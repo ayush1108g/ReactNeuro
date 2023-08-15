@@ -1,7 +1,27 @@
+import React,{useRef} from 'react';
 import Card from '../../UI/Card'
 import classes from './StudentSignin.module.css'
 
 const StudentSignIn = (props) => {
+    const emailInputRef = useRef();
+    const passwordInputRef = useRef();
+
+
+    const studentFormSignInHandler = (event) => {
+        event.preventDefault();
+        const userDetail = ({
+            userEmail: emailInputRef.current.value,
+            userPassword: passwordInputRef.current.value,
+        });
+
+        emailInputRef.current.value = ''
+        passwordInputRef.current.value = ''
+        props.onLogin(userDetail.userEmail,userDetail.userPassword);
+        
+        // console.log(userDetail);
+        //Authenticate and Then continue
+        props.studentSignInFormSubmit();
+    }
 
 
     return (
@@ -12,9 +32,9 @@ const StudentSignIn = (props) => {
                     <br></br>
                     <br></br>
                     <br></br>
-                    <form >
-                        <input type="email" name="email" placeholder="Email" required></input>
-                        <input type="password" name="password" placeholder="Create-Password" required></input>
+                    <form onSubmit={studentFormSignInHandler}>
+                        <input type="email" name="email" placeholder="Email" ref={emailInputRef} required></input>
+                        <input type="password" name="password" placeholder="Enter-Password" ref={passwordInputRef} required></input>
                         <button type="submit">Sign In</button>
                         <br></br>
                     </form>

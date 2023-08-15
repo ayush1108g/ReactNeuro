@@ -4,7 +4,7 @@ import classes from './Login.module.css'
 import MemberLogin from "./Member/MemberLogin";
 import StudentLogin from "./Student/StudentLogin";
 
-const Login = () => {
+const Login = (props) => {
 
     const [memberLoginState, setMemberLoginState] = useState(false);
     const [studentLoginState, setStudentLoginState] = useState(false);
@@ -42,8 +42,8 @@ const Login = () => {
     return (
         <React.Fragment>
             {loginState && display}
-            {memberLoginState && <MemberLogin backHandler={backHandler}/>}
-            {studentLoginState && <StudentLogin backHandler={backHandler}/>}
+            {memberLoginState && <MemberLogin onLogin={props.onLogin} backHandler={backHandler} memberSignInFormSubmit={props.memberSignInFormSubmit} />}
+            {studentLoginState && <StudentLogin onLogin={props.onLogin} backHandler={backHandler} studentSignInFormSubmit={props.studentSignInFormSubmit} />}
         </React.Fragment>
     );
 };

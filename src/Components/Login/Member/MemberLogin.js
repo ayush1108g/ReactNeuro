@@ -7,7 +7,7 @@ const MemberLogin = (props) => {
     const [signUpState, setSignUpState] = useState(true);
     const [signInState, setSignInState] = useState(false);
 
-    const signInHandler = () => {
+    const signInHandler = (props) => {
         setSignUpState(false);
         setSignInState(true);
     }
@@ -15,6 +15,7 @@ const MemberLogin = (props) => {
         setSignUpState(true);
         setSignInState(false);
     }
+    
 
     return (
         <React.Fragment>
@@ -23,7 +24,7 @@ const MemberLogin = (props) => {
             <button className={classes['back-button']} onClick={props.backHandler} >Back</button>
             </div>
             {signUpState && <MemberSignUp signInHandler={signInHandler} />}
-            {signInState && <MemberSignIn signUpHandler={signUpHandler} />}
+            {signInState && <MemberSignIn onLogin={props.onLogin} signUpHandler={signUpHandler} memberSignInFormSubmit={props.memberSignInFormSubmit} />}
             
         </React.Fragment>
     );

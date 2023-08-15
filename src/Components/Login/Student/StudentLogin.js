@@ -22,7 +22,7 @@ const StudentLogin = (props) => {
                 <button className={classes['back-button']} onClick={props.backHandler} >Back</button>
             </div>
             {signUpState && <StudentSignUp signInHandler={signInHandler} />}
-            {signInState && <StudentSignIn signUpHandler={signUpHandler} />}
+            {signInState && <StudentSignIn onLogin={props.onLogin} signUpHandler={signUpHandler} studentSignInFormSubmit={props.studentSignInFormSubmit} />}
         </React.Fragment>
     );
 };

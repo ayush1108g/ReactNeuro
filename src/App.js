@@ -1,14 +1,16 @@
-import './App.css';
-import Header from './Components/Layout/Header';
-import Login from './Components/Login/Login';
+import Main from "./Components/Contents/Main";
 
 
-function App() {
+
+
+
+function App(props) {
+  
+
+
   return (
     <div className="App">
-     <Login />
-     <Header />
-     
+      <Main />
     </div>
   );
 }

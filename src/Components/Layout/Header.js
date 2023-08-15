@@ -4,7 +4,9 @@ import BackgroundImg from '../../Store/snapedit_1692034406107.jpg'
 import Navbar from "./Navbar";
 import Summary from "../Contents/Summary";
 
-const Header = () => {
+const Header = (props) => {
+
+    
     const inlineStyles = {
         display: 'flex',
         flexDirection: 'column',
@@ -12,18 +14,18 @@ const Header = () => {
         justifyContent: 'center',
         backgroundImage: `url(${BackgroundImg})`,
         backgroundSize: 'cover',
-    backgroundPosition: 'center',
+        backgroundPosition: 'center',
         width: '100%',
         minHeight: '100vh',
-        
+
     }
     return (
         <React.Fragment>
-            <Navbar />
+            
             <div style={inlineStyles} className={`${classes['main-image']}`} >
-                
+
                 <Summary />
-                <button className={classes.button}>Continue</button>
+                <button className={classes.button} onClick={props.continueHandler} >Continue</button>
             </div>
         </React.Fragment>
     );
