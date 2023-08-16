@@ -24,7 +24,7 @@ const MemberSignUp = (props) => {
 
         // console.log(userDetail);
 
-        /// Store the user Detail 
+        // Store the user Detail 
         props.signInHandler();
     }
 

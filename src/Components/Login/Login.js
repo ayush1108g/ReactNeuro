@@ -4,6 +4,7 @@ import classes from './Login.module.css'
 import MemberLogin from "./Member/MemberLogin";
 import StudentLogin from "./Student/StudentLogin";
 
+
 const Login = (props) => {
 
     const [memberLoginState, setMemberLoginState] = useState(false);
@@ -12,9 +13,12 @@ const Login = (props) => {
 
     const memberLoginStateHandler = () => {
         setMemberLoginState(true);
+        setStudentLoginState(false);
         setLoginState(false);
+        // props.memLoginState(memberLoginState);
     };
     const studentLoginStateHandler = () => {
+        setMemberLoginState(false);
         setStudentLoginState(true);
         setLoginState(false);
     };
@@ -26,6 +30,7 @@ const Login = (props) => {
     }
 
     const display = <React.Fragment>
+       
         <div className={classes.buttonBody}>
             <Card>
                 <p>Login as...</p>
@@ -34,6 +39,7 @@ const Login = (props) => {
                     <button className={classes.button} onClick={studentLoginStateHandler} >Student</button>
                 </div>
             </Card>
+            
         </div>
     </React.Fragment>;
 

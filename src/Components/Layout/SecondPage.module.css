@@ -1,7 +1,9 @@
 .page-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 75%;
   min-height: 90vh;
   margin: 100px;
 }
@@ -17,7 +19,7 @@
 
 .back-button {
   position: relative;
-  top: 100px;
+  top: 130px;
   left: 30px;
   /* height: 500px; */
   padding: 10px 20px;

@@ -17,7 +17,6 @@ const Main = (props) => {
     if (storedUserLoggedInInformation === '1') {
       setIsLoggedIn(true);
       setStuSignInState(true);
-      // setMemSignInState(true);
     }
   }, []
   );
@@ -37,6 +36,7 @@ const Main = (props) => {
     setContinueState(false);
   }
   const loginHandler = (email, password) => {
+    console.log(email, password);
     // We should of course check email and password
     // But it's just a dummy/ demo anyways
     localStorage.setItem('isLoggedIn', '1');
@@ -50,6 +50,9 @@ const Main = (props) => {
     setIsLoggedIn(false);
   };
 
+
+
+
   return (
     <Fragment>
       <AuthContext.Provider value={{
@@ -60,7 +63,7 @@ const Main = (props) => {
         <Navbar onLogout={logoutHandler} />
         {(!stuSignInState && !memSignInstate) && <Login onLogin={loginHandler} memberSignInFormSubmit={memberSignInFormSubmit} studentSignInFormSubmit={studentSignInFormSubmit} />}
         {!continueState && (stuSignInState || memSignInstate) && <Header continueHandler={continueHandler} />}
-        {continueState && <SecondPage backHandler={backHandler} />}
+        {continueState && <SecondPage memSignInstate={memSignInstate} backHandler={backHandler} />}
       </AuthContext.Provider>
     </Fragment>
   );
