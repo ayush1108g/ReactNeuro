@@ -1,18 +1,19 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 import classes from './Navbar.module.css';
 import logo from '../../Store/Neurologo.png';
 import AuthContext from "../../Store/auth-Context";
 import horiMenu from '../../Store/menu-button-of-three-horizontal-lines.png';
 
 
-const Navbar = () => {
+const Navbar = (props) => {
   const ctx = useContext(AuthContext);
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // const toggleDropdown = () => {
   //   setIsDropdownOpen(!isDropdownOpen);
   // };
-
+const email=localStorage.getItem('email');
+const letter = email.charAt(0);
 
 
   return (
@@ -23,12 +24,8 @@ const Navbar = () => {
           <div><h1>NEUROMANCERS</h1></div>
         </div>
         <div className={classes["navbar-right"]}>
+        { ctx.isLoggedIn && <div className={classes.circle}> <span className={classes.initial}>{letter}</span></div>}
           <ul className={classes['nav-links']}>
-            {/* {ctx.isLoggedIn && (<li><a href="/">Users</a></li>)}
-            {ctx.isLoggedIn && (<li><a href="/">Admin</a></li>)} */}
-            {/* {ctx.isLoggedIn && (<li><button onClick={ctx.onLogout}>Logout</button></li>)} */}
-
-
             {ctx.isLoggedIn && <li className={`${classes.navLink} ${classes.dropdown}`}>
               <div className={classes["image-toggle-container"]}>
                 <img className={classes["image-toggle"]} src={horiMenu} alt="Toggle Img" /></div>

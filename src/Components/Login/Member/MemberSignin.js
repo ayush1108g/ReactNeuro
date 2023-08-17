@@ -19,7 +19,7 @@ const MemberSignIn = (props) => {
         emailInputRef.current.value = ''
         passwordInputRef.current.value = ''
         codeInputRef.current.value = ''
-        props.onLogin(userDetail.userEmail,userDetail.userPassword);
+        props.onLogin(userDetail.userEmail,userDetail.userPassword,userDetail.authenticationCode);
         // console.log(userDetail);
         //Authenticate and Then continue
         props.memberSignInFormSubmit();

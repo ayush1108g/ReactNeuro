@@ -52,14 +52,14 @@
   color: #f39c12;
 }
 
-@media (max-width: 620px) {
+@media (max-width: 500px) {
   .navbar {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
     display: block;
-    height: 100px;
+    height: 150px;
   }
 }
-
-
 
 .dropdown {
   position: relative;
@@ -94,6 +94,7 @@
 
 .dropdown:hover .dropdownContent {
   display: block;
+  
 }
 
 .logoutButton {
@@ -119,9 +120,7 @@
   overflow: hidden;
 }
 
-.image-toggle-container :hover {
-  animation: rotateImage 0.5s linear forwards;
-}
+
 
 @keyframes rotateImage {
   0% {
@@ -131,6 +130,9 @@
   100% {
     transform: rotate(90deg);
   }
+}
+.image-toggle-container:hover{
+  animation: rotateImage 0.2s linear forwards;
 }
 
 .image-toggle {
@@ -142,4 +144,21 @@
 
 .image-toggle:hover {
   transform: scale(1.1);
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #3498db;
+}
+
+.initial {
+  font-size: 36px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
 }

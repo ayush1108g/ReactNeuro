@@ -1,7 +1,6 @@
 import React from 'react';
 import CourseGoalItem from './CourseGoalItem';
 import classes from './CourseGoalList.module.css'
-import Card from '../UI/Card';
 
 const CourseGoalList = (props) => {
   
@@ -16,8 +15,7 @@ const CourseGoalList = (props) => {
         >  
         
           <h2>{goal.heading}</h2>
-          <a href={goal.contentLink} target='_blank' >{goal.content}</a>
-          
+          <a href={goal.contentLink} target='_blank' rel=" noopener noreferrer" >{goal.content}</a>
         </CourseGoalItem>
       ))}
     </ul>

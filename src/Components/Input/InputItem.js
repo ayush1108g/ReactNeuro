@@ -40,7 +40,7 @@ const InputItem = (props) => {
         props.onAddContent({
             heading: enteredHeading,
             content: enteredContent,
-            contentLink: enteredContentLink,
+            contentLink: 'http://' + enteredContentLink,
         });
 
         setEnteredHeading('');

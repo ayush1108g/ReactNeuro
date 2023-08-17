@@ -11,7 +11,7 @@ const CourseGoalItem = props => {
 
   return (
     <React.Fragment>
-      <Card>
+      <Card className={classes.ccard}>
     {props.memSignInstate &&  <Button onClick={deleteHandler} >Delete</Button>}
     <li className={classes["goal-item"]} >
       {props.children}
