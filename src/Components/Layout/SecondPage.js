@@ -42,7 +42,7 @@ const SecondPage = (props) => {
         <React.Fragment>
             <div >
                 <div className={classes.btnbody}>
-                    <button className={classes['back-button']} onClick={props.backHandler} >Back</button>
+                    <button className={classes['back-button']} onClick={props.backHandler} >Home</button>
                 </div>
 
                 <div className={classes["page-container"]}>

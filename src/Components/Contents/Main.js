@@ -4,10 +4,13 @@ import Header from '../Layout/Header';
 import Login from '../Login/Login';
 import Navbar from '../Layout/Navbar';
 import SecondPage from '../Layout/SecondPage';
+import ContactUs from '../Layout/ContactUs';
 
 const Main = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [ circleName ,setCircleName] = useState('');
+  const [ContactUsState,setContactUsState] = useState(false);
   const [memSignInstate, setMemSignInState] = useState(false);
   const [stuSignInState, setStuSignInState] = useState(false);
   const [continueState, setContinueState] = useState(false);
@@ -19,6 +22,7 @@ const Main = (props) => {
 
     if (storedUserLoggedInInformation === '1') {
       setIsLoggedIn(true);
+
       if (storedMemberLoggedInInformation === '1') {
         setMemSignInState(true);
       }
@@ -28,6 +32,7 @@ const Main = (props) => {
       else{
         setStuSignInState(true);
       }
+    setCircleName(localStorage.getItem('email').charAt(0));
     }
   }, []
   );
@@ -48,10 +53,15 @@ const Main = (props) => {
   }
   const backHandler = () => {
     setContinueState(false);
+    setContactUsState(false);
+  }
+  const contactUsHandler =() =>{
+    setContactUsState(true);
   }
   const loginHandler = (email, password,code) => {
     console.log(email, password,code);
-    localStorage.setItem('email',email);
+    localStorage.setItem('email', email);
+    setCircleName(localStorage.getItem('email').charAt(0));
     // We should of course check email and password
     // But it's just a dummy/ demo anyways
     localStorage.setItem('isLoggedIn', '1');
@@ -61,6 +71,7 @@ const Main = (props) => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('memberIsLoggedIn');
     localStorage.removeItem('studentIsLoggedIn');
+    localStorage.removeItem('email');
 
     setStuSignInState(false);
     setMemSignInState(false);
@@ -78,10 +89,14 @@ const Main = (props) => {
         onLogout: logoutHandler,
       }}>
 
-        <Navbar onLogout={logoutHandler} />
+        <Navbar contactUsHandler={contactUsHandler} circleName={circleName} onLogout={logoutHandler} />
         {(!stuSignInState && !memSignInstate) && <Login onLogin={loginHandler} memberSignInFormSubmit={memberSignInFormSubmit} studentSignInFormSubmit={studentSignInFormSubmit} />}
-        {!continueState && (stuSignInState || memSignInstate) && <Header continueHandler={continueHandler} />}
+
+        {!ContactUsState && !continueState && (stuSignInState || memSignInstate) &&<div><Header continueHandler={continueHandler} /></div> }
+        
         {continueState && <SecondPage memSignInstate={memSignInstate} backHandler={backHandler} />}
+
+        {ContactUsState && <ContactUs backHandler={backHandler}/>}
       </AuthContext.Provider>
     </Fragment>
   );

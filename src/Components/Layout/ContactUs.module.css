@@ -1,0 +1,26 @@
+.main{
+  padding-top: 75px;
+  margin-top: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back-button {
+    position: fixed;
+    top: 130px;
+    left: 30px;
+    /* height: 500px; */
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #7abfee;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #54b1ef;
+  }

@@ -12,8 +12,8 @@ const Navbar = (props) => {
   // const toggleDropdown = () => {
   //   setIsDropdownOpen(!isDropdownOpen);
   // };
-const email=localStorage.getItem('email');
-const letter = email.charAt(0);
+
+const letter = props.circleName;
 
 
   return (
@@ -32,7 +32,7 @@ const letter = email.charAt(0);
               <ul className={classes.dropdownContent}>
                 <li className={classes.dropdownContentItem}>Action</li>
                 <li className={classes.dropdownContentItem}>Another action</li>
-                <li className={classes.dropdownContentItem}>Something</li>
+                <li className={classes.dropdownContentItem} onClick={props.contactUsHandler}>Contact Us</li>
                 <li className={`${classes.dropdownContentItem} ${classes.divider}`}></li>
                 <li className={classes.dropdownContentItem}><button className={classes.logoutButton} onClick={ctx.onLogout}>Logout</button></li>
               </ul>
