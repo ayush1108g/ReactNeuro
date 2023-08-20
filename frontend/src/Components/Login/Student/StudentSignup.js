@@ -9,20 +9,20 @@ const StudentSignUp = (props) => {
     const passwordInputRef = useRef();
     const numberInputRef = useRef();
 
-    useEffect(() => {
-        const p = async () => {
-            const data = await fetch("http://localhost:4000/data", {
-                method: "GET",
-                headers: {
-                    "student-signup": "application/json",
-                },
-            });
-            const data1 = await data.json();
-            console.log(data1);
-        };
+    // useEffect(() => {
+    //     const p = async () => {
+    //         const data = await fetch("http://localhost:4000/data", {
+    //             method: "GET",
+    //             headers: {
+    //                 "student-signup": "application/json",
+    //             },
+    //         });
+    //         const data1 = await data.json();
+    //         console.log(data1);
+    //     };
 
-        p();
-    }, []);
+    //     p();
+    // }, []);
 
     const studentFormSignUpHandler = async (event) => {
         event.preventDefault();
