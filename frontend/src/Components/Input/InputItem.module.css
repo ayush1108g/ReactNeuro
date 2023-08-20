@@ -24,3 +24,20 @@
     border-color: #8b005d;
   }
   
+
+  .horizontal-line {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+
+  .line {
+    flex: 1;
+    border-top: 1px solid black;
+  }
+
+  .or {
+    padding: 0 10px;
+    color: black;
+    font-weight: bold;
+  }

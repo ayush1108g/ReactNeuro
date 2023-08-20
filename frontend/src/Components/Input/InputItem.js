@@ -60,6 +60,14 @@ const InputItem = (props) => {
             <br />
             <input type="link" placeholder="Content-link" onChange={linkChangeHandler} value={enteredContentLink} required></input>
             <br />
+            <div className={classes["horizontal-line"]}>
+                <div className={classes.line}></div>
+                <div className={classes.or}>or</div>
+                <div className={classes.line}></div>
+            </div>
+            <br />
+            <input type="file" placeholder="flie" ></input>
+            <br />
 
             <Button type="submit">Add Item</Button>
 
