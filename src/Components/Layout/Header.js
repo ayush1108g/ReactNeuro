@@ -1,7 +1,6 @@
 import React from "react";
 import classes from './Header.module.css'
 import BackgroundImg from '../../Store/snapedit_1692034406107.jpg'
-import Navbar from "./Navbar";
 import Summary from "../Contents/Summary";
 
 const Header = (props) => {
