@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Card from "../../UI/Card";
 import classes from "./StudentSignup.module.css";
 import axios from "axios";

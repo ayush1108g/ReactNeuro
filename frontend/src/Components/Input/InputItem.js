@@ -59,6 +59,7 @@ const InputItem = (props) => {
             <input type="text" placeholder="Content" onChange={contentChangeHandler} value={enteredContent} required />
             <br />
             <input type="link" placeholder="Content-link" onChange={linkChangeHandler} value={enteredContentLink} required></input>
+            <p>* Do not add http:// in link</p>
             <br />
             <div className={classes["horizontal-line"]}>
                 <div className={classes.line}></div>

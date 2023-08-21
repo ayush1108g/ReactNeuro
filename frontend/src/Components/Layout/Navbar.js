@@ -1,23 +1,25 @@
-import React, { useContext } from "react";
+import React, { useState,useContext } from "react";
 import classes from './Navbar.module.css';
 import logo from '../../Store/Neurologo.png';
 import AuthContext from "../../Store/auth-Context";
 import horiMenu from '../../Store/menu-button-of-three-horizontal-lines.png';
-
+import StudentSidebarModal from "./studentSideBarModal";
 
 const Navbar = (props) => {
   const ctx = useContext(AuthContext);
-  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [studentSideModal , setStudentSideModal] = useState(false);
+  
 
-  // const toggleDropdown = () => {
-  //   setIsDropdownOpen(!isDropdownOpen);
-  // };
+  const studentModalDisplayHandler = () => {
+    setStudentSideModal(!studentSideModal);
+  }
 
 const letter = props.circleName;
 
 
   return (
     <React.Fragment>
+      {ctx.isLoggedIn && studentSideModal && <StudentSidebarModal onChangeModal={studentModalDisplayHandler}/>}
       <nav className={classes.navbar}>
         <div className={classes["navbar-left"]}>
           <div ><img className={classes.logo} src={logo} alt="Logo" /></div>
@@ -31,10 +33,10 @@ const letter = props.circleName;
                 <img className={classes["image-toggle"]} src={horiMenu} alt="Toggle Img" /></div>
               <ul className={classes.dropdownContent}>
                 <li className={classes.dropdownContentItem}>Action</li>
-                <li className={classes.dropdownContentItem}>Another action</li>
+                <li className={classes.dropdownContentItem} onClick={studentModalDisplayHandler}>Student List</li>
                 <li className={classes.dropdownContentItem} onClick={props.contactUsHandler}>Contact Us</li>
-                <li className={`${classes.dropdownContentItem} ${classes.divider}`}></li>
-                <li className={classes.dropdownContentItem}><button className={classes.logoutButton} onClick={ctx.onLogout}>Logout</button></li>
+                {/* <li className={`${classes.dropdownContentItem} ${classes.divider}`}></li> */}
+                <li className={classes.dropdownContentItem} onClick={ctx.onLogout}>Logout</li>
               </ul>
             </li>}
 

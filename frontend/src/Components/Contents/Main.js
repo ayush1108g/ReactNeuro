@@ -93,7 +93,6 @@ const Main = (props) => {
         {(!stuSignInState && !memSignInstate) && <Login onLogin={loginHandler} memberSignInFormSubmit={memberSignInFormSubmit} studentSignInFormSubmit={studentSignInFormSubmit} />}
 
         {!ContactUsState && !continueState && (stuSignInState || memSignInstate) &&<div><Header continueHandler={continueHandler} /></div> }
-        
         {continueState && <SecondPage memSignInstate={memSignInstate} backHandler={backHandler} />}
 
         {ContactUsState && <ContactUs backHandler={backHandler}/>}

@@ -1,0 +1,61 @@
+.sidebar {
+  width: 300px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  position: relative;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 11;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.521);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  margin-bottom: 10px;
+  color: lavenderblush;
+}
+
+.close-button {
+
+  width: 50%;
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.student-list {
+  color: ghostwhite;
+  list-style: none;
+  padding: 0;
+  max-height: 450px;
+  overflow: auto;
+
+}
+
+.student-item {
+  margin-top: 50px;
+  margin-bottom: 15px;
+}
