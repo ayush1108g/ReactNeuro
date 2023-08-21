@@ -65,7 +65,7 @@ const StudentSignUp = (props) => {
             phoneno: userDetail.userNumber,
             password: userDetail.userPassword,
         };
-        const resp = await axios.post("http://localhost:4000/data", body, options);
+        const resp = await axios.post("http://localhost:4000/student/signup", body, options);
         // const data = await newStudentsignup.json();
         console.log(resp.data);
         // / Store the user Detail

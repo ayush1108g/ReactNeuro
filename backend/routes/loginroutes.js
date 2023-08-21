@@ -4,9 +4,9 @@ const studentsignupcontroller = require("./../controllers/logincontroller");
 const router = express.Router();
 
 router
-  .route("/")
+  .route("/signup")
   .get(studentsignupcontroller.getStudentsignup)
-  .post(studentsignupcontroller.signup);
+  .post(studentsignupcontroller.checkBody,studentsignupcontroller.signup);
 
 router.route("/login").post(studentsignupcontroller.login);
 module.exports = router;
