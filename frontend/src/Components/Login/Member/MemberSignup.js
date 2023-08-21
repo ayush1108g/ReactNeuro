@@ -1,28 +1,49 @@
 import React , {useRef} from 'react';
 import Card from '../../UI/Card';
 import classes from './MemberSignup.module.css'
+import axios from 'axios';
+
 
 const MemberSignUp = (props) => {
 
     const nameInputRef = useRef();
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
+    const numberInputRef = useRef();
     const codeInputRef = useRef();
 
-    const memberFormSignUpHandler =(event) => {
+    const memberFormSignUpHandler = async(event) => {
         event.preventDefault();
         const userDetail =({
             userName : nameInputRef.current.value,
             userEmail : emailInputRef.current.value,
             userPassword : passwordInputRef.current.value,
+            userNumber :numberInputRef.current.value,
             authenticationCode :codeInputRef.current.value,
         });
-        nameInputRef.current.value=''
-        emailInputRef.current.value=''
-        passwordInputRef.current.value=''
-        codeInputRef.current.value=''
+        nameInputRef.current.value='';
+        emailInputRef.current.value='';
+        passwordInputRef.current.value='';
+        numberInputRef.current.value='';
+        codeInputRef.current.value='';
 
-        // console.log(userDetail);
+        console.log(userDetail);
+
+        const options = {
+            headers: {
+                "mentor-signup": "application/json",
+            },
+        };
+        const body = {
+            name: userDetail.userName,
+            emailid: userDetail.userEmail,
+            phoneno: userDetail.userNumber,
+            password: userDetail.userPassword,
+            code: userDetail.authenticationCode,
+        };
+        const resp = await axios.post("http://localhost:4000/mentor/signup", body, options);
+        // const data = await newStudentsignup.json();
+        console.log(resp.data);
 
         // Store the user Detail 
         props.signInHandler();
@@ -37,6 +58,7 @@ const MemberSignUp = (props) => {
                         <input type="text" name="fullname" placeholder="Full Name" ref={nameInputRef} required></input>
                         <input type="email" name="email" placeholder="Email" ref={emailInputRef} required></input>
                         <input type="password" name="password" placeholder="Create-Password" ref={passwordInputRef} required></input>
+                        <input type="number" name="number" placeholder="Phone-Number" ref={numberInputRef} required ></input>
                         <input type="password" name="code" placeholder="Authentic-Member-Code" ref={codeInputRef} required></input>
                         <button type="submit">Sign Up</button>
                     </form>
