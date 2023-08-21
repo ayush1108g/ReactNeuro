@@ -1,5 +1,13 @@
 const mentorsignup = require("./../schema/mentor/signup");
-
+const jwt = require("jsonwebtoken");
+const catchasync = require("./../utils/catchasync");
+const signToken = id => {
+  return jwt.sign(
+    { id },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN }
+  );
+}
 exports.getmentorsignup = async (req, res) => {
   try {
     const newmentorsignup = await mentorsignup.find();
@@ -19,9 +27,10 @@ exports.getmentorsignup = async (req, res) => {
 exports.creatementorsignup = async (req, res) => {
   try {
     const newmentorsignup = await mentorsignup.create(req.body);
-
+    const token = signToken(newmentorsignup._id)
     res.status(201).json({
       status: "success",
+      token,
       data: {
         mentorsignup: newmentorsignup,
       },
@@ -37,8 +46,35 @@ exports.checkBody1 = (req, res, next) => {
   if (!req.body.name || !req.body.emailid || !req.body.password) {
     return res.status(400).json({
       status: "fail",
-      message: "Missing name or price",
+      message: "someting is missing",
     });
   }
   next();
 };
+exports.login = catchasync(async (req, res, next) => {
+  const { emailid, password } = req.body;
+  if (!emailid || !password) {
+    console.log("bvufvbe login");
+    res.status(400).json({
+      status: "fail",
+      message: "email or password missing",
+    });
+  }
+  const mentor = await mentorsignup.findOne({ emailid }).select("+password");
+  console.log(mentor);
+  
+  if (
+    !mentor ||
+    !(await mentor.correctPassword(password, mentor.password))
+  ) {
+    res.status(401).json({
+      status: "fail",
+      message: "username or password incorrect",
+    });
+  }
+  const token = signToken(mentor._id)
+  res.status(200).json({
+    status: "success",
+    token
+  });
+});
