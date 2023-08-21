@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-
-const mentorignupSchema = new mongoose.Schema({
+var Schema = mongoose.Schema;
+const mentorignupSchema = new Schema({
   name: {
     type: "string",
     required: true,
@@ -15,6 +15,6 @@ const mentorignupSchema = new mongoose.Schema({
     required: true,
   },
 });
-const signup = mongoose.model("signup", mentorignupSchema);
+const mentor = mongoose.model("mentor", mentorignupSchema);
 
-module.exports = signup;
+module.exports = mentor;

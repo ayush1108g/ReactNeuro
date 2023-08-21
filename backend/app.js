@@ -35,7 +35,7 @@ app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
 });
-app.use("/data", studentsignuprouter);
-app.use("/neuro/login/signup/mentor", mentorignuprouter);
+app.use("/student", studentsignuprouter);
+app.use("/mentor", mentorignuprouter);
 
 module.exports = app;

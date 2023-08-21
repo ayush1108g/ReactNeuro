@@ -1,4 +1,5 @@
-const mentorsignup = require("./../schema/student/signup");
+const mentorsignup = require("./../schema/mentor/signup");
+
 exports.getmentorsignup = async (req, res) => {
   try {
     const newmentorsignup = await mentorsignup.find();
@@ -32,7 +33,7 @@ exports.creatementorsignup = async (req, res) => {
     });
   }
 };
-exports.checkBody = (req, res, next) => {
+exports.checkBody1 = (req, res, next) => {
   if (!req.body.name || !req.body.emailid || !req.body.password) {
     return res.status(400).json({
       status: "fail",

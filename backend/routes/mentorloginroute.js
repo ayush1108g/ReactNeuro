@@ -4,10 +4,10 @@ const mentorsignupcontroller = require("./../controllers/loginmentor");
 const router = express.Router();
 
 router
-  .route("/")
+  .route("/signup")
   .get(mentorsignupcontroller.getmentorsignup)
   .post(
-    mentorsignupcontroller.checkBody,
+    mentorsignupcontroller.checkBody1,
     mentorsignupcontroller.creatementorsignup
   );
 
