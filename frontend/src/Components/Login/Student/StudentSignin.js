@@ -34,7 +34,8 @@ const StudentSignIn = (props) => {
                     <br></br>
                     <form onSubmit={studentFormSignInHandler}>
                         <input type="email" name="email" placeholder="Email" ref={emailInputRef} required></input>
-                        <input type="password" name="password" placeholder="Enter-Password" ref={passwordInputRef} required></input>
+                        <input type="password" name="password" placeholder="Enter-Password" ref={passwordInputRef} pattern=".{8,}"
+                            title="Password must be at least 8 characters long" required></input>
                         <button type="submit">Sign In</button>
                         <br></br>
                     </form>
