@@ -15,11 +15,11 @@ const MemberSignIn = (props) => {
             userPassword: passwordInputRef.current.value,
             authenticationCode: codeInputRef.current.value,
         });
-        
+
         emailInputRef.current.value = ''
         passwordInputRef.current.value = ''
         codeInputRef.current.value = ''
-        props.onLogin(userDetail.userEmail,userDetail.userPassword,userDetail.authenticationCode);
+        props.onLogin(userDetail.userEmail, userDetail.userPassword, userDetail.authenticationCode);
         // console.log(userDetail);
         //Authenticate and Then continue
         props.memberSignInFormSubmit();
@@ -35,7 +35,8 @@ const MemberSignIn = (props) => {
                     <br></br>
                     <form onSubmit={memberFormSignInHandler}>
                         <input type="email" name="email" placeholder="Email" ref={emailInputRef} required></input>
-                        <input type="password" name="password" placeholder="Enter-Password" ref={passwordInputRef} required></input>
+                        <input type="password" name="password" placeholder="Enter-Password" ref={passwordInputRef} pattern=".{8,}"
+                            title="Password must be at least 8 characters long" required></input>
                         <input type="password" name="code" placeholder="Authentic-Member-Code" ref={codeInputRef} required></input>
                         <button type="submit">Sign In</button>
                     </form>

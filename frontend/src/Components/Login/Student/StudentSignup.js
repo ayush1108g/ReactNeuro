@@ -80,8 +80,10 @@ const StudentSignUp = (props) => {
                         <input
                             type="text"
                             name="fullname"
-                            placeholder="Full Name"
+                            placeholder="User Name"
                             ref={nameInputRef}
+                            pattern=".{4,}"
+                            title="Username must be at least 4 characters long"
                             required
                         ></input>
                         <input
@@ -89,13 +91,17 @@ const StudentSignUp = (props) => {
                             name="email"
                             placeholder="Email"
                             ref={emailInputRef}
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                            title="Please enter a valid email address in the format user@example.com"
                             required
                         ></input>
                         <input
-                            type="number"
+                            type="tel"
                             name="number"
                             placeholder="Phone-Number"
                             ref={numberInputRef}
+                            pattern="[0-9]{10}"
+                            title="Please enter your 10 digit number"
                             required
                         ></input>
                         <input
@@ -103,12 +109,14 @@ const StudentSignUp = (props) => {
                             name="password"
                             placeholder="Create-Password"
                             ref={passwordInputRef}
+                            pattern=".{8,}"
+                            title="Password must be at least 8 characters long"
                             required
                         ></input>
                         <button
                             method="POST"
                             type="submit"
-                            onClick={studentFormSignUpHandler}
+                        // onClick={studentFormSignUpHandler}
                         >
                             Sign Up
                         </button>
