@@ -10,5 +10,5 @@ router
     mentorsignupcontroller.checkBody1,
     mentorsignupcontroller.creatementorsignup
   );
-
+  router.route("/login").post(mentorsignupcontroller.login);
 module.exports = router;

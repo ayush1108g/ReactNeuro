@@ -2,6 +2,13 @@ const Studentsignup = require("./../schema/student/signup");
 
 const jwt = require("jsonwebtoken");
 const catchasync = require("./../utils/catchasync");
+const signToken = id => {
+  return jwt.sign(
+    { id },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN }
+  );
+}
 
 exports.getStudentsignup = async (req, res) => {
   try {
@@ -21,7 +28,7 @@ exports.getStudentsignup = async (req, res) => {
 };
 exports.signup = async (req, res) => {
   try {
-    console.log("signup.....  ",req.body);
+    console.log("signup.....  ", req.body);
 
     const newStudentsignup = await Studentsignup.create({
       name: req.body.name,
@@ -29,11 +36,7 @@ exports.signup = async (req, res) => {
       phoneno: req.body.phoneno,
       password: req.body.password,
     });
-    const token = jwt.sign(
-      { id: newStudentsignup._id },
-      process.env.JWT_SECRET,
-      { expiresIn: process.env.JWT_EXPIRES_IN }
-    );
+    const token = signToken(newStudentsignup._id)
     res.status(201).json({
       token,
       data: {
@@ -65,6 +68,7 @@ exports.checkBody = (req, res, next) => {
 exports.login = catchasync(async (req, res, next) => {
   const { emailid, password } = req.body;
   if (!emailid || !password) {
+    console.log("bvufvbe login");
     res.status(400).json({
       status: "fail",
       message: "email or password missing",
@@ -78,17 +82,16 @@ exports.login = catchasync(async (req, res, next) => {
   // );
   if (
     !student ||
-    !(await student.correctPassword(password, Studentsignup.password))
+    !(await student.correctPassword(password, student.password))
   ) {
     res.status(401).json({
       status: "fail",
       message: "username or password incorrect",
     });
   }
-  const token = jwt.sign({ id: newStudentsignup._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
+  const token = signToken(student._id)
   res.status(200).json({
-    token,
+    status: "success",
+    token
   });
 });
