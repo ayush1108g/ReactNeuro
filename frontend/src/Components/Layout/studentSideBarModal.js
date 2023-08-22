@@ -50,7 +50,7 @@ function StudentSidebarModal(props) {
 
 
     return (
-        <div className={classes.sidebar}>
+        <div className={classes.sidebar} onClick={props.onChangeModal}>
            
             {(
                 <div className={classes.modal}>

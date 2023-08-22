@@ -8,7 +8,7 @@
 
 .back-button {
     position: fixed;
-    top: 130px;
+    top: 95px;
     left: 30px;
     /* height: 500px; */
     padding: 10px 20px;
@@ -19,6 +19,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    z-index: 15;
   }
   
   .back-button:hover {

@@ -16,3 +16,14 @@
     font-size: 4rem;
     margin-top: 0;
   }
+
+  @media (max-width: 450px) {
+    .summary h2 {
+      font-size: 2rem;
+    }
+  }
+  @media (max-width: 250px) {
+    .summary h2 {
+      font-size: 1.5rem;
+    }
+  }

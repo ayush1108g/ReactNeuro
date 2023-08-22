@@ -5,7 +5,7 @@ import Login from '../Login/Login';
 import Navbar from '../Layout/Navbar';
 import SecondPage from '../Layout/SecondPage';
 import ContactUs from '../Layout/ContactUs';
-
+import '../../Store/customScrolbar.css';
 const Main = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -78,18 +78,17 @@ const Main = (props) => {
     setContinueState(false);
     setIsLoggedIn(false);
   };
-
-
+  
 
 
   return (
-    <Fragment>
+    <Fragment >
       <AuthContext.Provider value={{
         isLoggedIn: isLoggedIn,
         onLogout: logoutHandler,
       }}>
 
-        <Navbar contactUsHandler={contactUsHandler} circleName={circleName} onLogout={logoutHandler} />
+        <Navbar  contactUsHandler={contactUsHandler} circleName={circleName} onLogout={logoutHandler} />
         {(!stuSignInState && !memSignInstate) && <Login onLogin={loginHandler} memberSignInFormSubmit={memberSignInFormSubmit} studentSignInFormSubmit={studentSignInFormSubmit} />}
 
         {!ContactUsState && !continueState && (stuSignInState || memSignInstate) &&<div><Header continueHandler={continueHandler} /></div> }
