@@ -9,7 +9,7 @@ const MemberSignUp = (props) => {
     const nameInputRef = useRef();
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-    const numberInputRef = useRef();
+    // const numberInputRef = useRef();
     const codeInputRef = useRef();
 
     const memberFormSignUpHandler = async (event) => {
@@ -18,13 +18,13 @@ const MemberSignUp = (props) => {
             userName: nameInputRef.current.value,
             userEmail: emailInputRef.current.value,
             userPassword: passwordInputRef.current.value,
-            userNumber: numberInputRef.current.value,
+            // userNumber: numberInputRef.current.value,
             authenticationCode: codeInputRef.current.value,
         });
         nameInputRef.current.value = '';
         emailInputRef.current.value = '';
         passwordInputRef.current.value = '';
-        numberInputRef.current.value = '';
+        // numberInputRef.current.value = '';
         codeInputRef.current.value = '';
 
         console.log(userDetail);
@@ -37,7 +37,7 @@ const MemberSignUp = (props) => {
         const body = {
             name: userDetail.userName,
             emailid: userDetail.userEmail,
-            phoneno: userDetail.userNumber,
+            // phoneno: userDetail.userNumber,
             password: userDetail.userPassword,
             code: userDetail.authenticationCode,
         };
@@ -58,7 +58,7 @@ const MemberSignUp = (props) => {
                         <input type="text" name="fullname" placeholder="User Name" ref={nameInputRef} pattern=".{4,}" title="Username must be at least 4 characters long" required></input>
                         <input type="email" name="email" placeholder="Email" ref={emailInputRef} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Please enter a valid email address in the format user@example.com" required></input>
                         <input type="password" name="password" placeholder="Create-Password" ref={passwordInputRef} pattern=".{8,}" title="Password must be at least 8 characters long" required></input>
-                        <input type="tel" name="number" placeholder="Phone-Number" ref={numberInputRef} pattern="[0-9]{10}" title="Please enter your 10 digit number " required ></input>
+                        {/* <input type="tel" name="number" placeholder="Phone-Number" ref={numberInputRef} pattern="[0-9]{10}" title="Please enter your 10 digit number " required ></input> */}
                         <input type="password" name="code" placeholder="Authentic-Member-Code" ref={codeInputRef} required></input>
                         <button type="submit">Sign Up</button>
                     </form>

@@ -32,7 +32,7 @@ const Main = (props) => {
       else{
         setStuSignInState(true);
       }
-    setCircleName(localStorage.getItem('email').charAt(0));
+    setCircleName(localStorage.getItem('name').charAt(0));
     }
   }, []
   );
@@ -58,10 +58,10 @@ const Main = (props) => {
   const contactUsHandler =() =>{
     setContactUsState(true);
   }
-  const loginHandler = (email, password,code) => {
-    console.log(email, password,code);
-    localStorage.setItem('email', email);
-    setCircleName(localStorage.getItem('email').charAt(0));
+  const loginHandler = (name,email, password,code) => {
+    console.log(name,email, password,code);
+    localStorage.setItem('name', name);
+    setCircleName(localStorage.getItem('name').charAt(0));
     // We should of course check email and password
     // But it's just a dummy/ demo anyways
     localStorage.setItem('isLoggedIn', '1');
@@ -71,7 +71,7 @@ const Main = (props) => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('memberIsLoggedIn');
     localStorage.removeItem('studentIsLoggedIn');
-    localStorage.removeItem('email');
+    localStorage.removeItem('name');
 
     setStuSignInState(false);
     setMemSignInState(false);

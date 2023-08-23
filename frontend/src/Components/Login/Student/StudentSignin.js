@@ -32,7 +32,7 @@ const StudentSignIn = (props) => {
     console.log(response);
     if (response.data.status === "success") {
       const name = response.data.name;
-      props.onLogin(userDetail.userEmail, userDetail.userPassword);
+      props.onLogin(name ,userDetail.userEmail, userDetail.userPassword ,"");
       props.studentSignInFormSubmit();
     }
 
