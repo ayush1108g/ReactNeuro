@@ -15,10 +15,7 @@ const mentorignupSchema = new Schema({
     type: "string",
     required: true,
   },
-  code :{
-    type:"Number",
-    required:true,
-  },
+  code : { type: "string", required: true, default: 123},
   phoneno:{
     type:"Number",
     required:true,
