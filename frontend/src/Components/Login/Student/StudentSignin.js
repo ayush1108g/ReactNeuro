@@ -31,9 +31,7 @@ const StudentSignIn = (props) => {
     );
     console.log(response);
     if (response.data.status === "success") {
-        try{
-const usern= await axios.get("http://localhost:4000/student/")
-        }catch{}
+      const name = response.data.name;
       props.onLogin(userDetail.userEmail, userDetail.userPassword);
       props.studentSignInFormSubmit();
     }

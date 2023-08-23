@@ -93,7 +93,7 @@ exports.login = catchasync(async (req, res, next) => {
   const token = signToken(student._id)
   res.status(200).json({
     status: "success",
-    student,
+    name:student.name,
     token
   });
 });
