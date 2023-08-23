@@ -37,6 +37,7 @@ const MemberSignUp = (props) => {
         const body = {
             name: userDetail.userName,
             emailid: userDetail.userEmail,
+            
             // phoneno: userDetail.userNumber,
             password: userDetail.userPassword,
             code: userDetail.authenticationCode,
