@@ -24,17 +24,20 @@ exports.getmentorsignup = async (req, res) => {
     });
   }
 };
-exports.creatementorsignup = async (req, res) => {
+exports.creatementorsignup = async (req, res,next) => {
   try {
     const newmentorsignup = await mentorsignup.create(req.body);
     const token = signToken(newmentorsignup._id)
-    res.status(201).json({
-      status: "success",
-      token,
-      data: {
-        mentorsignup: newmentorsignup,
-      },
-    });
+    if(newmentorsignup.code===123456){
+      res.status(201).json({
+        status: "success",
+        token,
+        data: {
+          mentorsignup: newmentorsignup,
+        },
+      });
+    }
+    else next()
   } catch (err) {
     res.status(404).json({
       status: "fail",
