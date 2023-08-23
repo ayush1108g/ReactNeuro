@@ -18,11 +18,11 @@ const mentorignupSchema = new Schema({
   code :{
     type:"Number",
     required:true,
-  },
-  phoneno:{
-    type:"Number",
-    required:true,
-  }
+  //   default: 12345,
+  //   validator: function (value) {
+  //     return value === 12345;
+  // },
+},
 });
 mentorignupSchema.pre("save", async function (next) {
 
