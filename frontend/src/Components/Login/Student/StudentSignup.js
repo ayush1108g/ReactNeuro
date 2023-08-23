@@ -67,7 +67,7 @@ const StudentSignUp = (props) => {
         };
         const resp = await axios.post("http://localhost:4000/student/signup", body, options);
         // const data = await newStudentsignup.json();
-        console.log(resp.data);
+        console.log(resp);
         // / Store the user Detail
         props.signInHandler();
     };
@@ -91,7 +91,6 @@ const StudentSignUp = (props) => {
                             name="email"
                             placeholder="Email"
                             ref={emailInputRef}
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                             title="Please enter a valid email address in the format user@example.com"
                             required
                         ></input>
