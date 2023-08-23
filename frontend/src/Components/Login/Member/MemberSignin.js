@@ -9,7 +9,7 @@ const MemberSignIn = (props) => {
     const passwordInputRef = useRef();
     const codeInputRef = useRef();
     const message = 'member';
-    const memberFormSignInHandler = (event) => {
+    const memberFormSignInHandler = async (event) => {
         event.preventDefault();
         const userDetail = ({
             userEmail: emailInputRef.current.value,
