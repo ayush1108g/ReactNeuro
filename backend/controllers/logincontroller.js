@@ -2,6 +2,7 @@ const Studentsignup = require("./../schema/student/signup");
 
 const jwt = require("jsonwebtoken");
 const catchasync = require("./../utils/catchasync");
+const email = require("./../utils/nodemailer");
 const signToken = id => {
   return jwt.sign(
     { id },
@@ -92,6 +93,7 @@ exports.login = catchasync(async (req, res, next) => {
   const token = signToken(student._id)
   res.status(200).json({
     status: "success",
+    student,
     token
   });
 });
@@ -103,6 +105,17 @@ exports.forgotPassword =  catchasync (async (req,res,next)=>{
   const resetToken = await user.createpasswordresetpassword();
   console.log(resetToken);
 //  await user.save();
+  const resetUrl = `${req.protocol}://${req.get(
+    "host"
+  )}/student/resetpassword/${resetToken}`;
+  console.log(resetUrl);
+  
+  await email({
+    from: process.env.EMAIL_FROM,
+    // to: req.body.emailid,
+    subject: "Password Reset Link",
+    html: `<a href="${resetUrl}">Reset Password</a>`,
+  });
   res.status(200).json({
     status: "success",
     message: "password reset link sent to your email",
