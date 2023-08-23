@@ -23,10 +23,10 @@ const studentsignupSchema = new Schema({
     select: false,
   },
 // passwordchangedate :Date,
-resetPasswordToken :{
-type:"string",
-},
-passwordresetexpired :Date,
+// resetPasswordToken :{
+// type:"string",
+// },
+// passwordresetexpired :Date,
 });
 
 studentsignupSchema.pre("save", async function (next) {
