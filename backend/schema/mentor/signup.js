@@ -15,7 +15,14 @@ const mentorignupSchema = new Schema({
     type: "string",
     required: true,
   },
-  
+  code :{
+    type:"Number",
+    required:true,
+  },
+  phoneno:{
+    type:"Number",
+    required:true,
+  }
 });
 mentorignupSchema.pre("save", async function (next) {
 
