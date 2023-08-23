@@ -2,6 +2,7 @@ import React, { useRef ,useState } from 'react';
 import Card from '../../UI/Card'
 import classes from './MemberSignin.module.css'
 import ForgotPassword from '../forgotPassword';
+import axios from "axios";
 
 const MemberSignIn = (props) => {
     const [forgotPass, setforgotPassword] = useState(false);
@@ -20,10 +21,32 @@ const MemberSignIn = (props) => {
         emailInputRef.current.value = ''
         passwordInputRef.current.value = ''
         // codeInputRef.current.value = ''
-        props.onLogin(userDetail.userEmail, userDetail.userPassword);
+
+
+        const body = {
+            emailid: userDetail.userEmail,
+            password: userDetail.userPassword,
+          };
+      
+          const response = await axios.post(
+            "http://localhost:4000/mentor/login",
+            body
+          );
+          console.log(response);
+          if (response.data.status === "success") {
+            const name = response.data.name;
+            props.onLogin(name ,userDetail.userEmail, userDetail.userPassword );
+            props.memberSignInFormSubmit();
+          }
+      
+
+
+
+
+        // props.onLogin(userDetail.userEmail, userDetail.userPassword);
         // console.log(userDetail);
         //Authenticate and Then continue
-        props.memberSignInFormSubmit();
+        
     }
 
     const forgotPasswordHandler = () => {
