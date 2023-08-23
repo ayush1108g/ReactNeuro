@@ -58,8 +58,8 @@ const Main = (props) => {
   const contactUsHandler =() =>{
     setContactUsState(true);
   }
-  const loginHandler = (name,email, password,code) => {
-    console.log(name,email, password,code);
+  const loginHandler = (name,email, password) => {
+    console.log(name,email, password);
     localStorage.setItem('name', name);
     setCircleName(localStorage.getItem('name').charAt(0));
     // We should of course check email and password

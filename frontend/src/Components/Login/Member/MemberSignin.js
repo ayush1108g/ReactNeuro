@@ -7,20 +7,20 @@ const MemberSignIn = (props) => {
     const [forgotPass, setforgotPassword] = useState(false);
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-    const codeInputRef = useRef();
+    // const codeInputRef = useRef();
     const message = 'member';
     const memberFormSignInHandler = async (event) => {
         event.preventDefault();
         const userDetail = ({
             userEmail: emailInputRef.current.value,
             userPassword: passwordInputRef.current.value,
-            authenticationCode: codeInputRef.current.value,
+            // authenticationCode: codeInputRef.current.value,
         });
 
         emailInputRef.current.value = ''
         passwordInputRef.current.value = ''
-        codeInputRef.current.value = ''
-        props.onLogin(userDetail.userEmail, userDetail.userPassword, userDetail.authenticationCode);
+        // codeInputRef.current.value = ''
+        props.onLogin(userDetail.userEmail, userDetail.userPassword);
         // console.log(userDetail);
         //Authenticate and Then continue
         props.memberSignInFormSubmit();
@@ -46,7 +46,7 @@ const MemberSignIn = (props) => {
                                 <input type="email" name="email" placeholder="Email" ref={emailInputRef} required></input>
                                 <input type="password" name="password" placeholder="Enter-Password" ref={passwordInputRef} pattern=".{8,}"
                                     title="Password must be at least 8 characters long" required></input>
-                                <input type="password" name="code" placeholder="Authentic-Member-Code" ref={codeInputRef} required></input>
+                                {/* <input type="password" name="code" placeholder="Authentic-Member-Code" ref={codeInputRef} required></input> */}
                                 <button type="submit">Sign In</button>
                             </form>
                             <br />
