@@ -13,5 +13,7 @@ exports.protect = catchasync(async(req, res, next)=>{
   }
   const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 console.log(JSON.stringify(decoded))
+const fresuser = await student.findById(decoded_.id)
+if(!fresuser){ return res.status(401).json({msg:"No student found"} )}
   next();
 })

@@ -95,3 +95,19 @@ exports.login = catchasync(async (req, res, next) => {
     token
   });
 });
+exports.forgotPassword =  catchasync (async (req,res,next)=>{
+
+  const user = await Studentsignup.findOne({ emailid: req.body.emailid });
+  if(!user) return res.status(404).json({masg:'error',});
+
+  const resetToken = await user.createpasswordresetpassword();
+  console.log(resetToken);
+//  await user.save();
+  res.status(200).json({
+    status: "success",
+    message: "password reset link sent to your email",
+    resetToken
+  });
+ 
+});
+exports.resetPassword = (req,res,next)=>{}
