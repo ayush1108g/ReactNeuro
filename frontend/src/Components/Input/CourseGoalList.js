@@ -12,7 +12,7 @@ const CourseGoalList = (props) => {
           id={goal.id}
           memSignInstate={props.memSignInstate}
           onDelete={props.onDeleteItem}
-        >  
+        >
         
           <h2>{goal.heading}</h2>
           <a href={goal.contentLink} target='_blank' rel=" noopener noreferrer" >{goal.content}</a>

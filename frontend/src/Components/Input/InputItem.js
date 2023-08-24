@@ -38,6 +38,7 @@ const InputItem = (props) => {
             return;
         }
         props.onAddContent({
+            id: Math.floor(Math.random() ).toString(),
             heading: enteredHeading,
             content: enteredContent,
             contentLink: 'http://' + enteredContentLink,

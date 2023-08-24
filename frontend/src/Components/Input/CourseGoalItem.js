@@ -7,6 +7,7 @@ import Card from '../UI/Card';
 const CourseGoalItem = props => {
   const deleteHandler = () => {
     props.onDelete(props.id);
+    console.log(props.id);
   };
 
   return (

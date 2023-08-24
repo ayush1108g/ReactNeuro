@@ -7,17 +7,11 @@ import axios from "axios";
 const SecondPage = (props) => {
   const [courseGoals, setCourseGoals] = useState([
     {
-      heading: "abc",
-      content: "Do all exercises!",
-      contentLink: "www.google.com",
-      id: "g1",
-    },
-    {
-      heading: "abx",
-      content: "Finish the course!",
-      contentLink: "http://www.google.com",
-      id: "g2",
-    },
+      heading: '',
+      content: '',
+      contentLink: '',
+      id: '',
+    }
   ]);
 
   useEffect(() => {
@@ -26,22 +20,21 @@ const SecondPage = (props) => {
         const response = await axios.get(
           "http://localhost:4000/data/resources"
         );
-        console.log(response.data.data.newresources);
         const data = response.data.data.newresources;
+        const loadedResourse = [];
+        for (const key in data) {
+          loadedResourse.push({
+            heading: data[key].title,
+            content: data[key].description,
+            contentLink: data[key].url,
+            id: data[key]._id,
+          })
+        }
+        setCourseGoals(loadedResourse);
       } catch (error) {
-        console.error("Error fetching students:", error);
+        console.error("Error fetching Resource:", error);
       }
     };
-    //     setCourseGoals((prevGoals) => {
-    //       const updatedGoals = [...prevGoals];
-    //       updatedGoals.unshift(data.items.map(item =>(
-    //         heading : item.title,
-    //         content : item.description,
-    //         contentLink :item.url ,
-    //         id: Math.random().toString(),
-    //       ));
-    //       return updatedGoals;
-    //     });
     fetchResource();
   }, []);
 
@@ -50,6 +43,7 @@ const SecondPage = (props) => {
       title: enteredContent.heading,
       description: enteredContent.content,
       url: enteredContent.contentLink,
+      id: enteredContent.id,
     };
     const resp = await axios.post("http://localhost:4000/data/resources", body);
     // const data = await newStudentsignup.json();
@@ -65,8 +59,6 @@ const SecondPage = (props) => {
       });
       return updatedGoals;
     });
-    console.log(courseGoals.length);
-    console.log(courseGoals);
   };
 
   const deleteItemHandler = (goalId) => {
@@ -77,7 +69,7 @@ const SecondPage = (props) => {
   };
 
   let content = (
-    <p style={{ textAlign: "center" }}>No goals found. Maybe add one?</p>
+    <p style={{ textAlign: "center" }}>No Resources found.</p>
   );
 
   if (courseGoals.length > 0) {
@@ -105,30 +97,10 @@ const SecondPage = (props) => {
         <div className={classes["page-container"]}>
           {props.memSignInstate && (
             <InputItem onAddContent={addContentHandler} />
-          )}
+          )} 
+          <div className={classes.heading}><i>Resources</i></div>
           <div className={classes["content-container"]}>
             {content}
-            {/* <Card>
-                            <h2>Welcome to our Website</h2>
-                            <p>This is some example content on the left side.This is some example content on the left side.</p>
-
-                        </Card><Card>
-                            <h2>Welcome to our Website</h2>
-                            <p>This is some example content on the left side.</p>
-                            <p>This is some example content on the left side.</p>
-                        </Card><Card>
-                            <h2>Welcome to our Website</h2>
-                            <p>This is some example content on the left side.</p>
-                            <p>This is some example content on the left side.</p>
-                        </Card><Card>
-                            <h2>Welcome to our Website</h2>
-                            <p>This is some example content on the left side.</p>
-                            <p>This is some example content on the left side.</p>
-                        </Card><Card>
-                            <h2>Welcome to our Website</h2>
-                            <p>This is some example content on the left side.</p>
-                            <p>This is some example content on the left side.</p>
-                        </Card> */}
           </div>
         </div>
       </div>

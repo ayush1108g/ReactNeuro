@@ -42,3 +42,10 @@
   z-index: 15;
  } 
 }
+
+.heading{
+  text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  
+}
