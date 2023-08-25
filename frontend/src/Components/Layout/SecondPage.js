@@ -101,6 +101,7 @@ const SecondPage = (props) => {
           <div className={classes.heading}><i>Resources</i></div>
           <div className={classes["content-container"]}>
             {content}
+            
           </div>
         </div>
       </div>
