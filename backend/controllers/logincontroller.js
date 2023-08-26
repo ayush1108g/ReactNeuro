@@ -1,5 +1,5 @@
 const Studentsignup = require("./../schema/student/signup");
-
+const cookie = require("cookie-parser")
 const jwt = require("jsonwebtoken");
 const catchasync = require("./../utils/catchasync");
 const email = require("./../utils/nodemailer");
@@ -89,6 +89,7 @@ exports.login = catchasync(async (req, res, next) => {
     res.status(400).json({
       status: "fail",
       message: "email or password missing",
+      
     });
   }
   const student = await Studentsignup.findOne({ emailid }).select("+password");

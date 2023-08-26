@@ -9,18 +9,28 @@ const SecondPage = (props) => {
   const [errormsg, setErrormsg] = useState("");
   const [courseGoals, setCourseGoals] = useState([
     {
-      heading: '',
-      content: '',
-      contentLink: '',
-      id: '',
-    }
+      heading: "",
+      content: "",
+      contentLink: "",
+      id: "",
+    },
   ]);
-
+  const token = props.token;
+  console.log(token);
   useEffect(() => {
     const fetchResource = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get("http://localhost:4000/data/resources");
+        const options = {
+          headers: {
+            "Authorization": "Bearer " + token,
+          },
+        };
+        console.log(options.headers.Authorization);
+        const response = await axios.get(
+          "http://localhost:4000/data/resources",
+          options
+        );
         const data = response.data.data.newresources;
         const loadedResourse = [];
         for (const key in data) {
@@ -29,19 +39,20 @@ const SecondPage = (props) => {
             content: data[key].description,
             contentLink: data[key].url,
             id: data[key]._id,
-          })
+          });
         }
         setCourseGoals(loadedResourse);
-        setErrormsg('');
+        setErrormsg("");
       } catch (error) {
         setIsLoading(false);
         console.error("Error fetching Resource:", error);
-        setErrormsg('Error fetching Resource');
+        setErrormsg("Error fetching Resource");
       }
       setIsLoading(false);
     };
     fetchResource();
   }, []);
+  
 
   const addContentHandler = async (enteredContent) => {
     const body = {
@@ -87,9 +98,7 @@ const SecondPage = (props) => {
     }
   };
 
-  let content = (
-    <p style={{ textAlign: "center" }}>No Resources found.</p>
-  );
+  let content = <p style={{ textAlign: "center" }}>No Resources found.</p>;
 
   if (courseGoals.length > 0) {
     content = (
@@ -117,18 +126,20 @@ const SecondPage = (props) => {
           {props.memSignInstate && (
             <InputItem onAddContent={addContentHandler} />
           )}
-          <div className={classes.heading}><i>Resources</i></div>
+          <div className={classes.heading}>
+            <i>Resources</i>
+          </div>
           <div>
             {!isLoading && <p className={classes.loading}> {errormsg}</p>}
-            {
-              isLoading && <section >
+            {isLoading && (
+              <section>
                 <p className={classes.loading}>Loading...</p>
               </section>
-            }
+            )}
           </div>
-          {!isLoading && <div className={classes["content-container"]}>
-            {content}
-          </div>}
+          {!isLoading && (
+            <div className={classes["content-container"]}>{content}</div>
+          )}
         </div>
       </div>
     </React.Fragment>
