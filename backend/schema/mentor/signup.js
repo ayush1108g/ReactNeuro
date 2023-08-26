@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const seedrandom = require('seedrandom');
 var Schema = mongoose.Schema;
+const rng = seedrandom('mySeed');
 const mentorignupSchema = new Schema({
   name: {
     type: "string",
@@ -15,11 +17,10 @@ const mentorignupSchema = new Schema({
     type: "string",
     required: true,
   },
-  
-  // phoneno:{
-  //   type:"Number",
-  //   required:true,
-  // },
+  id :{
+    type: "Number",
+  },
+ 
   code : { type: "Number", required: true},
 });
 mentorignupSchema.pre("save", async function (next) {

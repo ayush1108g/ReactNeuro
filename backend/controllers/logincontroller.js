@@ -14,6 +14,7 @@ const signToken = id => {
 exports.getStudentsignup = async (req, res) => {
   try {
     const newstudentsignup = await Studentsignup.find();
+    
     res.status(200).json({
       status: "success",
       data: {
@@ -27,16 +28,31 @@ exports.getStudentsignup = async (req, res) => {
     });
   }
 };
+exports.getStudent = catchasync(async (req, res,next) => {
+ 
+    console.log(req.params.id)
+    console.log("sdjndig")
+    const newStudent = await Studentsignup.findById(req.params.id)
+   if(!newStudent){
+    return res.status(404).json({
+      status: "fail",
+      message: "Student not found",
+    });
+   }
+    console.log(Studentsignup)
+  res.status(200).json({
+    status: "success",
+    data: {
+      newStudent
+    },
+  });
+  }
+)
 exports.signup = async (req, res) => {
   try {
     console.log("signup.....  ", req.body);
 
-    const newStudentsignup = await Studentsignup.create({
-      name: req.body.name,
-      emailid: req.body.emailid,
-      phoneno: req.body.phoneno,
-      password: req.body.password,
-    });
+    const newStudentsignup = await Studentsignup.create(req.body);
     const token = signToken(newStudentsignup._id)
     res.status(201).json({
       token,

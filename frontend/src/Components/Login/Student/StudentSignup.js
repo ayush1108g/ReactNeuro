@@ -33,6 +33,7 @@ const StudentSignUp = (props) => {
             userEmail: emailInputRef.current.value,
             userPassword: passwordInputRef.current.value,
             userNumber: numberInputRef.current.value,
+
         };
         nameInputRef.current.value = "";
         emailInputRef.current.value = "";
@@ -40,6 +41,8 @@ const StudentSignUp = (props) => {
         numberInputRef.current.value = "";
         console.log(userDetail);
 
+        const idno = Math.floor(Math.random() * 10000) % 15 + 1;
+        console.log(idno);
         // const newStudentsignup = await fetch("http://localhost:4000/data", {
         //   method: "POST",
         //   headers: {
@@ -66,6 +69,7 @@ const StudentSignUp = (props) => {
             emailid: userDetail.userEmail,
             phoneno: userDetail.userNumber,
             password: userDetail.userPassword,
+            idno: idno,
         };
         try {
             setIsLoading(true);
@@ -85,79 +89,80 @@ const StudentSignUp = (props) => {
                 setErrormsg("An error occurred. Please try again.");
         }
         setIsLoading(false);
-    };
-    return (
-        <section className={classes.form}>
-            <Card method="POST"><div>
-                {!isLoading && <p className={classes.loading}> {errormsg}</p>}
-                {
-                    isLoading && <section >
-                        <p className={classes.loading}>Loading...</p>
-                    </section>
-                }
+
+};
+return (
+    <section className={classes.form}>
+        <Card method="POST"><div>
+            {!isLoading && <p className={classes.loading}> {errormsg}</p>}
+            {
+                isLoading && <section >
+                    <p className={classes.loading}>Loading...</p>
+                </section>
+            }
+        </div>
+            <div className={classes["signup-form"]} method="POST">
+                <h2>Sign Up</h2>
+                <form method="POST" onSubmit={studentFormSignUpHandler}>
+                    <input
+                        type="text"
+                        name="fullname"
+                        placeholder="User Name"
+                        ref={nameInputRef}
+                        pattern=".{4,}"
+                        title="Username must be at least 4 characters long"
+                        required
+                    ></input>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        ref={emailInputRef}
+                        title="Please enter a valid email address in the format user@example.com"
+                        required
+                    ></input>
+                    <input
+                        type="tel"
+                        name="number"
+                        placeholder="Phone-Number"
+                        ref={numberInputRef}
+                        pattern="[0-9]{10}"
+                        title="Please enter your 10 digit number"
+                        required
+                    ></input>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Create-Password"
+                        ref={passwordInputRef}
+                        pattern=".{8,}"
+                        title="Password must be at least 8 characters long"
+                        required
+                    ></input>
+                    <button
+                        method="POST"
+                        type="submit"
+                    // onClick={studentFormSignUpHandler}
+                    >
+                        Sign Up
+                    </button>
+                </form>
             </div>
-                <div className={classes["signup-form"]} method="POST">
-                    <h2>Sign Up</h2>
-                    <form method="POST" onSubmit={studentFormSignUpHandler}>
-                        <input
-                            type="text"
-                            name="fullname"
-                            placeholder="User Name"
-                            ref={nameInputRef}
-                            pattern=".{4,}"
-                            title="Username must be at least 4 characters long"
-                            required
-                        ></input>
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                            ref={emailInputRef}
-                            title="Please enter a valid email address in the format user@example.com"
-                            required
-                        ></input>
-                        <input
-                            type="tel"
-                            name="number"
-                            placeholder="Phone-Number"
-                            ref={numberInputRef}
-                            pattern="[0-9]{10}"
-                            title="Please enter your 10 digit number"
-                            required
-                        ></input>
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Create-Password"
-                            ref={passwordInputRef}
-                            pattern=".{8,}"
-                            title="Password must be at least 8 characters long"
-                            required
-                        ></input>
-                        <button
-                            method="POST"
-                            type="submit"
-                        // onClick={studentFormSignUpHandler}
-                        >
-                            Sign Up
-                        </button>
-                    </form>
-                </div>
-                <div className={classes.para}>
-                    <p>
-                        Already have an account?{" "}
-                        <button
-                            className={classes.buttonSubmit}
-                            type="button"
-                            onClick={props.signInHandler}
-                        >
-                            Sign In
-                        </button>
-                    </p>
-                </div>
-            </Card>
-        </section>
-    );
+            <div className={classes.para}>
+                <p>
+                    Already have an account?{" "}
+                    <button
+                        className={classes.buttonSubmit}
+                        type="button"
+                        onClick={props.signInHandler}
+                    >
+                        Sign In
+                    </button>
+                </p>
+            </div>
+        </Card>
+    </section>
+);
 };
 
 export default StudentSignUp;

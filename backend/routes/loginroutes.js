@@ -11,4 +11,5 @@ router
 router.route("/login").post(studentsignupcontroller.login);
 router.route("/forgotpassword").patch(studentsignupcontroller.forgotPassword);
 router.route("/resetpassword").patch(studentsignupcontroller.resetPassword);
+router.route("/signup/:id").get(studentsignupcontroller.getStudent);
 module.exports = router;
