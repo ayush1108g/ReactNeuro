@@ -1,6 +1,7 @@
 const mentorsignup = require("./../schema/mentor/signup");
 const jwt = require("jsonwebtoken");
 const catchasync = require("./../utils/catchasync");
+const AppError = require('./../utils/apperror');
 const signToken = id => {
   return jwt.sign(
     { id },
@@ -24,22 +25,28 @@ exports.getmentorsignup = async (req, res) => {
     });
   }
 };
-exports.creatementorsignup = async (req, res) => {
+exports.creatementorsignup = async (req, res,next) => {
   try {
-    const newmentorsignup = await mentorsignup.create(req.body);
-    const token = signToken(newmentorsignup._id)
-    res.status(201).json({
-      status: "success",
-      token,
-      data: {
-        mentorsignup: newmentorsignup,
-      },
-    });
+    
+    const code = await req.body.code;
+    console.log(code);
+   
+    if(code == 1234){
+      const newmentorsignup = await mentorsignup.create(req.body);
+      const token = signToken(newmentorsignup._id)
+      res.status(201).json({
+        status: "success",
+        token,
+        data: {
+          mentorsignup: newmentorsignup,
+        },
+      });
+    }
+    else{
+      return next(new AppError('Please provide email and password!', 400));
+    }
   } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      massage: "invalid request",
-    });
+    return next(new AppError('Please provide email and password!', 400));
   }
 };
 exports.checkBody1 = (req, res, next) => {
