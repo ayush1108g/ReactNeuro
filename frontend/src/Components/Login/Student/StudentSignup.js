@@ -31,6 +31,7 @@ const StudentSignUp = (props) => {
             userEmail: emailInputRef.current.value,
             userPassword: passwordInputRef.current.value,
             userNumber: numberInputRef.current.value,
+
         };
         nameInputRef.current.value = "";
         emailInputRef.current.value = "";
@@ -38,6 +39,8 @@ const StudentSignUp = (props) => {
         numberInputRef.current.value = "";
         console.log(userDetail);
 
+        const idno= Math.floor(Math.random()*10000)%15+1;
+        console.log(idno);
         // const newStudentsignup = await fetch("http://localhost:4000/data", {
         //   method: "POST",
         //   headers: {
@@ -64,7 +67,9 @@ const StudentSignUp = (props) => {
             emailid: userDetail.userEmail,
             phoneno: userDetail.userNumber,
             password: userDetail.userPassword,
-        };
+            idno: idno,
+ 
+       };
         const resp = await axios.post("http://localhost:4000/student/signup", body, options);
         // const data = await newStudentsignup.json();
         console.log(resp);

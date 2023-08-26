@@ -81,6 +81,7 @@ exports.login = catchasync(async (req, res, next) => {
   }
   const token = signToken(mentor._id)
   res.status(200).json({
+    name:mentor.name,
     status: "success",
     token
   });
