@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 router
   .route("/resources")
-  .get(authentication.protect,resources.getresources)
+  .get(resources.getresources)
   .post(resources.createresources);
   
 router.route("/resources/:id").delete(resources.deleteresources)

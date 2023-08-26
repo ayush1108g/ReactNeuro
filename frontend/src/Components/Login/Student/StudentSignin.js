@@ -20,35 +20,41 @@ const StudentSignIn = (props) => {
       userPassword: passwordInputRef.current.value,
     };
 
-   
     const body = {
       emailid: userDetail.userEmail,
       password: userDetail.userPassword,
     };
     try {
       setIsLoading(true);
-      const response = await axios.post("http://localhost:4000/student/login", body, { timeout: 10000 });
-      // console.log(response);
+      const response = await axios.post(
+        "http://localhost:4000/student/login",
+        body,
+        { timeout: 10000 }
+      );
+      console.log(response);
+      const token = response.data.token;
       if (response.data.status === "success") {
         emailInputRef.current.value = "";
         passwordInputRef.current.value = "";
         const name = response.data.name;
-        props.onLogin(name, userDetail.userEmail, userDetail.userPassword, "");
+        props.onLogin(
+          name,
+          userDetail.userEmail,
+          userDetail.userPassword,
+          token,
+          ""
+        );
         props.studentSignInFormSubmit();
       }
-    }
-
-    catch (error) {
+    } catch (error) {
       console.log(error);
       if (error.code === "ERR_BAD_REQUEST")
         setErrormsg(error.response.data.message);
       else if (error.code === "ERR_BAD_RESPONSE")
-        setErrormsg('Server Not Responding...')
-      else
-        setErrormsg("An error occurred. Please try again.");
+        setErrormsg("Server Not Responding...");
+      else setErrormsg("An error occurred. Please try again.");
     }
     setIsLoading(false);
-
 
     // console.log(userDetail;
     //Authenticate and Then continue
@@ -60,7 +66,6 @@ const StudentSignIn = (props) => {
 
   return (
     <React.Fragment>
-
       <section className={classes.form}>
         <Card>
           {forgotPass && (
@@ -72,11 +77,11 @@ const StudentSignIn = (props) => {
           {!forgotPass && (
             <div>
               {!isLoading && <p className={classes.loading}> {errormsg}</p>}
-              {
-                isLoading && <section >
+              {isLoading && (
+                <section>
                   <p className={classes.loading}>Loading...</p>
                 </section>
-              }
+              )}
               <div className={classes["signin-form"]}>
                 <h2>Sign In</h2>
                 <br></br>
