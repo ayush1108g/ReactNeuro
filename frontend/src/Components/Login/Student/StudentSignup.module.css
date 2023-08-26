@@ -58,3 +58,14 @@
   border-radius: 50px;
   cursor: pointer;
 }
+
+
+.loading {
+  color: red;
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  animation: spin 1s linear infinite;
+}

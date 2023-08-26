@@ -19,6 +19,8 @@ const CourseGoalItem = props => {
           {props.children}
         </li>
       </Card>
+      <br />
+      
     </React.Fragment>
   );
 };
