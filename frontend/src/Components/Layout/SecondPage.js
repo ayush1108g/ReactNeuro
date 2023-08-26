@@ -50,6 +50,7 @@ const SecondPage = (props) => {
       url: enteredContent.contentLink,
       id: enteredContent.id,
     };
+    try{
     const resp = await axios.post("http://localhost:4000/data/resources", body);
     // const data = await newStudentsignup.json();
     console.log(resp.data);
@@ -64,19 +65,26 @@ const SecondPage = (props) => {
       });
       return updatedGoals;
     });
+  }
+  catch(error){
+    console.log(error);
+  }
   };
 
   const deleteItemHandler = async (goalId) => {
     console.log(goalId);
-    try{
-    const delRequest = await axios.delete(`http://localhost:4000/data/resources/${goalId}`);
-    setCourseGoals((prevGoals) => {
-      const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
-      return updatedGoals;
-    });
-  }catch(error){
-    console.log(error);
-  }
+    try {
+      const delRequest = await axios.delete(`http://localhost:4000/data/resources/${goalId}`);
+      console.log(delRequest);
+      if (delRequest.status === 201) {
+        setCourseGoals((prevGoals) => {
+          const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
+          return updatedGoals;
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   let content = (

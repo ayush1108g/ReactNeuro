@@ -15,7 +15,7 @@ exports.getresources = async (req, res) => {
         message: err,
       });
     }
-    
+
   };
   exports.createresources = async (req, res) => {
     try {
