@@ -4,6 +4,7 @@ const cors = require("cors");
 const studentsignuprouter = require("./routes/loginroutes");
 const mentorignuprouter = require("./routes/mentorloginroute");
 const resourcesrouter = require('./routes/resourcesroute')
+const feedbackrouter = require('./routes/feedbackroute')
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
@@ -31,4 +32,5 @@ app.use((req, res, next) => {
 app.use("/student", studentsignuprouter);
 app.use("/mentor", mentorignuprouter);
 app.use('/data',resourcesrouter);
+app.use('/feedback',feedbackrouter);
 module.exports = app;
