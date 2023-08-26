@@ -1,10 +1,12 @@
-import React, { useRef ,useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Card from '../../UI/Card'
 import classes from './MemberSignin.module.css'
 import ForgotPassword from '../forgotPassword';
 import axios from "axios";
 
 const MemberSignIn = (props) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [errormsg, setErrormsg] = useState("");
     const [forgotPass, setforgotPassword] = useState(false);
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
@@ -26,19 +28,31 @@ const MemberSignIn = (props) => {
         const body = {
             emailid: userDetail.userEmail,
             password: userDetail.userPassword,
-          };
-      
-          const response = await axios.post(
-            "http://localhost:4000/mentor/login",
-            body
-          );
-          console.log(response);
-          if (response.data.status === "success") {
-            const name = response.data.name;
-            props.onLogin(name ,userDetail.userEmail, userDetail.userPassword );
-            props.memberSignInFormSubmit();
-          }
-      
+        };
+
+        try {
+            setIsLoading(true);
+            const response = await axios.post(
+                "http://localhost:4000/mentor/login",
+                body, { timeout: 10000 });
+            console.log(response);
+            if (response.data.status === "success") {
+                const name = response.data.name;
+                console.log(name);
+                props.onLogin(name, userDetail.userEmail, userDetail.userPassword);
+                props.memberSignInFormSubmit();
+            }
+
+        } catch(error) {
+            console.log(error);
+            if (error.code === "ERR_BAD_REQUEST")
+                setErrormsg(error.response.data.message);
+            else if (error.code === "ERR_BAD_RESPONSE")
+                setErrormsg('Server Not Responding...')
+            else
+                setErrormsg("An error occurred. Please try again.");
+        }
+        setIsLoading(false);
 
 
 
@@ -46,7 +60,7 @@ const MemberSignIn = (props) => {
         // props.onLogin(userDetail.userEmail, userDetail.userPassword);
         // console.log(userDetail);
         //Authenticate and Then continue
-        
+
     }
 
     const forgotPasswordHandler = () => {
@@ -57,9 +71,15 @@ const MemberSignIn = (props) => {
     return (
         <section className={classes.form}>
             <Card >
-                {forgotPass && <ForgotPassword from={message} memsignUpHandler={props.signUpHandler}/>}
+                {forgotPass && <ForgotPassword from={message} memsignUpHandler={props.signUpHandler} />}
                 {!forgotPass &&
                     <div>
+                        {!isLoading && <p className={classes.loading}> {errormsg}</p>}
+                        {
+                            isLoading && <section >
+                                <p className={classes.loading}>Loading...</p>
+                            </section>
+                        }
                         <div className={classes['signin-form']}>
                             <h2>Sign In</h2>
                             <br></br>
@@ -73,7 +93,7 @@ const MemberSignIn = (props) => {
                                 <button type="submit">Sign In</button>
                             </form>
                             <br />
-                            <span onClick={forgotPasswordHandler}>Forgot password</span>
+                            <span className={classes.forgotPass} onClick={forgotPasswordHandler}>Forgot password</span>
                         </div>
                         <div className={classes.para}>
                             <p>Don't have an account? <button className={classes.buttonSubmit} type='button' onClick={props.signUpHandler}>Sign Up</button></p>

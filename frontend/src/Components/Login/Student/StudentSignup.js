@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Card from "../../UI/Card";
 import classes from "./StudentSignup.module.css";
 import axios from "axios";
 
 const StudentSignUp = (props) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [errormsg, setErrormsg] = useState("");
     const nameInputRef = useRef();
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
@@ -65,15 +67,35 @@ const StudentSignUp = (props) => {
             phoneno: userDetail.userNumber,
             password: userDetail.userPassword,
         };
-        const resp = await axios.post("http://localhost:4000/student/signup", body, options);
-        // const data = await newStudentsignup.json();
-        console.log(resp);
-        // / Store the user Detail
-        props.signInHandler();
+        try {
+            setIsLoading(true);
+            const response = await axios.post("http://localhost:4000/student/signup", body, options);
+            // const data = await newStudentsignup.json();
+            console.log(response);
+            // / Store the user Detail
+            props.signInHandler();
+        }
+        catch (error) {
+            console.log(error);
+            if (error.code === "ERR_BAD_REQUEST")
+                setErrormsg(error.response.data.message);
+            else if (error.code === "ERR_BAD_RESPONSE")
+                setErrormsg('Server Not Responding...')
+            else
+                setErrormsg("An error occurred. Please try again.");
+        }
+        setIsLoading(false);
     };
     return (
         <section className={classes.form}>
-            <Card method="POST">
+            <Card method="POST"><div>
+                {!isLoading && <p className={classes.loading}> {errormsg}</p>}
+                {
+                    isLoading && <section >
+                        <p className={classes.loading}>Loading...</p>
+                    </section>
+                }
+            </div>
                 <div className={classes["signup-form"]} method="POST">
                     <h2>Sign Up</h2>
                     <form method="POST" onSubmit={studentFormSignUpHandler}>
