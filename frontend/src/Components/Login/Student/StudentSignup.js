@@ -35,10 +35,7 @@ const StudentSignUp = (props) => {
             userNumber: numberInputRef.current.value,
 
         };
-        nameInputRef.current.value = "";
-        emailInputRef.current.value = "";
-        passwordInputRef.current.value = "";
-        numberInputRef.current.value = "";
+
         console.log(userDetail);
 
         const idno = Math.floor(Math.random() * 10000) % 15 + 1;
@@ -69,20 +66,28 @@ const StudentSignUp = (props) => {
             emailid: userDetail.userEmail,
             phoneno: userDetail.userNumber,
             password: userDetail.userPassword,
-            idno: idno,
+            id: idno,
         };
         try {
             setIsLoading(true);
-            const response = await axios.post("http://localhost:4000/student/signup", body, options);
+            const response = await axios.post("http://localhost:4000/student/signup", body, options, { timeout: 10000 });
             // const data = await newStudentsignup.json();
             console.log(response);
             // / Store the user Detail
-            props.signInHandler();
+            if (response.status === 201) {
+                nameInputRef.current.value = "";
+                emailInputRef.current.value = "";
+                passwordInputRef.current.value = "";
+                numberInputRef.current.value = "";
+                props.signInHandler();
+            }
         }
         catch (error) {
             console.log(error);
             if (error.code === "ERR_BAD_REQUEST")
                 setErrormsg(error.response.data.message);
+            else if(error.response.status === 500)
+                setErrormsg('Email or PhoneNo already in use');
             else if (error.code === "ERR_BAD_RESPONSE")
                 setErrormsg('Server Not Responding...')
             else
@@ -90,79 +95,79 @@ const StudentSignUp = (props) => {
         }
         setIsLoading(false);
 
-};
-return (
-    <section className={classes.form}>
-        <Card method="POST"><div>
-            {!isLoading && <p className={classes.loading}> {errormsg}</p>}
-            {
-                isLoading && <section >
-                    <p className={classes.loading}>Loading...</p>
-                </section>
-            }
-        </div>
-            <div className={classes["signup-form"]} method="POST">
-                <h2>Sign Up</h2>
-                <form method="POST" onSubmit={studentFormSignUpHandler}>
-                    <input
-                        type="text"
-                        name="fullname"
-                        placeholder="User Name"
-                        ref={nameInputRef}
-                        pattern=".{4,}"
-                        title="Username must be at least 4 characters long"
-                        required
-                    ></input>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        ref={emailInputRef}
-                        title="Please enter a valid email address in the format user@example.com"
-                        required
-                    ></input>
-                    <input
-                        type="tel"
-                        name="number"
-                        placeholder="Phone-Number"
-                        ref={numberInputRef}
-                        pattern="[0-9]{10}"
-                        title="Please enter your 10 digit number"
-                        required
-                    ></input>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Create-Password"
-                        ref={passwordInputRef}
-                        pattern=".{8,}"
-                        title="Password must be at least 8 characters long"
-                        required
-                    ></input>
-                    <button
-                        method="POST"
-                        type="submit"
-                    // onClick={studentFormSignUpHandler}
-                    >
-                        Sign Up
-                    </button>
-                </form>
+    };
+    return (
+        <section className={classes.form}>
+            <Card method="POST"><div>
+                {!isLoading && <p className={classes.loading}> {errormsg}</p>}
+                {
+                    isLoading && <section >
+                        <p className={classes.loading}>Loading...</p>
+                    </section>
+                }
             </div>
-            <div className={classes.para}>
-                <p>
-                    Already have an account?{" "}
-                    <button
-                        className={classes.buttonSubmit}
-                        type="button"
-                        onClick={props.signInHandler}
-                    >
-                        Sign In
-                    </button>
-                </p>
-            </div>
-        </Card>
-    </section>
-);
+                <div className={classes["signup-form"]} method="POST">
+                    <h2>Sign Up</h2>
+                    <form method="POST" onSubmit={studentFormSignUpHandler}>
+                        <input
+                            type="text"
+                            name="fullname"
+                            placeholder="User Name"
+                            ref={nameInputRef}
+                            pattern=".{4,}"
+                            title="Username must be at least 4 characters long"
+                            required
+                        ></input>
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            ref={emailInputRef}
+                            title="Please enter a valid email address in the format user@example.com"
+                            required
+                        ></input>
+                        <input
+                            type="tel"
+                            name="number"
+                            placeholder="Phone-Number"
+                            ref={numberInputRef}
+                            pattern="[0-9]{10}"
+                            title="Please enter your 10 digit number"
+                            required
+                        ></input>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Create-Password"
+                            ref={passwordInputRef}
+                            pattern=".{8,}"
+                            title="Password must be at least 8 characters long"
+                            required
+                        ></input>
+                        <button
+                            method="POST"
+                            type="submit"
+                        // onClick={studentFormSignUpHandler}
+                        >
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
+                <div className={classes.para}>
+                    <p>
+                        Already have an account?{" "}
+                        <button
+                            className={classes.buttonSubmit}
+                            type="button"
+                            onClick={props.signInHandler}
+                        >
+                            Sign In
+                        </button>
+                    </p>
+                </div>
+            </Card>
+        </section>
+    );
 };
 
 export default StudentSignUp;

@@ -20,8 +20,7 @@ const StudentSignIn = (props) => {
       userPassword: passwordInputRef.current.value,
     };
 
-    emailInputRef.current.value = "";
-    passwordInputRef.current.value = "";
+   
     const body = {
       emailid: userDetail.userEmail,
       password: userDetail.userPassword,
@@ -31,6 +30,8 @@ const StudentSignIn = (props) => {
       const response = await axios.post("http://localhost:4000/student/login", body, { timeout: 10000 });
       // console.log(response);
       if (response.data.status === "success") {
+        emailInputRef.current.value = "";
+        passwordInputRef.current.value = "";
         const name = response.data.name;
         props.onLogin(name, userDetail.userEmail, userDetail.userPassword, "");
         props.studentSignInFormSubmit();

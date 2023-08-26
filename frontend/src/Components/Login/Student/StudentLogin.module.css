@@ -9,7 +9,7 @@
   }
 
 .back-button {
-    position: relative;
+    position: fixed;
     top:100px;
     left:30px;
     /* height: 500px; */
@@ -21,6 +21,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    z-index: 20;
   }
 
   .back-button:hover {

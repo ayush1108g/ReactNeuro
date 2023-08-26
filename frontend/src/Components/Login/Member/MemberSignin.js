@@ -20,8 +20,7 @@ const MemberSignIn = (props) => {
             // authenticationCode: codeInputRef.current.value,
         });
 
-        emailInputRef.current.value = ''
-        passwordInputRef.current.value = ''
+       
         // codeInputRef.current.value = ''
 
 
@@ -37,6 +36,8 @@ const MemberSignIn = (props) => {
                 body, { timeout: 10000 });
             console.log(response);
             if (response.data.status === "success") {
+                emailInputRef.current.value = ''
+                passwordInputRef.current.value = ''
                 const name = response.data.name;
                 console.log(name);
                 props.onLogin(name, userDetail.userEmail, userDetail.userPassword);

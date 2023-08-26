@@ -5,6 +5,8 @@ import CourseGoalList from "../Input/CourseGoalList";
 import axios from "axios";
 
 const SecondPage = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [errormsg, setErrormsg] = useState("");
   const [courseGoals, setCourseGoals] = useState([
     {
       heading: '',
@@ -17,9 +19,8 @@ const SecondPage = (props) => {
   useEffect(() => {
     const fetchResource = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:4000/data/resources"
-        );
+        setIsLoading(true);
+        const response = await axios.get("http://localhost:4000/data/resources");
         const data = response.data.data.newresources;
         const loadedResourse = [];
         for (const key in data) {
@@ -31,9 +32,13 @@ const SecondPage = (props) => {
           })
         }
         setCourseGoals(loadedResourse);
+        setErrormsg('');
       } catch (error) {
+        setIsLoading(false);
         console.error("Error fetching Resource:", error);
+        setErrormsg('Error fetching Resource');
       }
+      setIsLoading(false);
     };
     fetchResource();
   }, []);
@@ -61,11 +66,17 @@ const SecondPage = (props) => {
     });
   };
 
-  const deleteItemHandler = (goalId) => {
+  const deleteItemHandler = async (goalId) => {
+    console.log(goalId);
+    try{
+    const delRequest = await axios.delete(`http://localhost:4000/data/resources/${goalId}`);
     setCourseGoals((prevGoals) => {
       const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
       return updatedGoals;
     });
+  }catch(error){
+    console.log(error);
+  }
   };
 
   let content = (
@@ -84,7 +95,7 @@ const SecondPage = (props) => {
 
   return (
     <React.Fragment>
-      <div>
+      <div className={classes.allcontent}>
         <div className={classes.btnbody}>
           <button
             className={classes["back-button"]}
@@ -97,12 +108,19 @@ const SecondPage = (props) => {
         <div className={classes["page-container"]}>
           {props.memSignInstate && (
             <InputItem onAddContent={addContentHandler} />
-          )} 
+          )}
           <div className={classes.heading}><i>Resources</i></div>
-          <div className={classes["content-container"]}>
-            {content}
-            
+          <div>
+            {!isLoading && <p className={classes.loading}> {errormsg}</p>}
+            {
+              isLoading && <section >
+                <p className={classes.loading}>Loading...</p>
+              </section>
+            }
           </div>
+          {!isLoading && <div className={classes["content-container"]}>
+            {content}
+          </div>}
         </div>
       </div>
     </React.Fragment>

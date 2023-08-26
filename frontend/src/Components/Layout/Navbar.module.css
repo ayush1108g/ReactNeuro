@@ -57,7 +57,14 @@
     padding: 0 0 0 0;
     margin: 0 0 0 0;
     display: block;
-    height: 150px;
+    height: 60px;
+  }
+  .nav-links{
+    padding: 0 0 0 15px;
+    margin: 0 0 0 0;
+  }
+  .navbar-right {
+    right: 15px;
   }
 }
 
