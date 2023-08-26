@@ -11,9 +11,12 @@ exports.protect = catchasync(async(req, res, next)=>{
   if(!token){
     return res.status(401).json({msg:"No token provided"});
   }
-  const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-console.log(JSON.stringify(decoded))
-const fresuser = await student.findById(decoded_.id)
-if(!fresuser){ return res.status(401).json({msg:"No student found"} )}
+  res.status(200).json({
+    msg: "Token verified"
+  })
+//   const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+// console.log(JSON.stringify(decoded))
+// const fresuser = await student.findById(decoded_.id)
+// if(!fresuser){ return res.status(401).json({msg:"No student found"} )}
   next();
 })

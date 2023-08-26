@@ -32,7 +32,7 @@ exports.getStudent = catchasync(async (req, res,next) => {
  
     console.log(req.params.id)
     console.log("sdjndig")
-    const newStudent = await Studentsignup.findById(req.params.id)
+    const newStudent = await Studentsignup.find({id:req.params.id});
    if(!newStudent){
     return res.status(404).json({
       status: "fail",

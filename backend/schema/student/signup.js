@@ -10,8 +10,7 @@ const studentsignupSchema = new Schema({
   phoneno: {
     type: "Number",
     required: true,
-    
-  },
+    },
   emailid: {
     type: "string",
     required: true,
@@ -20,7 +19,6 @@ const studentsignupSchema = new Schema({
   password: {
     type: "string",
     required: true,
-    select: false,
   },
   id:{
 type:"Number",
