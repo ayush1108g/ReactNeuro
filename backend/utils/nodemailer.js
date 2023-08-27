@@ -10,10 +10,9 @@ const nodemailer = require('nodemailer');
       });
       const mailoptions = {
         from: 'pushkargupta063@gmail.com',
-        to: 'guptapushkar321@gmail.com',
-        subject:'Hello',
-        subject: options.subject,
-        html: options.html
+        to: options.email,
+        subject:options.subject,
+        text: options.message,
       }
     await  transporter.sendMail(mailoptions);
   }
