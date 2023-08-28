@@ -5,12 +5,14 @@ const studentsignuprouter = require("./routes/loginroutes");
 const mentorignuprouter = require("./routes/mentorloginroute");
 const resourcesrouter = require('./routes/resourcesroute')
 const feedbackrouter = require('./routes/feedbackroute')
+let cookieParser = require("cookie-parser");
+
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));

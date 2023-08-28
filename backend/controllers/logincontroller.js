@@ -55,10 +55,12 @@ exports.signup = async (req, res) => {
 
     const newStudentsignup = await Studentsignup.create(req.body);
     const token = signToken(newStudentsignup._id)
+    res.cookie('token', token,{expire: 400000 + Date.now()})
     res.status(201).json({
       token,
       data: {
         Studentsignup: newStudentsignup,
+       
       },
     });
   } catch (err) {
@@ -109,10 +111,15 @@ exports.login = catchasync(async (req, res, next) => {
     });
   }
   const token = signToken(student._id)
+  res.cookie('token', token,{expire: 60*60+ Date.now(),
+  httpOnly: true,
+  path: "/student/login",
+  secure: true})
   res.status(200).json({
     status: "success",
     name:student.name,
-    token
+    token,
+    id: student.id,
   });
 });
 exports.forgotPassword =  catchasync (async (req,res,next)=>{

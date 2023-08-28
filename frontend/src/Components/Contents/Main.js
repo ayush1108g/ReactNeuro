@@ -56,11 +56,12 @@ const Main = (props) => {
   const contactUsHandler = () => {
     setContactUsState(true);
   };
-  const loginHandler = (name, email, password, token) => {
+  const loginHandler = (name, email, password, token, id) => {
     setToken(token);
-    console.log(name, email, password, token);
+    console.log(name, email, password, token, id);
     localStorage.setItem("name", name);
     setCircleName(localStorage.getItem("name").charAt(0));
+    sessionStorage.setItem("id", id + "5799");
     // We should of course check email and password
     // But it's just a dummy/ demo anyways
     localStorage.setItem("isLoggedIn", "1");
