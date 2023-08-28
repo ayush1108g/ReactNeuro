@@ -1,4 +1,5 @@
 const Studentsignup = require("./../schema/student/signup");
+const crypto = require('crypto');
 const cookie = require("cookie-parser")
 const jwt = require("jsonwebtoken");
 const catchasync = require("./../utils/catchasync");
@@ -54,10 +55,12 @@ exports.signup = async (req, res) => {
 
     const newStudentsignup = await Studentsignup.create(req.body);
     const token = signToken(newStudentsignup._id)
+    res.cookie('token', token,{expire: 400000 + Date.now()})
     res.status(201).json({
       token,
       data: {
         Studentsignup: newStudentsignup,
+       
       },
     });
   } catch (err) {
@@ -108,36 +111,70 @@ exports.login = catchasync(async (req, res, next) => {
     });
   }
   const token = signToken(student._id)
+  res.cookie('token', token,{expire: 60*60+ Date.now(),
+  httpOnly: true,
+  path: "/student/login",
+  secure: true})
   res.status(200).json({
     status: "success",
     name:student.name,
-    token
+    token,
+    id: student.id,
   });
 });
 exports.forgotPassword =  catchasync (async (req,res,next)=>{
 
   const user = await Studentsignup.findOne({ emailid: req.body.emailid });
-  if(!user) return res.status(404).json({masg:'error',});
+  if(!user) return res.status(404).json({masg:'no such user with this email id',});
 
   const resetToken = await user.createpasswordresetpassword();
   console.log(resetToken);
-//  await user.save();
+ await user.save();
   const resetUrl = `${req.protocol}://${req.get(
     "host"
   )}/student/resetpassword/${resetToken}`;
   console.log(resetUrl);
-  
-  await email({
-    from: process.env.EMAIL_FROM,
-    // to: req.body.emailid,
-    subject: "Password Reset Link",
-    html: `<a href="${resetUrl}">Reset Password</a>`,
-  });
-  res.status(200).json({
-    status: "success",
-    message: "password reset link sent to your email",
-    resetToken
-  });
+  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetUrl}.\nIf you didn't forget your password, please ignore this email!`;
+  try{
+    await email({
+     email: user.emailid,
+      subject: "Password Reset Link",
+      message,
+      html: `<a href="${resetUrl}">Reset Password</a>`,
+    });
+    res.status(200).json({
+      status: "success",
+      message: "password reset link sent to your email",
+      resetToken
+    });
+  }catch(err){
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    console.log(err);
+    massage:"reset link invalid"
+  }
  
 });
-exports.resetPassword = (req,res,next)=>{}
+exports.resetPassword = async (req,res,next)=>{
+const hashtoken = crypto.createHash("sha256").update(req.params.token).digest("hex");
+
+const user = await Studentsignup.findOne({resetPasswordToken
+: hashtoken ,
+passwordresetexpired
+ : {$gt:Date.now()}})
+if(!user){
+  return res.status(404).json({
+    status: "fail",
+    message: "password reset link is invalid",
+  });
+}
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.passwordresetexpired = undefined;
+  user.save();
+  res.status(200).json({
+    status: "success",
+    message: "password changed successfully",
+  });
+}

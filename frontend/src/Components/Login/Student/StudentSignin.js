@@ -33,6 +33,7 @@ const StudentSignIn = (props) => {
       );
       console.log(response);
       const token = response.data.token;
+      const id = response.data.id;
       if (response.data.status === "success") {
         emailInputRef.current.value = "";
         passwordInputRef.current.value = "";
@@ -42,6 +43,7 @@ const StudentSignIn = (props) => {
           userDetail.userEmail,
           userDetail.userPassword,
           token,
+          id,
           ""
         );
         props.studentSignInFormSubmit();

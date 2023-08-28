@@ -56,12 +56,13 @@ const Main = (props) => {
   const contactUsHandler = () => {
     setContactUsState(!ContactUsState);
   };
-  const loginHandler = (name, email, password, token) => {
+  const loginHandler = (name, email, password, token, id) => {
     setToken(token);
     // console.log(name, email, password, token);
     sessionStorage.setItem("name", name);
     sessionStorage.setItem("email", email);
     setCircleName(sessionStorage.getItem("name").charAt(0));
+    sessionStorage.setItem("id", id + "5799");
     
     sessionStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);

@@ -23,12 +23,12 @@ const studentsignupSchema = new Schema({
   id:{
 type:"Number",
 default: -1,
-  }
-// passwordchangedate :Date,
-// resetPasswordToken :{
-// type:"string",
-// },
-// passwordresetexpired :Date,
+  },
+  passwordChangedAt :Date,
+resetPasswordToken :{
+type:"string",
+},
+passwordresetexpired :Date,
 });
 
 studentsignupSchema.pre("save", async function (next) {
@@ -36,7 +36,12 @@ studentsignupSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
+studentsignupSchema.pre('save', function(next) {
+  if (!this.isModified('password') || this.isNew) return next();
 
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+})
 studentsignupSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
@@ -50,7 +55,7 @@ studentsignupSchema.methods.createpasswordresetpassword =function () {
 
   console.log({resetToken},this.resetPasswordToken);
 
-  this.passwordresetexpired = Date.now() + 6000000;
+  this.passwordresetexpired = Date.now() + 600000;
 
   return resetToken;
 }
