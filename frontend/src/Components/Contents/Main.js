@@ -16,11 +16,11 @@ const Main = (props) => {
   const [continueState, setContinueState] = useState(false);
 
   useEffect(() => {
-    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
+    const storedUserLoggedInInformation = sessionStorage.getItem("isLoggedIn");
     const storedMemberLoggedInInformation =
-      localStorage.getItem("memberIsLoggedIn");
+      sessionStorage.getItem("memberIsLoggedIn");
     const storedStudentLoggedInInformation =
-      localStorage.getItem("studentIsLoggedIn");
+      sessionStorage.getItem("studentIsLoggedIn");
 
     if (storedUserLoggedInInformation === "1") {
       setIsLoggedIn(true);
@@ -32,19 +32,19 @@ const Main = (props) => {
       } else {
         setStuSignInState(true);
       }
-      setCircleName(localStorage.getItem("name").charAt(0));
+      setCircleName(sessionStorage.getItem("name").charAt(0));
     }
   }, []);
 
   const memberSignInFormSubmit = () => {
     setMemSignInState(true);
     setIsLoggedIn(true);
-    localStorage.setItem("memberIsLoggedIn", "1");
+    sessionStorage.setItem("memberIsLoggedIn", "1");
   };
   const studentSignInFormSubmit = () => {
     setStuSignInState(true);
     setIsLoggedIn(true);
-    localStorage.setItem("studentIsLoggedIn", "1");
+    sessionStorage.setItem("studentIsLoggedIn", "1");
   };
   const continueHandler = () => {
     setContinueState(true);
@@ -54,24 +54,26 @@ const Main = (props) => {
     setContactUsState(false);
   };
   const contactUsHandler = () => {
-    setContactUsState(true);
+    setContactUsState(!ContactUsState);
   };
   const loginHandler = (name, email, password, token) => {
     setToken(token);
-    console.log(name, email, password, token);
-    localStorage.setItem("name", name);
-    setCircleName(localStorage.getItem("name").charAt(0));
-    // We should of course check email and password
-    // But it's just a dummy/ demo anyways
-    localStorage.setItem("isLoggedIn", "1");
+    // console.log(name, email, password, token);
+    sessionStorage.setItem("name", name);
+    sessionStorage.setItem("email", email);
+    setCircleName(sessionStorage.getItem("name").charAt(0));
+    
+    sessionStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
   const logoutHandler = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("memberIsLoggedIn");
-    localStorage.removeItem("studentIsLoggedIn");
-    localStorage.removeItem("name");
+    sessionStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("memberIsLoggedIn");
+    sessionStorage.removeItem("studentIsLoggedIn");
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("email");
 
+    setContactUsState(false);
     setStuSignInState(false);
     setMemSignInState(false);
     setContinueState(false);

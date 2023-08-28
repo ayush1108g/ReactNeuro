@@ -4,6 +4,7 @@ import classes from './InputItem.module.css'
 
 
 const InputItem = (props) => {
+    const [additem,setAddItem] = useState(true);
     const [enteredHeading, setEnteredHeading] = useState('');
     const [enteredContent, setEnteredContent] = useState('');
     const [enteredContentLink, setEnteredContentLink] = useState('');
@@ -38,7 +39,7 @@ const InputItem = (props) => {
             return;
         }
         props.onAddContent({
-            id: Math.floor(Math.random() ).toString(),
+            id: Math.floor(Math.random()).toString(),
             heading: enteredHeading,
             content: enteredContent,
             contentLink: 'http://' + enteredContentLink,
@@ -50,9 +51,14 @@ const InputItem = (props) => {
 
     };
 
-    return (
-        <form onSubmit={formSubmitHandler} className={classes['form-control']} >
+    const addItemHandler = () => {
+        setAddItem(!additem);
+    };
 
+    return (
+        <React.Fragment>
+          {additem && <Button type="button" onClick={addItemHandler}>Add Item</Button>}
+     {!additem  &&  <form onSubmit={formSubmitHandler} className={classes['form-control']} >
             <hr></hr>
             <label>Course Item</label>
             <input type="heading" placeholder="Heading" onChange={headingChangeHandler} value={enteredHeading} required ></input>
@@ -70,12 +76,12 @@ const InputItem = (props) => {
             <br />
             <input type="file" placeholder="flie" ></input>
             <br />
-
             <Button type="submit">Add Item</Button>
-
+            <Button type="button"onClick={addItemHandler}>Cancel</Button>
             <hr></hr>
             <br />
-        </form>
+        </form>}
+        </React.Fragment>
     );
 };
 

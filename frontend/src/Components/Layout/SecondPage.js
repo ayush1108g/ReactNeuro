@@ -16,7 +16,7 @@ const SecondPage = (props) => {
     },
   ]);
   const token = props.token;
-  console.log(token);
+  // console.log(token);
   useEffect(() => {
     const fetchResource = async () => {
       try {
@@ -26,10 +26,10 @@ const SecondPage = (props) => {
             "Authorization": "Bearer " + token,
           },
         };
-        console.log(options.headers.Authorization);
+        // console.log(options.headers.Authorization);
         const response = await axios.get(
           "http://localhost:4000/data/resources",
-          options
+          options, { timeout: 15000 }
         );
         const data = response.data.data.newresources;
         const loadedResourse = [];
@@ -52,7 +52,7 @@ const SecondPage = (props) => {
     };
     fetchResource();
   }, []);
-  
+
 
   const addContentHandler = async (enteredContent) => {
     const body = {
@@ -61,25 +61,28 @@ const SecondPage = (props) => {
       url: enteredContent.contentLink,
       id: enteredContent.id,
     };
-    try{
-    const resp = await axios.post("http://localhost:4000/data/resources", body);
-    // const data = await newStudentsignup.json();
-    console.log(resp.data);
+    try {
+      const resp = await axios.post("http://localhost:4000/data/resources", body);
+      // const data = await newStudentsignup.json();
+      console.log(resp.data);
 
-    setCourseGoals((prevGoals) => {
-      const updatedGoals = [...prevGoals];
-      updatedGoals.unshift({
-        heading: enteredContent.heading,
-        content: enteredContent.content,
-        contentLink: enteredContent.contentLink,
-        id: Math.random().toString(),
+      setCourseGoals((prevGoals) => {
+        const updatedGoals = [...prevGoals];
+        updatedGoals.unshift({
+          heading: enteredContent.heading,
+          content: enteredContent.content,
+          contentLink: enteredContent.contentLink,
+          id: Math.random().toString(),
+        });
+        return updatedGoals;
       });
-      return updatedGoals;
-    });
-  }
-  catch(error){
-    console.log(error);
-  }
+    }
+    catch (error) {
+      console.log(error);
+      if (error.response.status === 404) {
+        alert("Server Not Responding");
+      }
+    }
   };
 
   const deleteItemHandler = async (goalId) => {
@@ -95,6 +98,9 @@ const SecondPage = (props) => {
       }
     } catch (error) {
       console.log(error);
+      if (error.response.status === 404) {
+        alert("Some Error occurred");
+      }
     }
   };
 
