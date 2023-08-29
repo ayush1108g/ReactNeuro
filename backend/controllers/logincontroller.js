@@ -130,17 +130,15 @@ exports.forgotPassword =  catchasync (async (req,res,next)=>{
   const resetToken = await user.createpasswordresetpassword();
   console.log(resetToken);
  await user.save();
-  const resetUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/student/resetpassword/${resetToken}`;
-  console.log(resetUrl);
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetUrl}.\nIf you didn't forget your password, please ignore this email!`;
+  const code = resetToken;
+  console.log(code);
+  const message = `Your verification code is \n ${resetToken}\n you didn't forget your password, please ignore this email!`;
   try{
     await email({
      email: user.emailid,
-      subject: "Password Reset Link",
+      subject: "Password Reset code",
       message,
-      html: `<a href="${resetUrl}">Reset Password</a>`,
+      // html: `<a href="${resetUrl}">Reset Password</a>`,
     });
     res.status(200).json({
       status: "success",
@@ -156,6 +154,28 @@ exports.forgotPassword =  catchasync (async (req,res,next)=>{
   }
  
 });
+exports.verifycode = async (req,res,next)=>{
+  const hashtoken = req.body.code;
+  console.log(hashtoken);
+  const user = await Studentsignup.findOne({resetPasswordToken
+  : hashtoken ,
+  passwordresetexpired
+   : {$gt:Date.now()}})
+  if(!user){
+    return res.status(404).json({
+      status: "fail",
+      message: "your code is invalid",
+    });
+  }
+    // user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.passwordresetexpired = undefined;
+    user.save();
+    res.status(200).json({
+      status: "success",
+      message: "go to next page",
+    });
+  }
 exports.resetPassword = async (req,res,next)=>{
 const hashtoken = req.params.token;
 console.log(hashtoken);
