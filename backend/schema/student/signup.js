@@ -49,10 +49,10 @@ studentsignupSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 studentsignupSchema.methods.createpasswordresetpassword =function () {
-  const resetToken =crypto.randomBytes(32).toString('hex');
-
-  this.resetPasswordToken =  crypto.createHash('sha256').update(resetToken).digest('hex')
-
+  // const resetToken =crypto.randomBytes(32).toString('hex');
+const resetToken = Math.floor(Math.random() *100000)+ 100000
+  // this.resetPasswordToken =  crypto.createHash('sha256').update(resetToken).digest('hex')
+this.resetPasswordToken = resetToken;
   console.log({resetToken},this.resetPasswordToken);
 
   this.passwordresetexpired = Date.now() + 600000;

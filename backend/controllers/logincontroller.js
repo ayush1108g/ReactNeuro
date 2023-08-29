@@ -157,8 +157,8 @@ exports.forgotPassword =  catchasync (async (req,res,next)=>{
  
 });
 exports.resetPassword = async (req,res,next)=>{
-const hashtoken = crypto.createHash("sha256").update(req.params.token).digest("hex");
-
+const hashtoken = req.params.token;
+console.log(hashtoken);
 const user = await Studentsignup.findOne({resetPasswordToken
 : hashtoken ,
 passwordresetexpired
