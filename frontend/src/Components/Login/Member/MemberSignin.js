@@ -60,14 +60,14 @@ const MemberSignIn = (props) => {
     }
 
     const forgotPasswordHandler = () => {
-        setforgotPassword(true);
+        setforgotPassword(!forgotPass);
         console.log(forgotPass)
     }
 
     return (
         <section className={classes.form}>
             <Card >
-                {forgotPass && <ForgotPassword from={message} memsignUpHandler={props.signUpHandler} />}
+                {forgotPass && <ForgotPassword from={message} memsignUpHandler={props.signUpHandler} memSignInHandler={props.signInHandler}/>}
                 {!forgotPass &&
                     <div>
                         {!isLoading && <p className={classes.loading}> {errormsg}</p>}
