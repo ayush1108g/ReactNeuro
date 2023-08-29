@@ -3,15 +3,24 @@ import classes from './Navbar.module.css';
 import logo from '../../Store/Neurologo.png';
 import AuthContext from "../../Store/auth-Context";
 import horiMenu from '../../Store/menu-button-of-three-horizontal-lines.png';
-import StudentSidebarModal from "./studentSideBarModal";
+import StudentSidebarModal from "./sidebarModal/studentSideBarModal";
+import MemberSidebarModal from "./sidebarModal/memberSideBarModal";
+import MemStuSidebarModal from "./sidebarModal/memstuSidebar";
 
 const Navbar = (props) => {
   const ctx = useContext(AuthContext);
   const [studentSideModal, setStudentSideModal] = useState(false);
-
+  const [memberSideModal, setMemberSideModal] = useState(false);
+  const [memStuSideModal, setMemStuSideModal] = useState(false);
 
   const studentModalDisplayHandler = () => {
     setStudentSideModal(!studentSideModal);
+  }
+  const memberModalDisplayHandler = () => {
+    setMemberSideModal(!memberSideModal); 
+  }
+  const memStuModalDisplayHandler = () => {
+    setMemStuSideModal(!memStuSideModal);
   }
 
   const letter = props.circleName;
@@ -19,7 +28,9 @@ const Navbar = (props) => {
 
   return (
     <React.Fragment>
-      {ctx.isLoggedIn && studentSideModal && <StudentSidebarModal onChangeModal={studentModalDisplayHandler} />}
+      {ctx.isLoggedIn && studentSideModal && <StudentSidebarModal memSignInstate={props.memSignInstate} onChangeModal={studentModalDisplayHandler} />}
+      {ctx.isLoggedIn && memberSideModal && <MemberSidebarModal onChangeModal={memberModalDisplayHandler} />}
+      {ctx.isLoggedIn && memStuSideModal && <MemStuSidebarModal onChangeModal={memStuModalDisplayHandler} /> }
       <nav className={classes.navbar}>
         <div className={classes["navbar-left"]}>
           <div ><img className={classes.logo} src={logo} alt="Logo" /></div>
@@ -34,6 +45,8 @@ const Navbar = (props) => {
               <ul className={classes.dropdownContent}>
                 <li className={classes.dropdownContentItem} onClick={props.continueHandler}>Resources</li>
                 <li className={classes.dropdownContentItem} onClick={studentModalDisplayHandler}>Student List</li>
+               {props.memSignInstate && <li className={classes.dropdownContentItem} onClick={memberModalDisplayHandler}>Member List</li>}
+               {props.memSignInstate && <li className={classes.dropdownContentItem} onClick={memStuModalDisplayHandler}>Your Student List</li>}
                 <li className={classes.dropdownContentItem} onClick={props.contactUsHandler}>Contact Us</li>
                 <li className={classes.dropdownContentItem} onClick={ctx.onLogout}>Logout</li>
               </ul>

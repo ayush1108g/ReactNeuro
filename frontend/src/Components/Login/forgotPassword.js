@@ -146,8 +146,10 @@ const ForgotPassword = (props) => {
                 <button className={classes.button} onClick={handleResetPassword}>Reset Password</button>
             </div>}
             {finalSubmitPassword && <div>
-                <input type='name' placeholder='Enter Password' ref={password}></input>
-                <input type='password' placeholder='Confirm Password' ref={ConfirmPassword}></input>
+                <input type='name' placeholder='Enter Password' pattern=".{8,}"
+                    title="Password must be at least 8 characters long" ref={password}></input>
+                <input type='password' placeholder='Confirm Password' pattern=".{8,}"
+                    title="Password must be at least 8 characters long"ref={ConfirmPassword}></input>
                 <button className={classes.button} onClick={finalNewPassword}>Confirm Password</button></div>}
         </div>
     );
