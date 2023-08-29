@@ -9,7 +9,6 @@ const ForgotPassword = (props) => {
     const [errormsg, setErrormsg] = useState("");
     const [submit, setSubmit] = useState(false);
 
-
     const proceedToResetPassword = () => {
         const emailentered = emailRef.current.value.toLowerCase();
         const body = {
