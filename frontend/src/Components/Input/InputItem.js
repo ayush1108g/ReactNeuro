@@ -4,7 +4,7 @@ import classes from './InputItem.module.css'
 
 
 const InputItem = (props) => {
-    const [additem,setAddItem] = useState(true);
+    const [additem, setAddItem] = useState(true);
     const [enteredHeading, setEnteredHeading] = useState('');
     const [enteredContent, setEnteredContent] = useState('');
     const [enteredContentLink, setEnteredContentLink] = useState('');
@@ -38,11 +38,15 @@ const InputItem = (props) => {
             setIsValid(false);
             return;
         }
+        let link = enteredContentLink.toString();
+        if (!link.startsWith("http://") && !link.startsWith("https://")) {
+            link = "http://" + link;
+        }
         props.onAddContent({
             id: Math.floor(Math.random()).toString(),
             heading: enteredHeading,
             content: enteredContent,
-            contentLink: 'http://' + enteredContentLink,
+            contentLink: link,
         });
 
         setEnteredHeading('');
@@ -57,30 +61,30 @@ const InputItem = (props) => {
 
     return (
         <React.Fragment>
-          {additem && <Button type="button" onClick={addItemHandler}>Add Item</Button>}
-     {!additem  &&  <form onSubmit={formSubmitHandler} className={classes['form-control']} >
-            <hr></hr>
-            <label>Course Item</label>
-            <input type="heading" placeholder="Heading" onChange={headingChangeHandler} value={enteredHeading} required ></input>
-            <br />
-            <input type="text" placeholder="Content" onChange={contentChangeHandler} value={enteredContent} required />
-            <br />
-            <input type="link" placeholder="Content-link" onChange={linkChangeHandler} value={enteredContentLink} required></input>
-            <p>* Do not add http:// in link</p>
-            <br />
-            <div className={classes["horizontal-line"]}>
-                <div className={classes.line}></div>
-                <div className={classes.or}>or</div>
-                <div className={classes.line}></div>
-            </div>
-            <br />
-            <input type="file" placeholder="flie" ></input>
-            <br />
-            <Button type="submit">Add Item</Button>
-            <Button type="button"onClick={addItemHandler}>Cancel</Button>
-            <hr></hr>
-            <br />
-        </form>}
+            {additem && <Button type="button" onClick={addItemHandler}>Add Item</Button>}
+            {!additem && <form onSubmit={formSubmitHandler} className={classes['form-control']} >
+                <hr></hr>
+                <label>Course Item</label>
+                <input type="heading" placeholder="Heading" onChange={headingChangeHandler} value={enteredHeading} required ></input>
+                <br />
+                <input type="text" placeholder="Content" onChange={contentChangeHandler} value={enteredContent} required />
+                <br />
+                <input type="link" placeholder="Content-link" onChange={linkChangeHandler} value={enteredContentLink} required></input>
+                <p>* Do not add http:// in link</p>
+                <br />
+                <div className={classes["horizontal-line"]}>
+                    <div className={classes.line}></div>
+                    <div className={classes.or}>or</div>
+                    <div className={classes.line}></div>
+                </div>
+                <br />
+                <input type="file" placeholder="flie" ></input>
+                <br />
+                <Button type="submit">Add Item</Button>
+                <Button type="button" onClick={addItemHandler}>Cancel</Button>
+                <hr></hr>
+                <br />
+            </form>}
         </React.Fragment>
     );
 };

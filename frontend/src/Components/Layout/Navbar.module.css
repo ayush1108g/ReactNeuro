@@ -26,7 +26,7 @@
 
 .navbar h1:hover {
   color: #0a8f3d;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.438);
+  text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.438);
   transition: color 0.9s;
 }
 
@@ -43,7 +43,7 @@
 .nav-links li {
   margin-right: 20px;
   text-decoration: none;
-  color: #1e0808;
+  color:azure;
   font-weight: bold;
   transition: color 0.9s;
 }
@@ -77,7 +77,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #ffffff;
+  background-color: #0000009c;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -91,12 +91,6 @@
 .dropdownContentItem {
   padding: 10px;
   cursor: pointer;
-}
-
-.divider {
-  height: 1px;
-  background-color: #fff;
-  margin: 5px 0;
 }
 
 .dropdown:hover .dropdownContent {
@@ -117,7 +111,6 @@
 
 .logoutButton:hover {
   background-color: #25ed9d;
-  /* rotate: 180deg; */
 }
 
 .image-toggle-container {
@@ -135,11 +128,11 @@
   }
 
   100% {
-    transform: rotate(90deg);
+    transform: rotate(180deg);
   }
 }
 .image-toggle-container:hover{
-  animation: rotateImage 0.2s linear forwards;
+  animation: rotateImage 0.5s linear forwards;
 }
 
 .image-toggle {

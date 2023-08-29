@@ -5,7 +5,7 @@ import Summary from "../Contents/Summary";
 
 const Header = (props) => {
 
-    
+
     const inlineStyles = {
         display: 'flex',
         flexDirection: 'column',
@@ -20,11 +20,9 @@ const Header = (props) => {
     }
     return (
         <React.Fragment>
-            
             <div style={inlineStyles} className={`${classes['main-image']}`} >
-
                 <Summary />
-                <button className={classes.button} onClick={props.continueHandler} >Continue</button>
+                <button className={classes.button} onClick={props.continueHandler} >Resources</button>
             </div>
         </React.Fragment>
     );

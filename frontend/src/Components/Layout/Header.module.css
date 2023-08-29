@@ -10,11 +10,9 @@
     width: 100%;
     height: max-content;
     object-fit: cover;
-    /* transform: rotateZ(-5deg) translateY(-4rem) translateX(-1rem); */
   }
 
   .container {
-    /* background-size: cover; */
     background-position: center;
     width: 100%;
     min-height: 100vh;
@@ -25,7 +23,7 @@
     margin: 20px;
     padding: 10px 20px;
     font-size: 20px;
-    background-color: #0fb609;
+    background-color: #3e4df5;
     color: #fff;
     border: none;
     border-radius: 5px;

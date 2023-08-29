@@ -21,16 +21,8 @@ const SecondPage = (props) => {
     const fetchResource = async () => {
       try {
         setIsLoading(true);
-        const options = {
-          headers: {
-            "Authorization": "Bearer " + token,
-          },
-        };
-        // console.log(options.headers.Authorization);
-        const response = await axios.get(
-          "http://localhost:4000/data/resources",
-          options, { timeout: 15000 }
-        );
+        const options = { headers: { "Authorization": "Bearer " + token, }, };
+        const response = await axios.get("http://localhost:4000/data/resources", options, { timeout: 15000 });
         const data = response.data.data.newresources;
         const loadedResourse = [];
         for (const key in data) {
@@ -63,19 +55,21 @@ const SecondPage = (props) => {
     };
     try {
       const resp = await axios.post("http://localhost:4000/data/resources", body);
-      // const data = await newStudentsignup.json();
       console.log(resp.data);
 
-      setCourseGoals((prevGoals) => {
-        const updatedGoals = [...prevGoals];
-        updatedGoals.unshift({
-          heading: enteredContent.heading,
-          content: enteredContent.content,
-          contentLink: enteredContent.contentLink,
-          id: Math.random().toString(),
+      if (resp.data.status === 'success') {
+        alert("REsource added successfully");
+        setCourseGoals((prevGoals) => {
+          const updatedGoals = [...prevGoals];
+          updatedGoals.unshift({
+            heading: enteredContent.heading,
+            content: enteredContent.content,
+            contentLink: enteredContent.contentLink,
+            id: Math.random().toString(),
+          });
+          return updatedGoals;
         });
-        return updatedGoals;
-      });
+      }
     }
     catch (error) {
       console.log(error);

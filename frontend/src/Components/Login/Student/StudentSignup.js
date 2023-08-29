@@ -40,22 +40,7 @@ const StudentSignUp = (props) => {
 
         const idno = Math.floor(Math.random() * 10000) % 15 + 1;
         console.log(idno);
-        // const newStudentsignup = await fetch("http://localhost:4000/data", {
-        //   method: "POST",
-        //   headers: {
-        //     "student-signup": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     // name: userDetail.userName,
-        //     // emailid: userDetail.userEmail,
-        //     // phoneno: userDetail.userNumber,
-        //     // password: userDetail.userPassword,
-        //     name: "John Doe",
-        //     emailid: "john@example.com",
-        //     phoneno: "1234567890",
-        //     password: "secretpassword",
-        //   }),
-        // });
+        
         const options = {
             headers: {
                 "student-signup": "application/json",
@@ -71,9 +56,7 @@ const StudentSignUp = (props) => {
         try {
             setIsLoading(true);
             const response = await axios.post("http://localhost:4000/student/signup", body, options, { timeout: 10000 });
-            // const data = await newStudentsignup.json();
             console.log(response);
-            // / Store the user Detail
             if (response.status === 201) {
                 nameInputRef.current.value = "";
                 emailInputRef.current.value = "";

@@ -6,6 +6,8 @@ import Navbar from "../Layout/Navbar";
 import SecondPage from "../Layout/SecondPage";
 import ContactUs from "../Layout/ContactUs";
 import "../../Store/customScrolbar.css";
+
+
 const Main = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tokenn, setToken] = useState("");
@@ -47,7 +49,7 @@ const Main = (props) => {
     sessionStorage.setItem("studentIsLoggedIn", "1");
   };
   const continueHandler = () => {
-    setContinueState(true);
+    setContinueState(!continueState);
   };
   const backHandler = () => {
     setContinueState(false);
@@ -63,7 +65,7 @@ const Main = (props) => {
     sessionStorage.setItem("email", email);
     setCircleName(sessionStorage.getItem("name").charAt(0));
     sessionStorage.setItem("id", id + "5799");
-    
+
     sessionStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
@@ -91,6 +93,7 @@ const Main = (props) => {
       >
         <Navbar
           contactUsHandler={contactUsHandler}
+          continueHandler={continueHandler}
           circleName={circleName}
           onLogout={logoutHandler}
         />
@@ -109,7 +112,7 @@ const Main = (props) => {
               <Header continueHandler={continueHandler} />
             </div>
           )}
-        {continueState && (
+        {!ContactUsState && continueState && (
           <SecondPage
             token={tokenn}
             memSignInstate={memSignInstate}

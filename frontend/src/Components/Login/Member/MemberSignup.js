@@ -11,7 +11,6 @@ const MemberSignUp = (props) => {
     const nameInputRef = useRef();
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-    // const numberInputRef = useRef();
     const codeInputRef = useRef();
 
     const memberFormSignUpHandler = async (event) => {
@@ -20,7 +19,6 @@ const MemberSignUp = (props) => {
             userName: nameInputRef.current.value,
             userEmail: emailInputRef.current.value,
             userPassword: passwordInputRef.current.value,
-            // userNumber: numberInputRef.current.value,
             authenticationCode: codeInputRef.current.value,
         });
 
@@ -36,22 +34,18 @@ const MemberSignUp = (props) => {
             name: userDetail.userName,
             emailid: userDetail.userEmail,
 
-            // phoneno: userDetail.userNumber,
             password: userDetail.userPassword,
             code: userDetail.authenticationCode,
         };
         try {
             setIsLoading(true);
             const resp = await axios.post("http://localhost:4000/mentor/signup", body, options, { timeout: 10000 });
-            // const data = await newStudentsignup.json();
             console.log(resp.data);
 
-            // Store the user Detail 
             if (resp.status === 201) {
                 nameInputRef.current.value = '';
                 emailInputRef.current.value = '';
                 passwordInputRef.current.value = '';
-                // numberInputRef.current.value = '';
                 codeInputRef.current.value = '';
                 props.signInHandler();
             }

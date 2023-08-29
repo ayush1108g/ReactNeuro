@@ -4,8 +4,6 @@ import classes from "./ContactUs.module.css";
 import axios from "axios";
 
 const ContactForm = (props) => {
-    // const nameInputRef = useRef();
-    // const emailInputRef = useRef();
     const phoneInputRef = useRef();
     const queryInputRef = useRef();
 
@@ -20,7 +18,7 @@ const ContactForm = (props) => {
             massage: queryInputRef.current.value,
         }
         console.log(body);
-        // if (body.name.trim().length > 0 && body.email.trim().length > 0 && body.phone.trim().length > 0 && body.query.trim().length > 0) {
+       
 
 
         try {
@@ -28,7 +26,6 @@ const ContactForm = (props) => {
             console.log(response);
             alert("Your message has been sent!");
             {
-                // emailInputRef.current.value = '';
                 phoneInputRef.current.value = '';
                 queryInputRef.current.value = '';
             }
@@ -52,23 +49,19 @@ return (
                 <div className={classes.formGroup}>
                     <label htmlFor="name">Name</label>
                     <input
-                        // ref={nameInputRef}
                         value={name}
                         type="text"
                         id="name"
-                        // required
                         disabled
                     />
                 </div>
                 <div className={classes.formGroup}>
                     <label htmlFor="email">Email</label>
                     <input
-                        // ref={emailInputRef}
                         value={email}
                         type="email"
                         id="email"
                         disabled
-                    // required
                     />
                 </div>
                 <div className={classes.formGroup}>

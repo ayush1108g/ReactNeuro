@@ -10,18 +10,15 @@ const MemberSignIn = (props) => {
     const [forgotPass, setforgotPassword] = useState(false);
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-    // const codeInputRef = useRef();
     const message = 'member';
     const memberFormSignInHandler = async (event) => {
         event.preventDefault();
         const userDetail = ({
             userEmail: emailInputRef.current.value,
             userPassword: passwordInputRef.current.value,
-            // authenticationCode: codeInputRef.current.value,
         });
 
        
-        // codeInputRef.current.value = ''
 
 
         const body = {
@@ -58,9 +55,7 @@ const MemberSignIn = (props) => {
 
 
 
-        // props.onLogin(userDetail.userEmail, userDetail.userPassword);
-        // console.log(userDetail);
-        //Authenticate and Then continue
+        
 
     }
 

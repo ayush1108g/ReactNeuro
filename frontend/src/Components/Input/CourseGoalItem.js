@@ -16,11 +16,12 @@ const CourseGoalItem = props => {
   }
   return (
     <React.Fragment>
-      {delConfirm && <div><Button onClick={deleteHandler} >Confirm</Button>
-        <Button onClick={deleteConfirmHandler} >Cancel</Button>
-      </div>}
-      {!delConfirm && <Card className={classes.ccard}>
-        {props.memSignInstate && <Button onClick={deleteConfirmHandler} >Delete</Button>}
+
+      {<Card className={classes.ccard}>
+        {delConfirm && <div><Button onClick={deleteHandler} >Confirm</Button>
+          <Button onClick={deleteConfirmHandler} >Cancel</Button>
+        </div>}
+        {!delConfirm && props.memSignInstate && <Button onClick={deleteConfirmHandler} >Delete</Button>}
         <li className={classes["goal-item"]} >
           {props.children}
         </li>

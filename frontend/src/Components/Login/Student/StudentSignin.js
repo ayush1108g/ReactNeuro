@@ -58,8 +58,6 @@ const StudentSignIn = (props) => {
     }
     setIsLoading(false);
 
-    // console.log(userDetail;
-    //Authenticate and Then continue
   };
   const forgotPasswordHandler = () => {
     setforgotPassword(true);

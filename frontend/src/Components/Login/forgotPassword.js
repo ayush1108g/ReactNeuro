@@ -4,17 +4,12 @@ import classes from './forgotPassword.module.css';
 const ForgotPassword = (props) => {
     const emailRef = useRef();
 
-    const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [submit, setSubmit] = useState(false);
-    // const handleEmailChange = (event) => {
-    //     setEmail(event.target.value);
-    //     console.log(email);
-    // };
+    
 
     const proceedToResetPassword = () => {
         const emailentered = emailRef.current.value.toLowerCase();
-        setEmail(emailentered);
 
         //Check if the email is registered or not Both Student and Member
         // if (props.from === 'student') Check in student database
