@@ -163,9 +163,9 @@ exports.verifycode = async (req, res, next) => {
     });
   }
   // user.password = req.body.password;
-  user.resetPasswordToken = undefined;
-  user.passwordresetexpired = undefined;
-  user.save();
+  // user.resetPasswordToken = undefined;
+  // user.passwordresetexpired = undefined;
+  // user.save();
   res.status(200).json({
     status: "success",
     message: "go to next page",
