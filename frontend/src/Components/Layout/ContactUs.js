@@ -24,7 +24,7 @@ const ContactForm = (props) => {
 
         try {
             const response = await axios.post(`${ToLink}/feedback`, body);
-            // console.log(response);
+            console.log(response);
             alert("Your message has been sent!");
 
             phoneInputRef.current.value = '';
