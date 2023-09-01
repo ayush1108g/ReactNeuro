@@ -16,7 +16,10 @@ const resourcesSchema = new Schema({
     required: true,
   },
 });
-
+const filesSchema = new Schema({
+  filename:"string",
+      path:"string",
+})
 const Resources = mongoose.model("Resources", resourcesSchema);
-
-module.exports = Resources;
+const files = mongoose.model("Files", filesSchema);
+module.exports = Resources,files;
