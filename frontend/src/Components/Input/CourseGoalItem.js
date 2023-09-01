@@ -9,7 +9,7 @@ const CourseGoalItem = props => {
 
   const deleteHandler = () => {
     props.onDelete(props.id);
-    console.log(props.id);
+  //  console.log(props.id);
   };
   const deleteConfirmHandler = () => {
     setDelConfirm(!delConfirm);

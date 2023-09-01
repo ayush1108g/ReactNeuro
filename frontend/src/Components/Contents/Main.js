@@ -7,10 +7,11 @@ import SecondPage from "../Layout/SecondPage";
 import ContactUs from "../Layout/ContactUs";
 import "../../Store/customScrolbar.css";
 
+export const ToLink = "https://neuroproject.onrender.com";
 
-const Main = (props) => {
+const Main = (props) => { 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [tokenn, setToken] = useState("");
+  // const [tokenn, setToken] = useState("");
   const [circleName, setCircleName] = useState("");
   const [ContactUsState, setContactUsState] = useState(false);
   const [memSignInstate, setMemSignInState] = useState(false);
@@ -38,6 +39,8 @@ const Main = (props) => {
     }
   }, []);
 
+
+
   const memberSignInFormSubmit = () => {
     setMemSignInState(true);
     setIsLoggedIn(true);
@@ -59,8 +62,8 @@ const Main = (props) => {
     setContactUsState(!ContactUsState);
   };
   const loginHandler = (name, email, password, token, id) => {
-    setToken(token);
-    console.log(name, email, password, token,id);
+    // setToken(token);
+   // console.log(name, email, password, token,id);
     sessionStorage.setItem("name", name);
     sessionStorage.setItem("email", email);
     setCircleName(sessionStorage.getItem("name").charAt(0));
@@ -115,7 +118,7 @@ const Main = (props) => {
           )}
         {!ContactUsState && continueState && (
           <SecondPage
-            token={tokenn}
+            // token={tokenn}
             memSignInstate={memSignInstate}
             backHandler={backHandler}
           />

@@ -3,6 +3,7 @@ import classes from "./SecondPage.module.css";
 import InputItem from "../Input/InputItem";
 import CourseGoalList from "../Input/CourseGoalList";
 import axios from "axios";
+import { ToLink } from "../Contents/Main";
 
 const SecondPage = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,14 +16,14 @@ const SecondPage = (props) => {
       id: "",
     },
   ]);
-  const token = props.token;
+  //const token = props.token;
   // console.log(token);
   useEffect(() => {
     const fetchResource = async () => {
       try {
         setIsLoading(true);
-        const options = { headers: { "Authorization": "Bearer " + token, }, };
-        const response = await axios.get("http://localhost:4000/data/resources", options, { timeout: 15000 });
+        // const options = { headers: { "Authorization": "Bearer " + token, }, };
+        const response = await axios.get(`${ToLink}/data/resources`,{ timeout: 20000 });
         const data = response.data.data.newresources;
         const loadedResourse = [];
         for (const key in data) {
@@ -37,13 +38,13 @@ const SecondPage = (props) => {
         setErrormsg("");
       } catch (error) {
         setIsLoading(false);
-        console.error("Error fetching Resource:", error);
+       console.error("Error fetching Resource:", error);
         setErrormsg("Error fetching Resource");
       }
       setIsLoading(false);
     };
     fetchResource();
-  }, []);
+  } , []);
 
 
   const addContentHandler = async (enteredContent) => {
@@ -54,7 +55,7 @@ const SecondPage = (props) => {
       id: enteredContent.id,
     };
     try {
-      const resp = await axios.post("http://localhost:4000/data/resources", body);
+      const resp = await axios.post(`${ToLink}/data/resources`, body);
       console.log(resp.data);
 
       if (resp.data.status === 'success') {
@@ -72,7 +73,7 @@ const SecondPage = (props) => {
       }
     }
     catch (error) {
-      console.log(error);
+     console.log(error);
       if (error.response.status === 404) {
         alert("Server Not Responding");
       }
@@ -80,10 +81,10 @@ const SecondPage = (props) => {
   };
 
   const deleteItemHandler = async (goalId) => {
-    console.log(goalId);
+    //console.log(goalId);
     try {
-      const delRequest = await axios.delete(`http://localhost:4000/data/resources/${goalId}`);
-      console.log(delRequest);
+      const delRequest = await axios.delete(`${ToLink}/data/resources/${goalId}`);
+     // console.log(delRequest);
       if (delRequest.status === 201) {
         setCourseGoals((prevGoals) => {
           const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);

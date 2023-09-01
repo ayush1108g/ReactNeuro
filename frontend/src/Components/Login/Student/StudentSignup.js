@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import Card from "../../UI/Card";
 import classes from "./StudentSignup.module.css";
 import axios from "axios";
+import { ToLink } from "../../Contents/Main";
 
 const StudentSignUp = (props) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +14,7 @@ const StudentSignUp = (props) => {
 
     // useEffect(() => {
     //     const p = async () => {
-    //         const data = await fetch("http://localhost:4000/data", {
+    //         const data = await fetch(`{ToLink}/data", {
     //             method: "GET",
     //             headers: {
     //                 "student-signup": "application/json",
@@ -36,10 +37,10 @@ const StudentSignUp = (props) => {
 
         };
 
-        console.log(userDetail);
+       // console.log(userDetail);
 
         const idno = Math.floor(Math.random() * 10000) % 15 + 1;
-        console.log(idno);
+       // console.log(idno);
         
         const options = {
             headers: {
@@ -55,8 +56,8 @@ const StudentSignUp = (props) => {
         };
         try {
             setIsLoading(true);
-            const response = await axios.post("http://localhost:4000/student/signup", body, options, { timeout: 10000 });
-            console.log(response);
+            const response = await axios.post(`${ToLink}/student/signup`, body, options, { timeout: 20000 });
+          //  console.log(response);
             if (response.status === 201) {
                 nameInputRef.current.value = "";
                 emailInputRef.current.value = "";
@@ -66,7 +67,7 @@ const StudentSignUp = (props) => {
             }
         }
         catch (error) {
-            console.log(error);
+           console.log(error);
             if (error.code === "ERR_BAD_REQUEST")
                 setErrormsg(error.response.data.message);
             else if(error.response.status === 500)
