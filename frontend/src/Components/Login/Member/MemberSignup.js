@@ -51,7 +51,7 @@ const MemberSignUp = (props) => {
             }
         }
         catch (error) {
-            console.log(error);
+            // console.log(error);
             if (error.code === "ERR_BAD_REQUEST")
                 setErrormsg('Email already in use');
             else if (error.code === "ERR_BAD_RESPONSE")

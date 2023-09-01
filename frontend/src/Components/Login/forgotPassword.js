@@ -38,7 +38,7 @@ const ForgotPassword = (props) => {
             }
 
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             if (error.code === "ERR_BAD_REQUEST") {
                 setErrormsg('Email not found');
             }
@@ -75,7 +75,7 @@ const ForgotPassword = (props) => {
                 setFinalSubmitPassword(true);
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             // setErrormsg('Something went wrong. Please try again');
             setErrormsg(error.response.data.message);
         }
@@ -116,7 +116,7 @@ const ForgotPassword = (props) => {
                     }
                 }
             } catch (error) {
-                console.log(error);
+                // console.log(error);
                 setErrormsg('Something went wrong. Please try again');
             }
             setIsLoading(false);

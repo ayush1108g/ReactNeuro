@@ -67,7 +67,7 @@ const StudentSignUp = (props) => {
             }
         }
         catch (error) {
-           console.log(error);
+        //    console.log(error);
             if (error.code === "ERR_BAD_REQUEST")
                 setErrormsg(error.response.data.message);
             else if(error.response.status === 500)

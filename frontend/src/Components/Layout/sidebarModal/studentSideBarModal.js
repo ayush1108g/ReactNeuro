@@ -17,7 +17,7 @@ function StudentSidebarModal(props) {
      // console.log(response.data.data.newstudentsignup);
       setStudents(response.data.data.newstudentsignup);
     } catch (error) {
-      console.error("Error fetching students:", error);
+      // console.error("Error fetching students:", error);
     }
   };
 

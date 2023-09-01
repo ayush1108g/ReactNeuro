@@ -20,7 +20,7 @@ const id = xid.slice(0, -4);
     //  console.log(response.data.data.newStudent);
       setStudents(response.data.data.newStudent);
     } catch (error) {
-      console.error("Error fetching students:", error);
+      // console.error("Error fetching students:", error);
     }
   };
 

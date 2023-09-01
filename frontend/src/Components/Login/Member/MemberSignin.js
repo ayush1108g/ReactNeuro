@@ -39,7 +39,7 @@ const MemberSignIn = (props) => {
                 const name = response.data.name;
                 // const token = response.data.token;
                 const id = response.data.id;
-               // console.log(id);
+            //    console.log(id);
                 //console.log(name);
                 props.onLogin(name, userDetail.userEmail, userDetail.userPassword,
                     //  token,
@@ -48,7 +48,7 @@ const MemberSignIn = (props) => {
             }
 
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             if (error.code === "ERR_BAD_REQUEST")
                 setErrormsg(error.response.data.message);
             else if (error.code === "ERR_BAD_RESPONSE")

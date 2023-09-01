@@ -32,7 +32,7 @@ const ContactForm = (props) => {
 
         }
         catch (err) {
-            console.log(err);
+            // console.log(err);
             alert("Something went wrong!");
         }
 
