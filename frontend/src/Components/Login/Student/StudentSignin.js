@@ -3,6 +3,8 @@ import Card from "../../UI/Card";
 import classes from "./StudentSignin.module.css";
 import ForgotPassword from "../forgotPassword";
 import axios from "axios";
+import { ToLink } from "../../Contents/Main";
+
 
 const StudentSignIn = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,12 +29,12 @@ const StudentSignIn = (props) => {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        "http://localhost:4000/student/login",
+        `${ToLink}/student/login`,
         body,
-        { timeout: 10000 }
+        { timeout: 20000 }
       );
-      console.log(response);
-      const token = response.data.token;
+     // console.log(response);
+      // const token = response.data.token;
       const id = response.data.id;
       if (response.data.status === "success") {
         emailInputRef.current.value = "";
@@ -42,7 +44,7 @@ const StudentSignIn = (props) => {
           name,
           userDetail.userEmail,
           userDetail.userPassword,
-          token,
+          // token,
           id,
           ""
         );
@@ -61,7 +63,7 @@ const StudentSignIn = (props) => {
   };
   const forgotPasswordHandler = () => {
     setforgotPassword(!forgotPass);
-    console.log(forgotPass);
+  //  console.log(forgotPass);
   };
 
   return (

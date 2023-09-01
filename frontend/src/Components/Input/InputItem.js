@@ -8,7 +8,7 @@ const InputItem = (props) => {
     const [enteredHeading, setEnteredHeading] = useState('');
     const [enteredContent, setEnteredContent] = useState('');
     const [enteredContentLink, setEnteredContentLink] = useState('');
-    const [file, setFile] = useState(null);
+    // const [file, setFile] = useState(null);
     const [isValid, setIsValid] = useState(true);
 
 
@@ -33,11 +33,11 @@ const InputItem = (props) => {
         setEnteredContentLink(event.target.value);
     };
 
-    const fileChangeHandler = event => {
-        const selectedFile = event.target.files[0];
-        console.log(selectedFile);
-        setFile(selectedFile);
-    }
+    // const fileChangeHandler = event => {
+    //     const selectedFile = event.target.files[0];
+    //     console.log(selectedFile);
+    //     setFile(selectedFile);
+    // }
     const formSubmitHandler = event => {
         event.preventDefault();
 
@@ -87,7 +87,9 @@ const InputItem = (props) => {
                     <div className={classes.line}></div>
                 </div>
                 <br />
-                <input type="file" placeholder="flie" onChange={fileChangeHandler}></input>
+                <input type="file" placeholder="flie" 
+                // onChange={fileChangeHandler}
+                ></input>
                 <br />
                 <Button type="submit">Add Item</Button>
                 <Button type="button" onClick={addItemHandler}>Cancel</Button>

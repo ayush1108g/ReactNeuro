@@ -3,6 +3,7 @@ import Card from '../../UI/Card'
 import classes from './MemberSignin.module.css'
 import ForgotPassword from '../forgotPassword';
 import axios from "axios";
+import { ToLink } from '../../Contents/Main';
 
 const MemberSignIn = (props) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -29,18 +30,20 @@ const MemberSignIn = (props) => {
         try {
             setIsLoading(true);
             const response = await axios.post(
-                "http://localhost:4000/mentor/login",
-                body, { timeout: 10000 });
-            console.log(response);
+                `${ToLink}/mentor/login`,
+                body, { timeout: 20000 });
+            //console.log(response);
             if (response.data.status === "success") {
                 emailInputRef.current.value = ''
                 passwordInputRef.current.value = ''
                 const name = response.data.name;
-                const token = response.data.token;
+                // const token = response.data.token;
                 const id = response.data.id;
-                console.log(id);
-                console.log(name);
-                props.onLogin(name, userDetail.userEmail, userDetail.userPassword, token, id);
+               // console.log(id);
+                //console.log(name);
+                props.onLogin(name, userDetail.userEmail, userDetail.userPassword,
+                    //  token,
+                      id);
                 props.memberSignInFormSubmit();
             }
 
@@ -64,7 +67,7 @@ const MemberSignIn = (props) => {
 
     const forgotPasswordHandler = () => {
         setforgotPassword(!forgotPass);
-        console.log(forgotPass)
+       // console.log(forgotPass)
     }
 
     return (

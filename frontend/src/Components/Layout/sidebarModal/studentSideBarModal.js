@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import classes from "./studentSideBarModal.module.css";
+import { ToLink } from "../../Contents/Main";
 
 function StudentSidebarModal(props) {
   const [students, setStudents] = useState([ ]);
@@ -12,8 +13,8 @@ function StudentSidebarModal(props) {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/student/signup");
-      console.log(response.data.data.newstudentsignup);
+      const response = await axios.get(`${ToLink}/student/signup`);
+     // console.log(response.data.data.newstudentsignup);
       setStudents(response.data.data.newstudentsignup);
     } catch (error) {
       console.error("Error fetching students:", error);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import classes from "./studentSideBarModal.module.css";
+import { ToLink } from "../../Contents/Main";
 
 function MemStuSidebarModal(props) {
   const [students, setStudents] = useState([ ]);
@@ -14,9 +15,9 @@ function MemStuSidebarModal(props) {
     try {
 const xid = sessionStorage.getItem('id');
 const id = xid.slice(0, -4);
-console.log(id);
-      const response = await axios.get(`http://localhost:4000/student/signup/${id}`);
-      console.log(response.data.data.newStudent);
+//console.log(id);
+      const response = await axios.get(`${ToLink}/student/signup/${id}`);
+    //  console.log(response.data.data.newStudent);
       setStudents(response.data.data.newStudent);
     } catch (error) {
       console.error("Error fetching students:", error);

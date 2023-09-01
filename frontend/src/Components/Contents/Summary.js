@@ -5,12 +5,10 @@ const Summary = () => {
     <section className={classes.summary}>
       <h2>Neuromancers</h2>
       <p>
-        Choose your favorite meal from our broad selection of available meals
-        and enjoy a delicious lunch or dinner at home.
+      Neuromancers being the coding society of IIT Bhubaneswar would likely aim to provide a platform for students to develop coding skills, engage in coding competitions, and collaborate on tech projects. The society's objectives might involve improving coding proficiency, organizing coding events, and promoting a culture of learning and innovation.
       </p>
       <p>
-        All our meals are cooked with high-quality ingredients, just-in-time and
-        of course by experienced chefs!
+      Choosing Neuromancers could offer freshers a chance to sharpen coding abilities, participate in coding challenges, and be part of a community passionate about technology and programming.
       </p>
     </section>
   );

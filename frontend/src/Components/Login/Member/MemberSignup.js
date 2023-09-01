@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Card from '../../UI/Card';
 import classes from './MemberSignup.module.css'
 import axios from 'axios';
-
+import { ToLink } from '../../Contents/Main';
 
 const MemberSignUp = (props) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,7 @@ const MemberSignUp = (props) => {
         });
 
 
-        console.log(userDetail);
+      //  console.log(userDetail);
 
         const options = {
             headers: {
@@ -39,8 +39,8 @@ const MemberSignUp = (props) => {
         };
         try {
             setIsLoading(true);
-            const resp = await axios.post("http://localhost:4000/mentor/signup", body, options, { timeout: 10000 });
-            console.log(resp.data);
+            const resp = await axios.post(`${ToLink}/mentor/signup`, body, options, { timeout: 20000 });
+            //console.log(resp.data);
 
             if (resp.status === 201) {
                 nameInputRef.current.value = '';

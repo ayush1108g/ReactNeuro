@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import classes from './forgotPassword.module.css';
 import axios from 'axios';
+import { ToLink } from '../Contents/Main';
 
 const ForgotPassword = (props) => {
     const emailRef = useRef();
@@ -21,16 +22,16 @@ const ForgotPassword = (props) => {
         try {
             setIsLoading(true);
             let EmailPass ='';
-            console.log(props.from);
-            console.log(body);
+           // console.log(props.from);
+            //console.log(body);
             if (props.from === 'member') {
-                EmailPass = await axios.post("http://localhost:4000/mentor/forgotpassword", body, { timeout: 10000 });
+                EmailPass = await axios.post(`${ToLink}/mentor/forgotpassword`, body, { timeout: 20000 });
             }
             if (props.from === 'student') {
-                EmailPass = await axios.post("http://localhost:4000/student/forgotpassword", body, { timeout: 10000 });
+                EmailPass = await axios.post(`${ToLink}/student/forgotpassword`, body, { timeout: 20000 });
             }
             
-            console.log(EmailPass);
+           // console.log(EmailPass);
             if (EmailPass.data.status === 'success') {
                 setErrormsg(`Password reset email sent to ${emailentered}`);
                 setSubmit(true);
@@ -64,12 +65,12 @@ const ForgotPassword = (props) => {
             setIsLoading(true);
             let ResetPassword = '';
             if (props.from === 'student') {
-                ResetPassword = await axios.post("http://localhost:4000/student/verifycode", body, { timeout: 10000 });
+                ResetPassword = await axios.post(`${ToLink}/student/verifycode`, body, { timeout: 20000 });
             }
             else if (props.from === 'member') {
-                ResetPassword = await axios.post("http://localhost:4000/mentor/verifycode", body, { timeout: 10000 });
+                ResetPassword = await axios.post(`${ToLink}/mentor/verifycode`, body, { timeout: 20000 });
             }
-            console.log(ResetPassword);
+           // console.log(ResetPassword);
             if (ResetPassword.data.status === 'success') {
                 setFinalSubmitPassword(true);
             }
@@ -93,17 +94,17 @@ const ForgotPassword = (props) => {
             const body = {
                 password: pass,
             }
-            console.log(body);
+            //console.log(body);
             try {
                 setIsLoading(true);
                 let ChangePassword ='';
                 if (props.from === 'student') {
-                    ChangePassword = await axios.patch(`http://localhost:4000/student/resetpassword/${code}`, body);
+                    ChangePassword = await axios.patch(`${ToLink}/student/resetpassword/${code}`, body);
                 }
                 else if (props.from === 'member') {
-                    ChangePassword = await axios.patch(`http://localhost:4000/mentor/resetpassword/${code}`, body);
+                    ChangePassword = await axios.patch(`${ToLink}/mentor/resetpassword/${code}`, body);
                 }
-                console.log(ChangePassword);
+                //console.log(ChangePassword);
                 if (ChangePassword.data.status === 'success') {
                     alert("Password changed successfully");
                     props.onclc();
