@@ -7,41 +7,49 @@ const ForgotPassword = (props) => {
     const passwordRef = useRef();
     const password = useRef();
     const ConfirmPassword = useRef();
-    const [code,setCode] = useState('');
+    const [code, setCode] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [errormsg, setErrormsg] = useState("");
     const [submit, setSubmit] = useState(false);
     const [finalSubmitPassword, setFinalSubmitPassword] = useState(false);
 
-    const proceedToResetPassword = () => {
+    const proceedToResetPassword = async () => {
         const emailentered = emailRef.current.value.toLowerCase();
         const body = {
             emailid: emailentered,
         };
         try {
             setIsLoading(true);
-            const EmailPass = axios.post("http://localhost:4000/student/forgotpassword", body, { timeout: 10000 })
+            let EmailPass ='';
+            console.log(props.from);
+            console.log(body);
+            if (props.from === 'member') {
+                EmailPass = await axios.post("http://localhost:4000/mentor/forgotpassword", body, { timeout: 10000 });
+            }
+            if (props.from === 'student') {
+                EmailPass = await axios.post("http://localhost:4000/student/forgotpassword", body, { timeout: 10000 });
+            }
+            
             console.log(EmailPass);
-            //Check if the email is registered or not Both Student and Member
-            // if (props.from === 'student') Check in student database
-            // if (props.from === 'member') Check in member database
-            // if email is registered then 
-            // Generate a code and Send to the email
-            // if (EmailPass.response.status === '200') {
-            setErrormsg(`Password reset email sent to ${emailentered}`);
-            setSubmit(true);
-            // }
+            if (EmailPass.data.status === 'success') {
+                setErrormsg(`Password reset email sent to ${emailentered}`);
+                setSubmit(true);
+            }
 
         } catch (error) {
             console.log(error);
-            setErrormsg('Something went wrong. Please try again');
+            if (error.code === "ERR_BAD_REQUEST") {
+                setErrormsg('Email not found');
+            }
+            else {
+                setErrormsg('Something went wrong. Please try again');
+            }
         }
         setIsLoading(false);
-
     };
 
 
-    const handleResetPassword = () => {
+    const handleResetPassword = async () => {
         const passwordentered = passwordRef.current.value;
         const body = {
             code: passwordentered,
@@ -51,44 +59,70 @@ const ForgotPassword = (props) => {
         // For example, make an API call to send a reset email
         // and handle the response accordingly
         // Simulating a successful password reset message
-        if (props.from === 'student') {
-            try {
-                const ResetPassword = axios.post("http://localhost:4000/student/verifycode", body, { timeout: 10000 });
-                console.log(ResetPassword);
+        try {
+            setErrormsg('');
+            setIsLoading(true);
+            let ResetPassword = '';
+            if (props.from === 'student') {
+                ResetPassword = await axios.post("http://localhost:4000/student/verifycode", body, { timeout: 10000 });
+            }
+            else if (props.from === 'member') {
+                ResetPassword = await axios.post("http://localhost:4000/mentor/verifycode", body, { timeout: 10000 });
+            }
+            console.log(ResetPassword);
+            if (ResetPassword.data.status === 'success') {
                 setFinalSubmitPassword(true);
+            }
+        } catch (error) {
+            console.log(error);
+            // setErrormsg('Something went wrong. Please try again');
+            setErrormsg(error.response.data.message);
+        }
+        setIsLoading(false);
+
+    };
+
+    const finalNewPassword = async () => {
+        const pass = password.current.value;
+        if (pass !== ConfirmPassword.current.value) {
+            setErrormsg('Passwords do not match');
+            return;
+        }
+        else {
+            setErrormsg('');
+            const body = {
+                password: pass,
+            }
+            console.log(body);
+            try {
+                setIsLoading(true);
+                let ChangePassword ='';
+                if (props.from === 'student') {
+                    ChangePassword = await axios.patch(`http://localhost:4000/student/resetpassword/${code}`, body);
+                }
+                else if (props.from === 'member') {
+                    ChangePassword = await axios.patch(`http://localhost:4000/mentor/resetpassword/${code}`, body);
+                }
+                console.log(ChangePassword);
+                if (ChangePassword.data.status === 'success') {
+                    alert("Password changed successfully");
+                    props.onclc();
+                    if (props.from === 'student') {
+                        props.stuSignInHandler();
+                    }
+                    else if (props.from === 'member') {
+                        props.memSignInHandler();
+                    }
+                }
             } catch (error) {
                 console.log(error);
                 setErrormsg('Something went wrong. Please try again');
             }
-
-        }
-        if (props.from === 'member') {
-            props.memsignUpHandler();
-        }
-    };
-
-    const finalNewPassword = () => {
-        const pass = password.current.value ;
-        if( pass !== ConfirmPassword.current.value) {
-            setErrormsg('Passwords do not match');
-            return;
-        }
-        else{
-            setErrormsg('');
-            const body = {
-                password:pass,
-            }
-            console.log(body);
-            try {
-                const ChangePassword = axios.patch(`http://localhost:4000/student/resetpassword/${code}` , body);
-                console.log(ChangePassword);
-            }catch(error){
-                console.log(error);
-            }
+            setIsLoading(false);
 
 
         }
-    
+
         return;
     }
 
@@ -112,8 +146,10 @@ const ForgotPassword = (props) => {
                 <button className={classes.button} onClick={handleResetPassword}>Reset Password</button>
             </div>}
             {finalSubmitPassword && <div>
-                <input type='name' placeholder='Enter Password' ref={password}></input>
-                <input type='password' placeholder='Confirm Password' ref={ConfirmPassword}></input>
+                <input type='name' placeholder='Enter Password' pattern=".{8,}"
+                    title="Password must be at least 8 characters long" ref={password}></input>
+                <input type='password' placeholder='Confirm Password' pattern=".{8,}"
+                    title="Password must be at least 8 characters long"ref={ConfirmPassword}></input>
                 <button className={classes.button} onClick={finalNewPassword}>Confirm Password</button></div>}
         </div>
     );

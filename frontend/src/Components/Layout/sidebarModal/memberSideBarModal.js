@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import classes from "./studentSideBarModal.module.css";
 
-function StudentSidebarModal(props) {
+function MemberSidebarModal(props) {
   const [students, setStudents] = useState([ ]);
 
   
@@ -12,9 +12,9 @@ function StudentSidebarModal(props) {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/student/signup");
-      console.log(response.data.data.newstudentsignup);
-      setStudents(response.data.data.newstudentsignup);
+      const response = await axios.get("http://localhost:4000/mentor/signup");
+    //   console.log(response);
+      setStudents(response.data.data.newmentorsignup);
     } catch (error) {
       console.error("Error fetching students:", error);
     }
@@ -25,7 +25,7 @@ function StudentSidebarModal(props) {
       {
         <div className={classes.modal}>
           <div className={classes["modal-content"]}>
-            <h2 className={classes["modal-title"]}>Student List</h2>
+            <h2 className={classes["modal-title"]}>Member List</h2>
             <ul className={classes["student-list"]}>
               {students.map((student) => (
                 <li key={student._id} className={classes["student-item"]}>
@@ -48,4 +48,4 @@ function StudentSidebarModal(props) {
   );
 }
 
-export default StudentSidebarModal;
+export default MemberSidebarModal;

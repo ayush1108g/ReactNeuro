@@ -8,6 +8,7 @@ const InputItem = (props) => {
     const [enteredHeading, setEnteredHeading] = useState('');
     const [enteredContent, setEnteredContent] = useState('');
     const [enteredContentLink, setEnteredContentLink] = useState('');
+    const [file, setFile] = useState(null);
     const [isValid, setIsValid] = useState(true);
 
 
@@ -32,27 +33,35 @@ const InputItem = (props) => {
         setEnteredContentLink(event.target.value);
     };
 
+    const fileChangeHandler = event => {
+        const selectedFile = event.target.files[0];
+        console.log(selectedFile);
+        setFile(selectedFile);
+    }
     const formSubmitHandler = event => {
         event.preventDefault();
+
+        // if((enteredHeading.trim().length > 0 && enteredContent.trim().length>0 && (enteredContentLink.trim().length > 0) || file)){
         if (!isValid) {
             setIsValid(false);
             return;
         }
-        let link = enteredContentLink.toString();
-        if (!link.startsWith("http://") && !link.startsWith("https://")) {
-            link = "http://" + link;
-        }
-        props.onAddContent({
-            id: Math.floor(Math.random()).toString(),
-            heading: enteredHeading,
-            content: enteredContent,
-            contentLink: link,
-        });
+        {
+            let link = enteredContentLink.toString();
+            if (!link.startsWith("http://") && !link.startsWith("https://")) {
+                link = "http://" + link;
+            }
+            props.onAddContent({
+                id: Math.floor(Math.random()).toString(),
+                heading: enteredHeading,
+                content: enteredContent,
+                contentLink: link,
+            });
 
-        setEnteredHeading('');
-        setEnteredContent('');
-        setEnteredContentLink('');
-
+            setEnteredHeading('');
+            setEnteredContent('');
+            setEnteredContentLink('');
+        } return;
     };
 
     const addItemHandler = () => {
@@ -70,7 +79,7 @@ const InputItem = (props) => {
                 <input type="text" placeholder="Content" onChange={contentChangeHandler} value={enteredContent} required />
                 <br />
                 <input type="link" placeholder="Content-link" onChange={linkChangeHandler} value={enteredContentLink} required></input>
-                <p>* Do not add http:// in link</p>
+                {/* <p>* Do not add http:// in link</p> */}
                 <br />
                 <div className={classes["horizontal-line"]}>
                     <div className={classes.line}></div>
@@ -78,7 +87,7 @@ const InputItem = (props) => {
                     <div className={classes.line}></div>
                 </div>
                 <br />
-                <input type="file" placeholder="flie" ></input>
+                <input type="file" placeholder="flie" onChange={fileChangeHandler}></input>
                 <br />
                 <Button type="submit">Add Item</Button>
                 <Button type="button" onClick={addItemHandler}>Cancel</Button>

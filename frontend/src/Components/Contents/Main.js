@@ -20,7 +20,7 @@ const Main = (props) => {
   useEffect(() => {
     const storedUserLoggedInInformation = sessionStorage.getItem("isLoggedIn");
     const storedMemberLoggedInInformation =
-      sessionStorage.getItem("memberIsLoggedIn");
+      sessionStorage.getItem("member#tobe@get*is$Log!ged&in");
     const storedStudentLoggedInInformation =
       sessionStorage.getItem("studentIsLoggedIn");
 
@@ -41,7 +41,7 @@ const Main = (props) => {
   const memberSignInFormSubmit = () => {
     setMemSignInState(true);
     setIsLoggedIn(true);
-    sessionStorage.setItem("memberIsLoggedIn", "1");
+    sessionStorage.setItem("member#tobe@get*is$Log!ged&in", "1");
   };
   const studentSignInFormSubmit = () => {
     setStuSignInState(true);
@@ -60,7 +60,7 @@ const Main = (props) => {
   };
   const loginHandler = (name, email, password, token, id) => {
     setToken(token);
-    // console.log(name, email, password, token);
+    console.log(name, email, password, token,id);
     sessionStorage.setItem("name", name);
     sessionStorage.setItem("email", email);
     setCircleName(sessionStorage.getItem("name").charAt(0));
@@ -71,7 +71,7 @@ const Main = (props) => {
   };
   const logoutHandler = () => {
     sessionStorage.removeItem("isLoggedIn");
-    sessionStorage.removeItem("memberIsLoggedIn");
+    sessionStorage.removeItem("member#tobe@get*is$Log!ged&in");
     sessionStorage.removeItem("studentIsLoggedIn");
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("email");
@@ -95,6 +95,7 @@ const Main = (props) => {
           contactUsHandler={contactUsHandler}
           continueHandler={continueHandler}
           circleName={circleName}
+          memSignInstate={memSignInstate}
           onLogout={logoutHandler}
         />
         {!stuSignInState && !memSignInstate && (

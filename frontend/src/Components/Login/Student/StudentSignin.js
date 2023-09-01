@@ -60,7 +60,7 @@ const StudentSignIn = (props) => {
 
   };
   const forgotPasswordHandler = () => {
-    setforgotPassword(true);
+    setforgotPassword(!forgotPass);
     console.log(forgotPass);
   };
 
@@ -71,7 +71,9 @@ const StudentSignIn = (props) => {
           {forgotPass && (
             <ForgotPassword
               from={message}
+              onclc={forgotPasswordHandler}
               stusignUpHandler={props.signUpHandler}
+              stuSignInHandler={props.signInHandler}
             />
           )}
           {!forgotPass && (
