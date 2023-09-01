@@ -85,6 +85,12 @@ const ForgotPassword = (props) => {
 
     const finalNewPassword = async () => {
         const pass = password.current.value;
+        const confirmpass = ConfirmPassword.current.value;
+        if( pass.trim().length < 8 && confirmpass.trim().length <8 ) {
+            setErrormsg("Password must be 8 character long");
+            return;
+        }
+
         if (pass !== ConfirmPassword.current.value) {
             setErrormsg('Passwords do not match');
             return;
@@ -144,13 +150,13 @@ const ForgotPassword = (props) => {
             }
             {!finalSubmitPassword && submit && <div>
                 <input type='number' placeholder='Reset Code' ref={passwordRef}></input>
-                <button className={classes.button} onClick={handleResetPassword}>Reset Password</button>
+                <button className={classes.button} onClick={handleResetPassword} required>Reset Password</button>
             </div>}
             {finalSubmitPassword && <div>
                 <input type='name' placeholder='Enter Password' pattern=".{8,}"
-                    title="Password must be at least 8 characters long" ref={password}></input>
+                    title="Password must be at least 8 characters long" ref={password} required></input>
                 <input type='password' placeholder='Confirm Password' pattern=".{8,}"
-                    title="Password must be at least 8 characters long"ref={ConfirmPassword}></input>
+                    title="Password must be at least 8 characters long" ref={ConfirmPassword} required></input>
                 <button className={classes.button} onClick={finalNewPassword}>Confirm Password</button></div>}
         </div>
     );
