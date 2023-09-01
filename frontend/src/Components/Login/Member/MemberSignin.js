@@ -39,11 +39,10 @@ const MemberSignIn = (props) => {
                 const name = response.data.name;
                 // const token = response.data.token;
                 const id = response.data.id;
+                // console.log(response);
             //    console.log(id);
                 //console.log(name);
-                props.onLogin(name, userDetail.userEmail, userDetail.userPassword,
-                    //  token,
-                      id);
+                props.onLogin(name, userDetail.userEmail, userDetail.userPassword, id);
                 props.memberSignInFormSubmit();
             }
 

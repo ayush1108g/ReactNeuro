@@ -61,7 +61,7 @@ const Main = (props) => {
   const contactUsHandler = () => {
     setContactUsState(!ContactUsState);
   };
-  const loginHandler = (name, email, password, token, id) => {
+  const loginHandler = (name, email, password, id) => {
     // setToken(token);
    // console.log(name, email, password, token,id);
     sessionStorage.setItem("name", name);
