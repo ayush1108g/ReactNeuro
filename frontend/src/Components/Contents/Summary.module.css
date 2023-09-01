@@ -3,8 +3,8 @@
     max-width: 45rem;
     /* width: 90%; */
     margin: auto;
-    margin-top: 20rem;
-    position: relative;
+    margin-top: 16rem;
+    /* position: relative; */
     /* background-color: #383838; */
     color: white;
     border-radius: 14px;
@@ -20,6 +20,9 @@
   @media (max-width: 450px) {
     .summary h2 {
       font-size: 2rem;
+    }
+    .summary{
+      margin-top: 15rem;
     }
   }
   @media (max-width: 250px) {
