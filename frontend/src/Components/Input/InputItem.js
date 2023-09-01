@@ -89,7 +89,7 @@ const InputItem = (props) => {
                 <br />
                 <input type="file" placeholder="flie" 
                 // onChange={fileChangeHandler}
-                ></input>
+                ></input><p>File Upload is currently not available</p>
                 <br />
                 <Button type="submit">Add Item</Button>
                 <Button type="button" onClick={addItemHandler}>Cancel</Button>
