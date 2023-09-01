@@ -32,7 +32,7 @@ exports.creatementorsignup = async (req, res,next) => {
     const code = await req.body.code;
     console.log(code);
    
-    if(code == 1234){
+    if(code == 993362){
       const newmentorsignup = await mentorsignup.create(req.body);
       const token = signToken(newmentorsignup._id)
       res.status(201).json({
