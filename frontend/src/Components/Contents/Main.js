@@ -19,11 +19,11 @@ const Main = (props) => {
   const [continueState, setContinueState] = useState(false);
 
   useEffect(() => {
-    const storedUserLoggedInInformation = sessionStorage.getItem("isLoggedIn");
+    const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
     const storedMemberLoggedInInformation =
-      sessionStorage.getItem("member#tobe@get*is$Log!ged&in");
+      localStorage.getItem("member#tobe@get*is$Log!ged&in");
     const storedStudentLoggedInInformation =
-      sessionStorage.getItem("studentIsLoggedIn");
+      localStorage.getItem("studentIsLoggedIn");
 
     if (storedUserLoggedInInformation === "1") {
       setIsLoggedIn(true);
@@ -35,7 +35,7 @@ const Main = (props) => {
       } else {
         setStuSignInState(true);
       }
-      setCircleName(sessionStorage.getItem("name").charAt(0));
+      setCircleName(localStorage.getItem("name").charAt(0));
     }
   }, []);
 
@@ -44,12 +44,12 @@ const Main = (props) => {
   const memberSignInFormSubmit = () => {
     setMemSignInState(true);
     setIsLoggedIn(true);
-    sessionStorage.setItem("member#tobe@get*is$Log!ged&in", "1");
+    localStorage.setItem("member#tobe@get*is$Log!ged&in", "1");
   };
   const studentSignInFormSubmit = () => {
     setStuSignInState(true);
     setIsLoggedIn(true);
-    sessionStorage.setItem("studentIsLoggedIn", "1");
+    localStorage.setItem("studentIsLoggedIn", "1");
   };
   const continueHandler = () => {
     setContinueState(!continueState);
@@ -64,20 +64,21 @@ const Main = (props) => {
   const loginHandler = (name, email, password, id) => {
     // setToken(token);
    // console.log(name, email, password, token,id);
-    sessionStorage.setItem("name", name);
-    sessionStorage.setItem("email", email);
-    setCircleName(sessionStorage.getItem("name").charAt(0));
-    sessionStorage.setItem("id", id + "5799");
+    localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
+    setCircleName(localStorage.getItem("name").charAt(0));
+    localStorage.setItem("id", id + "5799");
 
-    sessionStorage.setItem("isLoggedIn", "1");
+    localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
   };
   const logoutHandler = () => {
-    sessionStorage.removeItem("isLoggedIn");
-    sessionStorage.removeItem("member#tobe@get*is$Log!ged&in");
-    sessionStorage.removeItem("studentIsLoggedIn");
-    sessionStorage.removeItem("name");
-    sessionStorage.removeItem("email");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("id");
+    localStorage.removeItem("member#tobe@get*is$Log!ged&in");
+    localStorage.removeItem("studentIsLoggedIn");
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
 
     setContactUsState(false);
     setStuSignInState(false);

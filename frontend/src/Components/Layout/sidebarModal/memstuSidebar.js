@@ -13,7 +13,7 @@ function MemStuSidebarModal(props) {
 
   const fetchStudents = async () => {
     try {
-const xid = sessionStorage.getItem('id');
+const xid = localStorage.getItem('id');
 const id = xid.slice(0, -4);
 //console.log(id);
       const response = await axios.get(`${ToLink}/student/signup/${id}`);

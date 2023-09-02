@@ -8,8 +8,8 @@ const ContactForm = (props) => {
     const phoneInputRef = useRef();
     const queryInputRef = useRef();
 
-    const name = sessionStorage.getItem('name');
-    const email = sessionStorage.getItem('email');
+    const name = localStorage.getItem('name');
+    const email = localStorage.getItem('email');
     const handleSubmit = async (e) => {
         e.preventDefault();
         const body = {
