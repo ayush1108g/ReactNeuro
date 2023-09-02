@@ -6,8 +6,10 @@ import axios from "axios";
 import { ToLink } from "../Contents/Main";
 
 const SecondPage = (props) => {
+  const [dataAddedSuccess, setDataAddedSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errormsg, setErrormsg] = useState("");
+  const [resourceChanged, setResourceChanged] = useState(false);
   const [courseGoals, setCourseGoals] = useState([
     {
       heading: "",
@@ -16,6 +18,7 @@ const SecondPage = (props) => {
       id: "",
     },
   ]);
+
   //const token = props.token;
   // console.log(token);
   useEffect(() => {
@@ -23,7 +26,7 @@ const SecondPage = (props) => {
       try {
         setIsLoading(true);
         // const options = { headers: { "Authorization": "Bearer " + token, }, };
-        const response = await axios.get(`${ToLink}/data/resources`,{ timeout: 20000 });
+        const response = await axios.get(`${ToLink}/data/resources`, { timeout: 20000 });
         const data = response.data.data.newresources;
         const loadedResourse = [];
         for (const key in data) {
@@ -38,13 +41,13 @@ const SecondPage = (props) => {
         setErrormsg("");
       } catch (error) {
         setIsLoading(false);
-       console.error("Error fetching Resource:", error);
+        console.error("Error fetching Resource:", error);
         setErrormsg("Error fetching Resource");
       }
       setIsLoading(false);
     };
     fetchResource();
-  } , []);
+  }, [resourceChanged]);
 
 
   const addContentHandler = async (enteredContent) => {
@@ -59,22 +62,29 @@ const SecondPage = (props) => {
       console.log(resp.data);
 
       if (resp.data.status === 'success') {
-        alert("REsource added successfully");
-        setCourseGoals((prevGoals) => {
-          const updatedGoals = [...prevGoals];
-          updatedGoals.unshift({
-            heading: enteredContent.heading,
-            content: enteredContent.content,
-            contentLink: enteredContent.contentLink,
-            id: Math.random().toString(),
-          });
-          return updatedGoals;
-        });
+        alert("Resource added successfully");
+        setDataAddedSuccess(true);
+        setResourceChanged(!resourceChanged);
+        // setCourseGoals((prevGoals) => {
+        //   const updatedGoals = [...prevGoals];
+        //   updatedGoals.unshift({
+        //     heading: enteredContent.heading,
+        //     content: enteredContent.content,
+        //     contentLink: enteredContent.contentLink,
+        //     id: Math.random().toString(),
+        //   });
+
+        //   return updatedGoals;
+        // });
       }
     }
     catch (error) {
-     console.log(error);
-      if (error.response.status === 404) {
+      setDataAddedSuccess(false);
+      console.log(error);
+      // console.log(error.config);
+      if (error.message === 'Network Error')
+        setErrormsg(error.message);
+      else if (error.code === "ERR_NETWORK") {
         alert("Server Not Responding");
       }
     }
@@ -84,12 +94,15 @@ const SecondPage = (props) => {
     //console.log(goalId);
     try {
       const delRequest = await axios.delete(`${ToLink}/data/resources/${goalId}`);
-     // console.log(delRequest);
+      // console.log(delRequest);
       if (delRequest.status === 201) {
-        setCourseGoals((prevGoals) => {
-          const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
-          return updatedGoals;
-        });
+        setResourceChanged(!resourceChanged);
+
+        // setCourseGoals((prevGoals) => {
+        //   const updatedGoals = prevGoals.filter((goal) => goal.id !== goalId);
+        //   return updatedGoals;
+        // });
+        alert("Resource deleted successfully");
       }
     } catch (error) {
       console.log(error);
@@ -124,14 +137,16 @@ const SecondPage = (props) => {
         </div>
 
         <div className={classes["page-container"]}>
+
           {props.memSignInstate && (
-            <InputItem onAddContent={addContentHandler} />
+            <InputItem onAddContent={addContentHandler} dataAddedSuccess={dataAddedSuccess} />
           )}
+          {!isLoading && <p className={classes.loading}> {errormsg}</p>}
           <div className={classes.heading}>
             <i>Resources</i>
           </div>
           <div>
-            {!isLoading && <p className={classes.loading}> {errormsg}</p>}
+
             {isLoading && (
               <section>
                 <p className={classes.loading}>Loading...</p>

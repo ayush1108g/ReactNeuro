@@ -39,7 +39,7 @@ const MemberSignUp = (props) => {
         };
         try {
             setIsLoading(true);
-            const resp = await axios.post(`${ToLink}/mentor/signup`, body, options, { timeout: 20000 });
+            const resp = await axios.post(`${ToLink}/mentor/signup`, body, options, { timeout: 30000 });
             //console.log(resp.data);
 
             if (resp.status === 201) {

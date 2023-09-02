@@ -56,7 +56,7 @@ const StudentSignUp = (props) => {
         };
         try {
             setIsLoading(true);
-            const response = await axios.post(`${ToLink}/student/signup`, body, options, { timeout: 20000 });
+            const response = await axios.post(`${ToLink}/student/signup`, body, options, { timeout: 30000 });
           //  console.log(response);
             if (response.status === 201) {
                 nameInputRef.current.value = "";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import classes from './InputItem.module.css'
 
@@ -38,7 +38,7 @@ const InputItem = (props) => {
     //     console.log(selectedFile);
     //     setFile(selectedFile);
     // }
-    const formSubmitHandler = event => {
+    const formSubmitHandler = (event) => {
         event.preventDefault();
 
         // if((enteredHeading.trim().length > 0 && enteredContent.trim().length>0 && (enteredContentLink.trim().length > 0) || file)){
@@ -58,11 +58,17 @@ const InputItem = (props) => {
                 contentLink: link,
             });
 
+        } return;
+    };
+
+    useEffect(() => {
+        if (props.dataAddedSuccess === true) {
             setEnteredHeading('');
             setEnteredContent('');
             setEnteredContentLink('');
-        } return;
-    };
+        }
+    }, [props.dataAddedSuccess]);
+
 
     const addItemHandler = () => {
         setAddItem(!additem);
@@ -87,7 +93,7 @@ const InputItem = (props) => {
                     <div className={classes.line}></div>
                 </div>
                 <br />
-                <input type="file" placeholder="flie" 
+                <input type="file" placeholder="flie"
                 // onChange={fileChangeHandler}
                 ></input><p>File Upload is currently not available</p>
                 <br />

@@ -31,7 +31,7 @@ const MemberSignIn = (props) => {
             setIsLoading(true);
             const response = await axios.post(
                 `${ToLink}/mentor/login`,
-                body, { timeout: 20000 });
+                body, { timeout: 30000 });
             //console.log(response);
             if (response.data.status === "success") {
                 emailInputRef.current.value = ''

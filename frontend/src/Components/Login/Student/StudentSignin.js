@@ -31,7 +31,7 @@ const StudentSignIn = (props) => {
       const response = await axios.post(
         `${ToLink}/student/login`,
         body,
-        { timeout: 20000 }
+        { timeout: 30000 }
       );
      // console.log(response);
       // const token = response.data.token;
