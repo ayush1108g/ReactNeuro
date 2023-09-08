@@ -52,22 +52,6 @@
   color: #f39c12;
 }
 
-@media (max-width: 500px) {
-  .navbar {
-    padding: 0 0 0 0;
-    margin: 0 0 0 0;
-    display: block;
-    height: 60px;
-  }
-  .nav-links{
-    padding: 0 0 0 15px;
-    margin: 0 0 0 0;
-  }
-  .navbar-right {
-    right: 15px;
-  }
-}
-
 .dropdown {
   position: relative;
 }
@@ -162,3 +146,39 @@
   color: #fff;
   text-transform: uppercase;
 }
+
+
+
+@media (max-width: 500px) {
+ 
+  .navbar-right {
+    right: 5px;
+  }
+  h1{
+    font-size: 5vw;
+  }
+  .initial{
+    font-size: 10vw;
+  }
+  .logo{
+    width: 10vw;
+  }
+   .circle{
+    width: 12vw;
+    height: 12vw;
+  }
+  .image-toggle-container{
+    width: 10vw;
+    height: 10vw;
+  }
+  .navbar{
+    display: flex;
+    text-align: left;
+    align-items: center;
+  }
+  .nav-links{  
+    margin-left: 0;
+    padding-left: 5px;
+  }
+}
+
