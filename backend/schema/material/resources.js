@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 var Schema = mongoose.Schema;
-
+const dateString = Date.now().toString();
+const dateObject = new Date(dateString);
+const day = dateObject.getDate();
 const resourcesSchema = new Schema({
   title: {
     type: String,
@@ -15,6 +17,16 @@ const resourcesSchema = new Schema({
     type: String,
     required: true,
   },
+  date: {
+    type: Date,
+    default: Date.now(),
+    
+  },
+  time:{
+    type: String,
+   
+    
+  }
 });
 const filesSchema = new Schema({
   filename:"string",

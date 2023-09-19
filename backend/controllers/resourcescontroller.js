@@ -3,6 +3,7 @@ const resources = require('./../schema/material/resources');
 exports.getresources = async (req, res) => {
     try {
       const newresources = await resources.find();
+      console.log(newresources.date)
       res.status(200).json({
         status: "success",
         data: {
