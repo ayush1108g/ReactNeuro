@@ -41,9 +41,9 @@ const ContactForm = (props) => {
     return (
 
         <React.Fragment>
-            <div className={classes.btnbody}>
+            {/* <div className={classes.btnbody}>
                 <button className={classes['back-button']} onClick={props.backHandler} >Home</button>
-            </div>
+            </div> */}
             <div className={classes.container}>
                 <h2>Contact Us</h2>
                 <form onSubmit={handleSubmit} className={classes.form}>
