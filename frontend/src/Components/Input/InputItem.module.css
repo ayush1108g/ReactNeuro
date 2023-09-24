@@ -41,3 +41,19 @@
     color: black;
     font-weight: bold;
   }
+
+  .Loading {
+    color: red;
+  }
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .checkbox p {
+    display: block;
+    font-size: 14px; 
+  }

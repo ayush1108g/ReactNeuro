@@ -58,6 +58,7 @@ const uploadfile = async (req,res)=>{
       console.log(result.data)
     res.status(201).json({
       status: "success",
+      data : result.data,
     });
   }catch(err){
     console.log("Error:", err);

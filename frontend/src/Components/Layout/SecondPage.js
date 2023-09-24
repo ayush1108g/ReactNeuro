@@ -10,6 +10,7 @@ const SecondPage = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errormsg, setErrormsg] = useState("");
   const [resourceChanged, setResourceChanged] = useState(false);
+  const [issendLoading, setIsSending] = useState(false);
   const [courseGoals, setCourseGoals] = useState([
     {
       heading: "",
@@ -58,6 +59,7 @@ const SecondPage = (props) => {
       id: enteredContent.id,
     };
     try {
+      setIsSending(true);
       const resp = await axios.post(`${ToLink}/data/resources`, body);
       console.log(resp.data);
 
@@ -88,6 +90,7 @@ const SecondPage = (props) => {
         alert("Server Not Responding");
       }
     }
+    setIsSending(false);
   };
 
   const deleteItemHandler = async (goalId) => {
@@ -141,6 +144,7 @@ const SecondPage = (props) => {
           {props.memSignInstate && (
             <InputItem onAddContent={addContentHandler} dataAddedSuccess={dataAddedSuccess} />
           )}
+{issendLoading && <p className={classes.loadingx} >Sending...</p>}
           {!isLoading && <p className={classes.loading}> {errormsg}</p>}
           <div className={classes.heading}>
             <i>Resources</i>

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Button from "../UI/Button";
 import classes from './InputItem.module.css'
-
+import axios from "axios";
+import { ToLink } from "../Contents/Main";
 
 const InputItem = (props) => {
     const [additem, setAddItem] = useState(true);
     const [enteredHeading, setEnteredHeading] = useState('');
     const [enteredContent, setEnteredContent] = useState('');
     const [enteredContentLink, setEnteredContentLink] = useState('');
-    // const [file, setFile] = useState(null);
+    const [douploadFile, setDouploadFile] = useState(false);
     const [isValid, setIsValid] = useState(true);
-
+    const [isFlieToLinkLoading, setIsFlieToLinkLoading] = useState(false);
 
     const headingChangeHandler = event => {
         if (event.target.value.trim().length > 0) {
@@ -33,11 +34,25 @@ const InputItem = (props) => {
         setEnteredContentLink(event.target.value);
     };
 
-    // const fileChangeHandler = event => {
-    //     const selectedFile = event.target.files[0];
-    //     console.log(selectedFile);
-    //     setFile(selectedFile);
-    // }
+    const fileChangeHandler = async(event) => {
+        const selectedFile = event.target.files[0];
+        // console.log(selectedFile);
+        // setFile(selectedFile);
+        const body = new FormData();
+        body.append('file', selectedFile);
+        try {
+            setIsFlieToLinkLoading(true);
+        const resp = await axios.post(`${ToLink}/data/upload-file`, body)
+        // const resp = await axios.post('http://localhost:4000/data/upload-file', body);
+        console.log(resp.data);
+        setEnteredContentLink(resp.data.data.webViewLink);
+        console.log(resp.data.data.webViewLink);
+        }
+        catch(error){
+            console.log(error);
+        }
+        setIsFlieToLinkLoading(false);
+    }
     const formSubmitHandler = (event) => {
         event.preventDefault();
 
@@ -60,12 +75,17 @@ const InputItem = (props) => {
 
         } return;
     };
+    const filetolinkHandler=()=>{
+        setDouploadFile((douploadFile)=>!douploadFile);
+    }
 
     useEffect(() => {
         if (props.dataAddedSuccess === true) {
             setEnteredHeading('');
             setEnteredContent('');
             setEnteredContentLink('');
+            setDouploadFile(false);
+            setAddItem(false);
         }
     }, [props.dataAddedSuccess]);
 
@@ -84,8 +104,7 @@ const InputItem = (props) => {
                 <br />
                 <input type="text" placeholder="Content" onChange={contentChangeHandler} value={enteredContent} required />
                 <br />
-                <input type="link" placeholder="Content-link" onChange={linkChangeHandler} value={enteredContentLink} required></input>
-                {/* <p>* Do not add http:// in link</p> */}
+                <input type="text" placeholder="Content-link" onChange={linkChangeHandler} value={enteredContentLink} disabled={douploadFile} required></input>
                 <br />
                 <div className={classes["horizontal-line"]}>
                     <div className={classes.line}></div>
@@ -93,15 +112,23 @@ const InputItem = (props) => {
                     <div className={classes.line}></div>
                 </div>
                 <br />
-                <input type="file" placeholder="flie"
-                // onChange={fileChangeHandler}
-                ></input><p>File Upload is currently not available</p>
+                <input type="checkbox" onChange={filetolinkHandler} className={classes.check} ></input>
+                {!douploadFile && <div className={classes.checkbox}>
+                    <p> Upload File</p>
+                </div>}
+                {douploadFile && <> <input type="file" placeholder="flie"
+                onChange={fileChangeHandler}
+                ></input></> }
+                {isFlieToLinkLoading && <div className={classes.Loading}>Loading....</div>}
+                
+
                 <br />
                 <Button type="submit">Add Item</Button>
                 <Button type="button" onClick={addItemHandler}>Cancel</Button>
                 <hr></hr>
                 <br />
             </form>}
+
         </React.Fragment>
     );
 };
