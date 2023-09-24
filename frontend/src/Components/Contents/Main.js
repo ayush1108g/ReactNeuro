@@ -53,6 +53,7 @@ const Main = (props) => {
   };
   const continueHandler = () => {
     setContinueState(!continueState);
+    setContactUsState(false);
   };
   const backHandler = () => {
     setContinueState(false);
@@ -97,6 +98,7 @@ const Main = (props) => {
       >
         <Navbar
           contactUsHandler={contactUsHandler}
+          backHandler={backHandler}
           continueHandler={continueHandler}
           circleName={circleName}
           memSignInstate={memSignInstate}
