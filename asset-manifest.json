@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ResourcePortal/static/css/main.d61965fa.css",
+    "main.js": "/ResourcePortal/static/js/main.0a0fd4a9.js",
+    "static/media/snapedit_1692034406107.jpg": "/ResourcePortal/static/media/snapedit_1692034406107.c620612b94ee529151b2.jpg",
+    "static/media/Neurologo.png": "/ResourcePortal/static/media/Neurologo.9c9220c8450099e420db.png",
+    "index.html": "/ResourcePortal/index.html",
+    "main.d61965fa.css.map": "/ResourcePortal/static/css/main.d61965fa.css.map",
+    "main.0a0fd4a9.js.map": "/ResourcePortal/static/js/main.0a0fd4a9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d61965fa.css",
+    "static/js/main.0a0fd4a9.js"
+  ]
+}
