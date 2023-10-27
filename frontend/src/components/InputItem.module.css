@@ -1,0 +1,82 @@
+.form-control {
+    margin: 0.5rem 0;
+  }
+  
+  .form-control label {
+    font-weight: bold;
+    font-size: large;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control input {
+    display: block;
+    width: 100%;
+    border: 1px solid #ccc;
+    font: inherit;
+    line-height: 1.5rem;
+    padding: 0 0.25rem;
+  }
+  
+  /* .form-control input:focus {
+    outline: none;
+    background: #fad0ec;
+    border-color: #8b005d;
+  } */
+  
+  
+  .horizontal-line {
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .line {
+    flex: 1;
+    border-top: 1px solid black;
+  }
+  
+  .or {
+    padding: 0 10px;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .Loading {
+    color: red;
+  }
+  
+  .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .checkbox p {
+    display: block;
+    font-size: 14px;
+  }
+  
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  
+  
+  input[type=file]::file-selector-button {
+    font-size: 12px;
+    margin-right: 20px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  
+  input[type=file]::file-selector-button:hover {
+    background: #0d45a5;
+  }
