@@ -1,4 +1,5 @@
 import classes from "./ContactUsPage.module.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { ToLink } from "../App";

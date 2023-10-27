@@ -15,10 +15,8 @@ function StudentSidebarModal(props) {
   const fetchStudents = async () => {
     try {
       const response = await axios.get(`${ToLink}/student/signup`);
-     // console.log(response.data.data.newstudentsignup);
       setStudents(response.data.data.newstudentsignup);
     } catch (error) {
-      // console.error("Error fetching students:", error);
     }
   };
 

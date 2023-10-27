@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './ItemList.module.css'
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Items from './Items';
 
 const ItemList = (props) => {

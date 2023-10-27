@@ -1,23 +1,27 @@
 import BackgroundImg from "../store/snapedit_1692034406107.jpg";
 import classes from "./HomePage.module.css";
-import SidebarContext from "../store/sidebar-context";
-import { useContext } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router";
-import { useEffect } from "react";
+import {useEffect } from "react";
 import React from "react";
-import ResourcePage from "./ResourcePage";
 
 export default function HomePage() {
 
   const navigate = useNavigate();
-  const sidebarCtx = useContext(SidebarContext);
+
   const isLoggedin = localStorage.getItem("isLoggedIn");
+  
   useEffect(() => {
-    if (isLoggedin !== '1') {
-      navigate("/login");
-    }
-  },[isLoggedin])
+    setTimeout(() => {
+      if (isLoggedin !== '1') {
+        navigate("/login");
+      }
+    console.log(isLoggedin);
+
+    }, 10);
+
+  });
+
   const ResourcePageHandler = () => {
     navigate("/resources");
   }

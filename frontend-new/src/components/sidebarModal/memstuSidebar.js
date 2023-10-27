@@ -3,29 +3,23 @@ import axios from "axios";
 import classes from "./studentSideBarModal.module.css";
 import { ToLink } from "../../App";
 
-
 function MemStuSidebarModal(props) {
-  const [students, setStudents] = useState([ ]);
+  const [students, setStudents] = useState([]);
 
-  
   useEffect(() => {
     fetchStudents();
   }, []);
 
   const fetchStudents = async () => {
     try {
-const xid = localStorage.getItem('id');
-const id = xid.slice(0, -4);
-//console.log(id);
+      const xid = localStorage.getItem("id");
+      const id = xid;
       const response = await axios.get(`${ToLink}/student/signup/${id}`);
-    //  console.log(response.data.data.newStudent);
-    if(response.data.data.newStudent.length===0){
-      return;  
-    }
+      if (response.data.data.newStudent.length === 0) {
+        return;
+      }
       setStudents(response.data.data.newStudent);
-    } catch (error) {
-      // console.error("Error fetching students:", error);
-    }
+    } catch (error) {}
   };
 
   return (

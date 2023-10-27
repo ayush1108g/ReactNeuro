@@ -3,8 +3,7 @@ import { useNavigate } from "react-router";
 // import { useLocation } from "react-router-dom";
 // import { motion } from "framer-motion";
 import { GiHamburgerMenu } from "react-icons/gi";
-import SidebarContext from "../store/sidebar-context";
-import React, { useReducer, useContext } from "react";
+import React, { useReducer} from "react";
 import StudentSidebarModal from "./sidebarModal/studentSideBarModal";
 import MemberSidebarModal from "./sidebarModal/memberSideBarModal";
 import MemStuSidebarModal from "./sidebarModal/memstuSidebar";
@@ -28,7 +27,6 @@ const Reducer = (state, action) => {
   return state;
 }
 const Navbar = (props) => {
-  const sidebarCtx = useContext(SidebarContext);
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(Reducer, defaultState);
   // const location = useLocation();
@@ -49,12 +47,6 @@ const Navbar = (props) => {
   const memStuModalDisplayHandler = () => {
     dispatch({ type: "memStuSideModal", payload: !state.memStuSideModal });
   }
-
-  // const sidebarHandler = () => {
-  //   sidebarCtx.toggleSidebar();
-  // };
-
-  console.log(sidebarCtx);
 
   const logoutHandler = () => {
     localStorage.clear();
@@ -81,7 +73,7 @@ const Navbar = (props) => {
               <GiHamburgerMenu className={`${classes.hamm}`} />&nbsp;&nbsp;
             </button>
 
-            <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
+            <div className="dropdown-menu bg-light" aria-labelledby="dropdownMenuButton">
               <li className="dropdown-item" onClick={studentModalDisplayHandler}>Student List</li>
               {role === "mentor#code" && <> <li className="dropdown-item" onClick={memberModalDisplayHandler}>Member List</li>
                 <li className="dropdown-item" onClick={memStuModalDisplayHandler}>Your Student List</li></>}

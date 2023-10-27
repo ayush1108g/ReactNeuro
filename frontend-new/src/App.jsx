@@ -12,7 +12,6 @@ import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import ContactUsPage from "./pages/ContactUsPage";
 import Errorpage from "./pages/Errorpage";
-import SidebarContextProvider from "./store/sidebarContextProvider";
 export const ToLink = "https://neuroproject.onrender.com";
 // export const ToLink = "http://localhost:3000";
 
@@ -44,10 +43,8 @@ function RoutesWithAnimation() {
 function App() {
   return (
     <HashRouter>
-      <SidebarContextProvider>
         <Navbar />
         <RoutesWithAnimation />
-      </SidebarContextProvider>
     </HashRouter>
   );
 }
