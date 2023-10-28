@@ -68,7 +68,6 @@ const ResourcePage = () => {
         } catch (error) {
             setDataAddedSuccess(false);
             console.log(error);
-            // console.log(error.config);
             if (error.message === 'Network Error')
                 setErrormsg(error.message);
             else if (error.code === "ERR_NETWORK") {
@@ -77,28 +76,13 @@ const ResourcePage = () => {
         }
         setIsSending(false);
     };
-    const deleteItemHandler = async (goalId) => {
-        try {
-            const delRequest = await axios.delete(`${ToLink}/data/resources/${goalId}`);
-            if (delRequest.status === 201) {
-                setResourceChanged(!resourceChanged);
-                alert("Resource deleted successfully");
-            }
-        } catch (error) {
-            console.log(error);
-            if (error.response.status === 404) {
-                alert("Some Error occurred");
-            }
-        }
-    };
+  
     let content = <p style={{ textAlign: "center" }}>No Resources found.</p>;
 
     if (courseGoals.length > 0) {
         content = (
             <ItemList
                 items={courseGoals}
-                memSignInstate={memSignInstate}
-                onDeleteItem={deleteItemHandler}
             />
         );
     }
@@ -122,8 +106,8 @@ const ResourcePage = () => {
                     <div>
                         {isLoading && (
                             <section>
-                                <div class="spinner-border" role="status">
-                                    {/* <span class="sr-only">Loading...</span> */}
+                                <div className="spinner-border" role="status">
+                                    {/* <span className="sr-only">Loading...</span> */}
                                 </div>
                             </section>
                         )}

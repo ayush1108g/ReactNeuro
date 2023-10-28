@@ -1,0 +1,10 @@
+.box {
+    position: relative;
+    top:-100px;
+    left:-100px;
+    background-color: #8734cf;
+    padding: 20px;
+    border-radius: 50%;
+    scale: 300%;
+    z-index: 1;
+  }

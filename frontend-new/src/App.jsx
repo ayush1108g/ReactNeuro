@@ -7,6 +7,7 @@ import ForgotPassPage from "./pages/ForgotPass/ForgotPassPage";
 import ForgotPassIDPage from "./pages/ForgotPass/ForgotPassIDPage";
 import ForgotPassConfirmPage from "./pages/ForgotPass/ForgotPassConfirmPage";
 import ResourcesPage from "./pages/ResourcePage";
+import ResourceIDPage from "./pages/ResourceIDPage";
 import { Route, Routes, useLocation, HashRouter } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
@@ -33,6 +34,7 @@ function RoutesWithAnimation() {
         />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/resources" element={<ResourcesPage />} />
+        <Route path="/resources/:id" element={<ResourceIDPage />} />
         <Route path="/contactUs" element={<ContactUsPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<Errorpage />} />
