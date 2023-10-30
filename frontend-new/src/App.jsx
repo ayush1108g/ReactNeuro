@@ -22,6 +22,11 @@ export const ToLink = "https://resource-portal.onrender.com";
 function RoutesWithAnimation() {
   const location = useLocation();
   console.log(location);
+  console.log('123');
+
+  const isLoggedin = localStorage.getItem("isLoggedIn");
+  console.log(isLoggedin);
+  
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.key}>

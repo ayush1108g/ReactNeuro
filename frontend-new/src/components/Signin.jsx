@@ -71,7 +71,7 @@ const Signin = (props) => {
         data.id = idno;
       }
     }
-    console.log(data);
+    // console.log(data);
     const page = props.pagename.toLowerCase();
     const selBut = selectedRadioButton.toLowerCase();
     const head = selBut + "-" + page;
@@ -80,9 +80,9 @@ const Signin = (props) => {
         [head]: "application/json",
       },
     };
-    console.log(options);
-    console.log(page);
-    console.log(selBut);
+    // console.log(options);
+    // console.log(page);
+    // console.log(selBut);
 
     try {
       console.log(`${ToLink}/${selBut}/${page}`);
@@ -114,15 +114,17 @@ const Signin = (props) => {
           if (selectedRadioButton === "mentor")
             passKeyInputRef.current.value = "";
         }
-        if(selectedRadioButton === "mentor"){
-          localStorage.setItem("role","mentor#code");
+        if (selectedRadioButton === "mentor") {
+          localStorage.setItem("role", "mentor#code");
         }
-        else{
-          localStorage.setItem("role","student");
+        else {
+          localStorage.setItem("role", "student");
         }
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       }
-      console.log(resp);
+      // console.log(resp);
     } catch (error) {
       console.log(error);
       if (error.code === "ERR_BAD_REQUEST") setErrormsg("Email already in use");
@@ -164,7 +166,7 @@ const Signin = (props) => {
           {!isLoading && <p className={classes.loading}> {errormsg}</p>}
           {isLoading && (
             <div className="spinner-border text-danger" role="status">
-              {/* <span class="sr-only">Loading...</span> */}
+              {/* <span className="sr-only">Loading...</span> */}
             </div>
           )}
           <motion.div

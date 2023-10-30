@@ -73,7 +73,7 @@ const ContactUsPage = () => {
                     {!isLoading && <p className={classes.loading}> {errormsg}</p>}
                     {isLoading && (
                         <div className="spinner-border text-danger" role="status">
-                            {/* <span class="sr-only">Loading...</span> */}
+                            {/* <span className="sr-only">Loading...</span> */}
                         </div>
                     )}
                     <motion.div
@@ -119,9 +119,9 @@ const ContactUsPage = () => {
                             required
                         />
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Query</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" ref={queryInputref} rows="2"></textarea>
+                    <div className="mb-3">
+                        <label for="exampleFormControlTextarea1" className="form-label">Query</label>
+                        <textarea className="form-control" id="exampleFormControlTextarea1" ref={queryInputref} rows="2"></textarea>
                     </div>
                     <div className={classes.buttons}>
                         <button

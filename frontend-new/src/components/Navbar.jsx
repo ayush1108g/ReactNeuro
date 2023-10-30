@@ -68,7 +68,7 @@ const Navbar = (props) => {
             &nbsp;&nbsp;
           </div>
           {isLoggedin && 
-          <div classname="dropdown " >
+          <div className="dropdown " >
             <button className="btn btn-secondary dropdown-toggle" style={{ backgroundColor: 'rgb(175, 242, 242)' }} type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <GiHamburgerMenu className={`${classes.hamm}`} />&nbsp;&nbsp;
             </button>
