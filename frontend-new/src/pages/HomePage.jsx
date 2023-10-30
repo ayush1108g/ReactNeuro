@@ -3,7 +3,7 @@ import classes from "./HomePage.module.css";
 import { motion } from "framer-motion";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router";
-import {useEffect } from "react";
+// import {useEffect } from "react";
 import React from "react";
 
 
