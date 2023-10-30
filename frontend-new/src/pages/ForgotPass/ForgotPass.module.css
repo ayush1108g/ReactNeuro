@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height:100vh;
+  height: 90vh;
   position: relative;
 }
 
@@ -58,7 +58,7 @@
   position: relative;
   top:-100px;
   left:-100px;
-  background-color: #8734cf;
+  background-color: rgb(175, 242, 242);
   padding: 20px;
   border-radius: 50%;
   scale: 300%;

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import { ToLink } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
 
 const ForgotPassConfirmPage = () => {
@@ -16,7 +17,9 @@ const ForgotPassConfirmPage = () => {
   const Confpasswordref = useRef();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
-
+  if (!id.includes('-') || id.split("-").length !== 3 || !id.includes('@')) {
+    return <Navigate to={`/*?error=Not%20Authorised`} />;
+  }
   const idw = id.split("-")[1];
   const mentorstu = id.split("-")[0];
   const code = id.split("-")[2];

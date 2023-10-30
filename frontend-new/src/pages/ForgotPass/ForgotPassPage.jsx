@@ -81,7 +81,9 @@ const ForgotPassPage = () => {
   return (
     <>
       <div className={`row d-flex align-items-center ${classes.container}`}>
-        <motion.form className={`border-bottom-0 ${classes.form}`}>
+        <motion.form 
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className={`border-bottom-0 ${classes.form}`}>
           {!isLoading && <p className={classes.loading}> {errormsg}</p>}
           {isLoading && (
             <div className="spinner-border text-danger" role="status">

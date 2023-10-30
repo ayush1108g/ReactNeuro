@@ -5,13 +5,17 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { ToLink } from "../../App";
 import { useNavigate } from "react-router-dom";
-
+import { Navigate } from "react-router";
 const ForgotPassIDPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errormsg, setErrormsg] = useState("");
   const passwordref = useRef();
   const { id } = useParams();
   const navigate = useNavigate();
+
+  if (!id.includes('-') || id.split("-").length !== 2 || !id.includes('@')) {
+    return <Navigate to={`/*?error=Not%20Authorised`} />;
+  }
   const idw = id.split("-")[1];
   const mentorstu = id.split("-")[0];
   const loginpageHandler = () => {
@@ -69,8 +73,8 @@ const ForgotPassIDPage = () => {
   return (
     <>
       <div className={`row d-flex align-items-center ${classes.container}`}>
-        { !isValid && <p className="h1 d-flex align-items-center justify-content-center">Not Authorised</p>}
-       { isValid==="1" && <motion.form className={`border-bottom-0 ${classes.form}`}>
+        {!isValid && <p className="h1 d-flex align-items-center justify-content-center">Not Authorised</p>}
+        {isValid === "1" && <motion.form className={`border-bottom-0 ${classes.form}`}>
           {!isLoading && <p className={classes.loading}> {errormsg}</p>}
           {isLoading && (
             <div className="spinner-border text-danger" role="status">

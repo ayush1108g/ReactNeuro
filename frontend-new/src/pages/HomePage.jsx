@@ -1,27 +1,31 @@
 import BackgroundImg from "../store/snapedit_1692034406107.jpg";
 import classes from "./HomePage.module.css";
 import { motion } from "framer-motion";
+import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router";
 import {useEffect } from "react";
 import React from "react";
 
-export default function HomePage() {
 
+export default function HomePage() {
   const navigate = useNavigate();
 
   const isLoggedin = localStorage.getItem("isLoggedIn");
   
-  useEffect(() => {
-    setTimeout(() => {
-      if (isLoggedin !== '1') {
-        navigate("/login");
-      }
-    console.log(isLoggedin);
+  // useEffect(() => {
+    // setTimeout(() => {
+    //   if (isLoggedin !== '1') {
+    //     navigate("/login");
+    //   }
+    // console.log(isLoggedin);
 
-    }, 10);
+    // }, 1000);
 
-  });
+  // });
 
+  if(isLoggedin !== '1'){
+    return <Navigate to="/login" />;
+  }
   const ResourcePageHandler = () => {
     navigate("/resources");
   }

@@ -2,9 +2,17 @@
     position: relative;
     top:-100px;
     left:-100px;
-    background-color: #8734cf;
+    background-color: rgb(175, 242, 242);
     padding: 20px;
     border-radius: 50%;
     scale: 300%;
     z-index: 1;
+  }
+
+  .BOX{
+    overflow: hidden;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    background-color: white;
   }

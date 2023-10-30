@@ -2,8 +2,9 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { ToLink } from "../App";
-import Card from "../UI/Card";
+// import Card from "../UI/Card";
 import Button from "../UI/Button";
+import { Navigate } from "react-router";
 import { motion } from "framer-motion";
 import classes from './ResourceiDPage.module.css';
 
@@ -25,7 +26,11 @@ const ResourceIDPage = () => {
                 const response = await axios.get(`${ToLink}/data/resources/`, { timeout: 20000 });
                 const data = response.data.data.newresources;
                 const loadedResource = data.filter(item => item._id === id);
-
+                if(loadedResource.length === 0) {
+                    setErrormsg("Resource not found"); 
+                    setIsLoading(false);
+                    return;
+                }
                 setDataAdd(loadedResource[0]);
                 setResourceChanged(true);
                 setErrormsg("");
@@ -39,6 +44,11 @@ const ResourceIDPage = () => {
         };
         fetchResource();
     }, [resourceChanged, id])
+
+
+    if (errormsg === "Resource not found") {
+        return <Navigate to={`/*?error=Resource%20not%20found`} />;
+    }
 
     const deleteItemHandler = async (ID) => {
         try {
@@ -90,8 +100,8 @@ const ResourceIDPage = () => {
 
             {resourceChanged &&
                 <div className="d-flex justify-content-center align-items-center " style={{ height: '100vh', padding: '20vw' }} >
-                    <Card>
-                        <div style={{ overflow: 'hidden' }}>
+                    {/* <Card> */}
+                        <div className={classes.BOX}>
                             {delConfirm && (
                                 <div>
                                     <Button onClick={() => deleteHandler(dataAdd)}>Confirm</Button>
@@ -116,7 +126,7 @@ const ResourceIDPage = () => {
                             <p>{dataAdd.description}</p>
                             <a href={dataAdd.url}>Link</a>
                         </div>
-                    </Card>
+                    {/* </Card> */}
                 </div>
             }
         </>
