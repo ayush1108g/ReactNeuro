@@ -8,7 +8,9 @@ import ForgotPassIDPage from "./pages/ForgotPass/ForgotPassIDPage";
 import ForgotPassConfirmPage from "./pages/ForgotPass/ForgotPassConfirmPage";
 import ResourcesPage from "./pages/ResourcePage";
 import ResourceIDPage from "./pages/ResourceIDPage";
-import { Route, Routes, useLocation, HashRouter } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
+// import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import ContactUsPage from "./pages/ContactUsPage";
@@ -45,10 +47,10 @@ function RoutesWithAnimation() {
 }
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
         <Navbar />
         <RoutesWithAnimation />
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
