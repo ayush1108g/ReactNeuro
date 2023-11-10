@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/ResourcePortal/static/css/main.d61965fa.css",
-    "main.js": "/ResourcePortal/static/js/main.0a0fd4a9.js",
+    "main.css": "/ResourcePortal/static/css/main.da1c3643.css",
+    "main.js": "/ResourcePortal/static/js/main.66e63e0f.js",
+    "static/js/787.2b75339b.chunk.js": "/ResourcePortal/static/js/787.2b75339b.chunk.js",
     "static/media/snapedit_1692034406107.jpg": "/ResourcePortal/static/media/snapedit_1692034406107.c620612b94ee529151b2.jpg",
-    "static/media/Neurologo.png": "/ResourcePortal/static/media/Neurologo.9c9220c8450099e420db.png",
     "index.html": "/ResourcePortal/index.html",
-    "main.d61965fa.css.map": "/ResourcePortal/static/css/main.d61965fa.css.map",
-    "main.0a0fd4a9.js.map": "/ResourcePortal/static/js/main.0a0fd4a9.js.map"
+    "main.da1c3643.css.map": "/ResourcePortal/static/css/main.da1c3643.css.map",
+    "main.66e63e0f.js.map": "/ResourcePortal/static/js/main.66e63e0f.js.map",
+    "787.2b75339b.chunk.js.map": "/ResourcePortal/static/js/787.2b75339b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d61965fa.css",
-    "static/js/main.0a0fd4a9.js"
+    "static/css/main.da1c3643.css",
+    "static/js/main.66e63e0f.js"
   ]
 }
