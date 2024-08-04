@@ -32,10 +32,10 @@ const Navbar = (props) => {
   // const location = useLocation();
   // const locationPath = location.pathname;
   const isLoggedin = localStorage.getItem("isLoggedIn");
-  var letter;
-  if (isLoggedin) {
-    letter = localStorage.getItem("name").charAt(0).toUpperCase();
-  }
+  let letter="A";
+  // if (isLoggedin) {
+  //   letter = localStorage.getItem("name");
+  // }
   const role = localStorage.getItem("role");
 
   const studentModalDisplayHandler = () => {
